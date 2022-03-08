@@ -7,6 +7,10 @@ import Login from '../pages/Login';
 import Foods from '../pages/Foods';
 >>>>>>> e5fe190c481c590ab11779b2a7a803c11b7adc3b
 import Explore from '../pages/Explore';
+import ExploreFoods from '../pages/ExploreFoods';
+import ExploreDrinks from '../pages/ExploreDrinks';
+import FoodsByIngredient from '../pages/FoodsByIngredient';
+import FoodsByNationalities from '../pages/FoodsByNationalities';
 
 
 function Rotas() {
@@ -20,6 +24,14 @@ function Rotas() {
         <Route exact path="/foods" component={ Foods } />
 >>>>>>> e5fe190c481c590ab11779b2a7a803c11b7adc3b
         <Route exact path="/explore" component={ Explore } />
+        <Route exact path="/explore/foods" component={ ExploreFoods } />
+        <Route exact path="/explore/drinks" component={ ExploreDrinks } />
+        <Route exact path="/explore/foods/ingredients" component={ FoodsByIngredient } />
+        <Route
+          exact
+          path="/explore/foods/nationalities"
+          component={ FoodsByNationalities }
+        />
       </Switch>
     </BrowserRouter>
   );
