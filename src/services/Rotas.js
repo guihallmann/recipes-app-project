@@ -22,7 +22,11 @@ function Rotas() {
         <Route exact path="/explore/foods" component={ ExploreFoods } />
         <Route exact path="/explore/drinks" component={ ExploreDrinks } />
         <Route exact path="/explore/foods/ingredients" component={ FoodsByIngredient } />
-        <Route exact path="/explore/foods/nationalities" component={ FoodsByNationalities } />
+        <Route
+          exact
+          path="/explore/foods/nationalities"
+          component={ FoodsByNationalities }
+        />
       </Switch>
     </BrowserRouter>
   );
