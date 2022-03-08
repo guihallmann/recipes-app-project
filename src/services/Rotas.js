@@ -9,6 +9,7 @@ import ExploreDrinks from '../pages/ExploreDrinks';
 import FoodsByIngredient from '../pages/FoodsByIngredient';
 import FoodsByNationalities from '../pages/FoodsByNationalities';
 import Drinks from '../pages/Drinks';
+import DrinksByIngredient from '../pages/DrinksByIgredient';
 
 function Rotas() {
   return (
@@ -22,6 +23,11 @@ function Rotas() {
         <Route exact path="/explore/foods" component={ ExploreFoods } />
         <Route exact path="/explore/drinks" component={ ExploreDrinks } />
         <Route exact path="/explore/foods/ingredients" component={ FoodsByIngredient } />
+        <Route
+          exact
+          path="/explore/drinks/ingredients"
+          component={ DrinksByIngredient }
+        />
         <Route
           exact
           path="/explore/foods/nationalities"
