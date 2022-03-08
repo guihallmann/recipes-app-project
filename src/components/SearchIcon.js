@@ -3,10 +3,10 @@ import RecipesContext from '../context/RecipesContext';
 import searchIcon from '../images/searchIcon.svg';
 
 function SearchIcon() {
-  const { status, setStatus } = useContext(RecipesContext);
+  const { searchBarStatus, setSearchBarStatus } = useContext(RecipesContext);
   const handleClick = () => {
-    if (status === false) setStatus(true);
-    if (status === true) setStatus(false);
+    if (searchBarStatus === false) setSearchBarStatus(true);
+    if (searchBarStatus === true) setSearchBarStatus(false);
   };
   return (
     <button
