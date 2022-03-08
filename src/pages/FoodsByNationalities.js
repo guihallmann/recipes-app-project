@@ -2,13 +2,14 @@ import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-function Foods() {
+function FoodsByNationalities() {
   return (
     <div>
-      <Header title="Foods" />
+      <Header />
+      <p>Foods by Nat</p>
       <Footer />
     </div>
   );
 }
 
-export default Foods;
+export default FoodsByNationalities;
