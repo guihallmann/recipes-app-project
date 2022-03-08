@@ -35,7 +35,7 @@ export async function getRandomMeal() {
 export async function getRandomDrink() {
   const response = await
   (fetch(DRINK_RANDOM_URL));
-  const data = await response.json();
+  const data = await response.json().drinks;
   return data;
 }
 

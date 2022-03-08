@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 function FoodsByIngredient() {
   return (
     <div>
-      <Header />
+      <Header title="Explore Ingredients" />
       <p>Foods by Ingredient</p>
       <Footer />
     </div>
