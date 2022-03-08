@@ -31,9 +31,7 @@ function Header(props) {
           || title === 'Explore Nationalities'
           || title === 'Drinks') && <SearchIcon />}
       </section>
-      <section className="search-filter">
-        { searchBarStatus && <SearchBar />}
-      </section>
+      { searchBarStatus && <SearchBar />}
     </header>
   );
 }
