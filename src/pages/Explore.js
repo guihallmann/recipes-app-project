@@ -13,14 +13,14 @@ function Explore() {
           data-testid="explore-foods"
           onClick={ () => (history.push('/explore/foods')) }
         >
-          Explorar Comidas
+          Explore Foods
         </button>
         <button
           type="button"
           data-testid="explore-drinks"
           onClick={ () => (history.push('/explore/drinks')) }
         >
-          Explorar Bebidas
+          Explore Drinks
         </button>
       </div>
       <p>Footer</p>
