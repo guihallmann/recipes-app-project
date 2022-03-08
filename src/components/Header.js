@@ -1,9 +1,10 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import { useHistory } from 'react-router';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
-function Header() {
+function Header({ title }) {
   const history = useHistory();
   const handleClick = (path) => {
     history.push(path);
@@ -18,7 +19,7 @@ function Header() {
         <img src={ profileIcon } alt="profileIcon" />
       </button>
       <h1 className="page-title" data-testid="page-title">
-        Foods
+        { title }
       </h1>
       <button
         type="button"
@@ -29,5 +30,9 @@ function Header() {
     </header>
   );
 }
+
+Header.propTypes = {
+  title: PropTypes.string,
+}.isRequired;
 
 export default Header;

@@ -4,7 +4,7 @@ import Header from '../components/Header';
 function FoodsByNationalities() {
   return (
     <div>
-      <Header />
+      <Header title="Explore Nationalities" />
       <p>Foods by Nat</p>
       <p>Footer</p>
     </div>

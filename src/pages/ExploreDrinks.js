@@ -4,9 +4,17 @@ import Header from '../components/Header';
 
 function ExploreDrinks() {
   const history = useHistory();
+
+  const randomDrink = async () => {
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php');
+    const data = await response.json();
+    const drinkId = data.drinks[0].idDrink;
+    history.push(`/drinks/${drinkId}`);
+  };
+
   return (
     <div>
-      <Header />
+      <Header title="Explore Drinks" />
       <div>
         <button
           type="button"
@@ -18,7 +26,7 @@ function ExploreDrinks() {
         <button
           type="button"
           data-testid="explore-surprise"
-          onClick=""
+          onClick={ randomDrink }
         >
           Surprise me!
         </button>
