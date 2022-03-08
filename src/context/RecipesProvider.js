@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
 
 function RecipesProvider({ children }) {
-  const [status, setStatus] = useState(false);
+  const [searchBarStatus, setSearchBarStatus] = useState(false);
   const context = {
-    status,
-    setStatus,
+    searchBarStatus,
+    setSearchBarStatus,
   };
   return (
     <RecipesContext.Provider value={ context }>

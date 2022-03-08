@@ -9,7 +9,7 @@ import RecipesContext from '../context/RecipesContext';
 
 function Header(props) {
   const { title } = props;
-  const { status } = useContext(RecipesContext);
+  const { searchBarStatus } = useContext(RecipesContext);
   const history = useHistory();
   const handleClick = (path) => {
     history.push(path);
@@ -32,7 +32,7 @@ function Header(props) {
           || title === 'Drinks') && <SearchIcon />}
       </section>
       <section className="search-filter">
-        { status && <SearchBar />}
+        { searchBarStatus && <SearchBar />}
       </section>
     </header>
   );
