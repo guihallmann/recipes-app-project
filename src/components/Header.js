@@ -1,9 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
+import '../styles/Header.css';
 import profileIcon from '../images/profileIcon.svg';
-import searchIcon from '../images/searchIcon.svg';
+import SearchIcon from './SearchIcon';
 
-function Header() {
+function Header(props) {
+  const { title } = props;
   const history = useHistory();
   const handleClick = (path) => {
     history.push(path);
@@ -18,16 +21,17 @@ function Header() {
         <img src={ profileIcon } alt="profileIcon" />
       </button>
       <h1 className="page-title" data-testid="page-title">
-        Foods
+        {title}
       </h1>
-      <button
-        type="button"
-        data-testid="search-top-btn"
-      >
-        <img src={ searchIcon } alt="searchIcon" />
-      </button>
+      {(title === 'Foods'
+        || title === 'Explore Nationalities'
+        || title === 'Drinks') && <SearchIcon />}
     </header>
   );
 }
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
+};
 
 export default Header;
