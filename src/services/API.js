@@ -1,6 +1,6 @@
 // const CATEGORIES_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
 // const NATIONALITIES_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
-// const MEAL_INGREDIENTS_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
+const MEAL_INGREDIENTS_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
 // const MEAL_RANDOM_URL = 'www.themealdb.com/api/json/v1/1/random.php';
 // const DRINK_RANDOM_URL = 'www.thecocktaildb.com/api/json/v1/1/random.php';
 
@@ -18,12 +18,12 @@
 //   return data;
 // }
 
-// export async function getMealIngredients() {
-//   const response = await
-//   (fetch(MEAL_INGREDIENTS_URL));
-//   const data = await response.json();
-//   return data;
-// }
+export async function getMealIngredients() {
+  const response = await
+  (fetch(MEAL_INGREDIENTS_URL));
+  const data = await response.json();
+  return data;
+}
 
 // export async function getRandomMeal() {
 //   const response = await
