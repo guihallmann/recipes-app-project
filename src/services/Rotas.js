@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import Login from '../pages/Login';
 import Foods from '../pages/Foods';
+import Drinks from '../pages/Drinks';
 import Explore from '../pages/Explore';
 import Profile from '../pages/Profile';
 import ExploreFoods from '../pages/ExploreFoods';
