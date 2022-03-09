@@ -24,12 +24,12 @@ function FoodsByIngredient() {
   return (
     <div>
       <Header title="Explore Ingredients" />
-      {!isloading && ingredients.map((ingredient, index) => (
+      {!isloading && ingredients.map(({ idIngredient, strIngredient }, index) => (
         <IngredientCard
-          key={ ingredient.idIngredient }
+          key={ idIngredient }
           index={ index }
-          image={ ingredient.strIngredient }
-          name={ ingredient.strIngredient }
+          image={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
+          name={ strIngredient }
         />
       ))}
       <Footer />

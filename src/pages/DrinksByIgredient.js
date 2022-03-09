@@ -17,6 +17,12 @@ function DrinksByIngredient() {
     setIsLoading(false);
   };
 
+  // const getDrinkImg = async () => {
+  //   const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkName}`);
+  //   const data = await response.json();
+  //   const drinkImg = data.drinks;
+  // };
+
   useEffect(() => {
     getDrinkIngredients();
   }, []);
@@ -24,12 +30,12 @@ function DrinksByIngredient() {
   return (
     <div>
       <Header title="Explore Ingredients" />
-      {!isloading && ingredients.map((ingredient, index) => (
+      {!isloading && ingredients.map(({ strIngredient1 }, index) => (
         <IngredientCard
-          key={ ingredient.strIngredient1 }
+          key={ strIngredient1 }
           index={ index }
-          image={ ingredient.strIngredient1 }
-          name={ ingredient.strIngredient1 }
+          image={ `https://www.thecocktaildb.com/images/ingredients/${strIngredient1}-Small.png` }
+          name={ strIngredient1 }
         />
       ))}
       <Footer />
