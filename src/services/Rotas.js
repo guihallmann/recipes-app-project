@@ -9,7 +9,7 @@ import ExploreFoods from '../pages/ExploreFoods';
 import ExploreDrinks from '../pages/ExploreDrinks';
 import FoodsByIngredient from '../pages/FoodsByIngredient';
 import FoodsByNationalities from '../pages/FoodsByNationalities';
-import Drinks from '../pages/Drinks';
+/* import Drinks from '../pages/Drinks'; */
 import DrinksByIngredient from '../pages/DrinksByIgredient';
 import NotFound from '../pages/NotFound';
 
