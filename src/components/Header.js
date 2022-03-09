@@ -1,9 +1,15 @@
 import React from 'react';
 
-function Header() {
+function Header({ props: profile, title, search }) {
   return (
-    <span>Olá, mundo!</span>
+    <header>
+      <span>{profile}</span>
+      <span>{title}</span>
+      <span>{search}</span>
+    </header>
   );
 }
+
+Header.Pro;
 
 export default Header;
