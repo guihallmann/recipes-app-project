@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router';
+import RecipesContext from '../context/RecipesContext';
 import {
   getMealName,
   getMealIngredient,
@@ -11,6 +12,7 @@ import {
 import { FIRST_LETTER, NAME, INGREDIENT } from '../data/consts';
 
 function SearchBar() {
+  const { setFoodsList, setDrinksList } = useContext(RecipesContext);
   const [searchText, setSearchText] = useState('');
   const [radioText, setRadioText] = useState('Ingredient');
   const history = useHistory();
@@ -59,11 +61,17 @@ function SearchBar() {
       if (apiReturn && apiReturn.meals.length === 1) {
         history.push(`/foods/${apiReturn.meals[0].idMeal}`);
       }
+      if (apiReturn && apiReturn.meals.length > 1) {
+        setFoodsList(apiReturn.meals);
+      }
     }
     if (pathname === '/drinks') {
       const apiReturn = await drinkRequest();
       if (apiReturn && apiReturn.drinks.length === 1) {
         history.push(`/drinks/${apiReturn.drinks[0].idDrink}`);
+      }
+      if (apiReturn && apiReturn.drinks.length > 1) {
+        setDrinksList(apiReturn.drinks);
       }
     }
   };

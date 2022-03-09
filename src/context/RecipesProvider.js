@@ -4,9 +4,16 @@ import RecipesContext from './RecipesContext';
 
 function RecipesProvider({ children }) {
   const [searchBarStatus, setSearchBarStatus] = useState(false);
+  const [foodsList, setFoodsList] = useState([]);
+  const [drinksList, setDrinksList] = useState([]);
+
   const context = {
     searchBarStatus,
     setSearchBarStatus,
+    foodsList,
+    setFoodsList,
+    drinksList,
+    setDrinksList,
   };
   return (
     <RecipesContext.Provider value={ context }>
