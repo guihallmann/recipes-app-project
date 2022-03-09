@@ -1,39 +1,50 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
+import {
+  getMealName,
+  getMealIngredient,
+  getMealLetter,
+  getDrinkName,
+  getDrinkIngredient,
+  getDrinkLetter,
+  // getDrinkIngredient,
+  // getDrinkLetter,
+  // getDrinkName,
+} from '../services/API';
+import { FIRST_LETTER, NAME, INGREDIENT } from '../data/consts';
 
 function SearchBar() {
   const [searchText, setSearchText] = useState('');
   const [radioText, setRadioText] = useState('Ingredient');
-  const FIRST_LETTER = 'First Letter';
+  const history = useHistory();
+  const { pathname } = history.location;
   const handleChange = ({ target }) => {
     setSearchText(target.value);
   };
 
-  async function getIngredient(ingredient) {
-    const response = await (fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`));
-    const data = await (response).json();
-    console.log(data);
-  }
-
-  async function getName(name) {
-    const response = await (fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`));
-    const data = await (response).json();
-    console.log(data);
-  }
-
-  async function getLetter(letter) {
-    const response = await (fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`));
-    const data = await (response).json();
-    console.log(data);
-  }
-
-  const handleClick = () => {
-    if (radioText === 'Name') getName(searchText);
-    if (radioText === 'Ingredient') getIngredient(searchText);
+  const foodRequest = () => {
+    if (radioText === NAME) getMealName(searchText);
+    if (radioText === INGREDIENT) getMealIngredient(searchText);
     if (radioText === FIRST_LETTER && searchText.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else {
-      getLetter(searchText);
+      getMealLetter(searchText);
     }
+  };
+
+  const drinkRequest = () => {
+    if (radioText === NAME) getDrinkName(searchText);
+    if (radioText === INGREDIENT) getDrinkIngredient(searchText);
+    if (radioText === FIRST_LETTER && searchText.length > 1) {
+      global.alert('Your search must have only 1 (one) character');
+    } else {
+      getDrinkLetter(searchText);
+    }
+  };
+
+  const handleClick = () => {
+    if (pathname === '/foods') foodRequest();
+    if (pathname === '/drinks') drinkRequest();
   };
 
   return (
@@ -54,7 +65,7 @@ function SearchBar() {
           id="ingredient"
           name="search-radio"
           value={ radioText }
-          onChange={ () => setRadioText('Ingredient') }
+          onChange={ () => setRadioText(INGREDIENT) }
         />
       </label>
       <label htmlFor="name">
@@ -64,7 +75,7 @@ function SearchBar() {
           data-testid="name-search-radio"
           id="name"
           name="search-radio"
-          onChange={ () => setRadioText('Name') }
+          onChange={ () => setRadioText(NAME) }
         />
       </label>
       <label htmlFor="first-letter">

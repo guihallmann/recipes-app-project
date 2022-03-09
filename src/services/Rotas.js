@@ -3,6 +3,7 @@ import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import Header from '../components/Header';
 import Login from '../pages/Login';
 import Foods from '../pages/Foods';
+import Drinks from '../pages/Drinks';
 import Explore from '../pages/Explore';
 import Profile from '../pages/Profile';
 import ExploreFoods from '../pages/ExploreFoods';
@@ -17,6 +18,7 @@ function Rotas() {
         <Route exact path="/header" component={ Header } />
         <Route exact path="/" component={ Login } />
         <Route exact path="/foods" component={ Foods } />
+        <Route exact path="/drinks" component={ Drinks } />
         <Route exact path="/explore" component={ Explore } />
         <Route exact path="/profile" component={ Profile } />
         <Route exact path="/explore/foods" component={ ExploreFoods } />
