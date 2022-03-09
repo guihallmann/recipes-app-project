@@ -21,12 +21,12 @@ function Drinks() {
   };
 
   const handleClickFilter = async ({ target }) => {
-    if (toggleFilter !== target.textContent) {
-      setDrinksList(await searchByDrinkCategories(target.textContent));
-      setToggleFilter(target.textContent);
-    } else {
+    if (toggleFilter === target.textContent || target.textContent === 'All') {
       getDrinks();
       setToggleFilter('');
+    } else {
+      setDrinksList(await searchByDrinkCategories(target.textContent));
+      setToggleFilter(target.textContent);
     }
   };
 
@@ -38,6 +38,13 @@ function Drinks() {
     <section>
       <Header title="Drinks" />
       <div>
+        <button
+          type="button"
+          onClick={ handleClickFilter }
+          data-testid="All-category-filter"
+        >
+          All
+        </button>
         {drinkCategories.map((category, index) => (
           index <= MAX_NUMBER_BUTTON
           && (

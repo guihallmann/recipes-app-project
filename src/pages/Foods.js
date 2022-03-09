@@ -21,12 +21,12 @@ function Foods() {
   };
 
   const handleClickFilter = async ({ target }) => {
-    if (toggleFilter !== target.textContent) {
-      setFoodsList(await searchByMealCategories(target.textContent));
-      setToggleFilter(target.textContent);
-    } else {
+    if (toggleFilter === target.textContent || target.textContent === 'All') {
       getMeals();
       setToggleFilter('');
+    } else {
+      setFoodsList(await searchByMealCategories(target.textContent));
+      setToggleFilter(target.textContent);
     }
   };
 
@@ -38,6 +38,13 @@ function Foods() {
     <section>
       <Header title="Foods" />
       <div>
+        <button
+          type="button"
+          onClick={ handleClickFilter }
+          data-testid="All-category-filter"
+        >
+          All
+        </button>
         {mealCategories.map((category, index) => (
           index <= MAX_NUMBER_BUTTON
           && (
