@@ -11,10 +11,9 @@ function SearchIcon() {
   return (
     <button
       type="button"
-      data-testid="search-top-btn"
       onClick={ handleClick }
     >
-      <img src={ searchIcon } alt="searchIcon" />
+      <img data-testid="search-top-btn" src={ searchIcon } alt="searchIcon" />
     </button>
   );
 }

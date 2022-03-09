@@ -18,10 +18,9 @@ function Header({ title }) {
       <section className="header">
         <button
           type="button"
-          data-testid="profile-top-btn"
           onClick={ () => handleClick('/profile') }
         >
-          <img src={ profileIcon } alt="profileIcon" />
+          <img data-testid="profile-top-btn" src={ profileIcon } alt="profileIcon" />
         </button>
         <h1 className="page-title" data-testid="page-title">
           {title}
