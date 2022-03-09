@@ -60,13 +60,6 @@ export async function getRandomDrink() {
 //   return data;
 // }
 
-// export async function getMealDetails(mealId) {
-//   const response = await
-//   (fetch(`www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`));
-//   const data = await response.json();
-//   return data;
-// } // meal ID example 52845
-
 // export async function getDrinkName(drinkName) {
 //   const response = await
 //   (fetch(`www.thecocktaildb.com/api/json/v1/1/search.php?s=${drinkName}`));
@@ -154,6 +147,16 @@ export async function getDrinkLetter(letter) {
     const response = await (fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`));
     const data = await (response).json();
     // console.log(data);
+    return data;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function getMealDetails(id) {
+  try {
+    const response = await (fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`));
+    const data = await (response).json();
     return data;
   } catch (error) {
     return error;
