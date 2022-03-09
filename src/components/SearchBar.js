@@ -7,9 +7,6 @@ import {
   getDrinkName,
   getDrinkIngredient,
   getDrinkLetter,
-  // getDrinkIngredient,
-  // getDrinkLetter,
-  // getDrinkName,
 } from '../services/API';
 import { FIRST_LETTER, NAME, INGREDIENT } from '../data/consts';
 
@@ -22,29 +19,53 @@ function SearchBar() {
     setSearchText(target.value);
   };
 
-  const foodRequest = () => {
-    if (radioText === NAME) getMealName(searchText);
-    if (radioText === INGREDIENT) getMealIngredient(searchText);
+  const foodRequest = async () => {
+    if (radioText === NAME) {
+      const apiResult = await getMealName(searchText);
+      return apiResult;
+    }
+    if (radioText === INGREDIENT) {
+      const apiResult = await getMealIngredient(searchText);
+      return apiResult;
+    }
     if (radioText === FIRST_LETTER && searchText.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else {
-      getMealLetter(searchText);
+      const apiResult = await getMealLetter(searchText);
+      return apiResult;
     }
   };
 
-  const drinkRequest = () => {
-    if (radioText === NAME) getDrinkName(searchText);
-    if (radioText === INGREDIENT) getDrinkIngredient(searchText);
+  const drinkRequest = async () => {
+    if (radioText === NAME) {
+      const apiResult = await getDrinkName(searchText);
+      return apiResult;
+    }
+    if (radioText === INGREDIENT) {
+      const apiResult = await getDrinkIngredient(searchText);
+      return apiResult;
+    }
     if (radioText === FIRST_LETTER && searchText.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else {
-      getDrinkLetter(searchText);
+      const apiResult = await getDrinkLetter(searchText);
+      return apiResult;
     }
   };
 
-  const handleClick = () => {
-    if (pathname === '/foods') foodRequest();
-    if (pathname === '/drinks') drinkRequest();
+  const handleClick = async () => {
+    if (pathname === '/foods') {
+      const apiReturn = await foodRequest();
+      if (apiReturn && apiReturn.meals.length === 1) {
+        history.push(`/foods/${apiReturn.meals[0].idMeal}`);
+      }
+    }
+    if (pathname === '/drinks') {
+      const apiReturn = await drinkRequest();
+      if (apiReturn && apiReturn.drinks.length === 1) {
+        history.push(`/drinks/${apiReturn.drinks[0].idDrink}`);
+      }
+    }
   };
 
   return (

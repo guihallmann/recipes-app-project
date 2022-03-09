@@ -99,7 +99,7 @@ export async function getMealIngredient(ingredient) {
   try {
     const response = await (fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`));
     const data = await (response).json();
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (error) {
     return error;
@@ -110,7 +110,7 @@ export async function getMealName(name) {
   try {
     const response = await (fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`));
     const data = await (response).json();
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (error) {
     return error;
@@ -121,7 +121,7 @@ export async function getMealLetter(letter) {
   try {
     const response = await (fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`));
     const data = await (response).json();
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (error) {
     return error;
@@ -131,7 +131,7 @@ export async function getDrinkIngredient(ingredient) {
   try {
     const response = await (fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`));
     const data = await (response).json();
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (error) {
     return error;
@@ -142,7 +142,7 @@ export async function getDrinkName(name) {
   try {
     const response = await (fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`));
     const data = await (response).json();
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (error) {
     return error;
@@ -153,7 +153,7 @@ export async function getDrinkLetter(letter) {
   try {
     const response = await (fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`));
     const data = await (response).json();
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (error) {
     return error;

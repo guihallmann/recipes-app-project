@@ -13,7 +13,6 @@ function Login({ history }) {
   }, [inputEmail, inputPassword]);
 
   const handleClickLogin = () => {
-    console.log('a');
     localStorage.setItem('mealsToken', '1');
     localStorage.setItem('cocktailsToken', '1');
     const StringifyEmail = JSON.stringify({ email: inputEmail });

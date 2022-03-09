@@ -9,7 +9,7 @@ import ExploreFoods from '../pages/ExploreFoods';
 import ExploreDrinks from '../pages/ExploreDrinks';
 import FoodsByIngredient from '../pages/FoodsByIngredient';
 import FoodsByNationalities from '../pages/FoodsByNationalities';
-import Drinks from '../pages/Drinks';
+import Details from '../pages/Details';
 import DrinksByIngredient from '../pages/DrinksByIgredient';
 import NotFound from '../pages/NotFound';
 
@@ -35,6 +35,16 @@ function Rotas() {
           exact
           path="/explore/foods/nationalities"
           component={ FoodsByNationalities }
+        />
+        <Route
+          exact
+          path="/foods/:id"
+          render={ (props) => <Details { ...props } /> }
+        />
+        <Route
+          exact
+          path="/drinks/:id"
+          render={ (props) => <Details { ...props } /> }
         />
       </Switch>
     </BrowserRouter>
