@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 function SearchBar() {
   const [searchText, setSearchText] = useState('');
   const [radioText, setRadioText] = useState('Ingredient');
+  const FIRST_LETTER = 'First Letter';
   const handleChange = ({ target }) => {
     setSearchText(target.value);
   };
@@ -13,8 +14,26 @@ function SearchBar() {
     console.log(data);
   }
 
+  async function getName(name) {
+    const response = await (fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`));
+    const data = await (response).json();
+    console.log(data);
+  }
+
+  async function getLetter(letter) {
+    const response = await (fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`));
+    const data = await (response).json();
+    console.log(data);
+  }
+
   const handleClick = () => {
-    getIngredient(searchText);
+    if (radioText === 'Name') getName(searchText);
+    if (radioText === 'Ingredient') getIngredient(searchText);
+    if (radioText === FIRST_LETTER && searchText.length > 1) {
+      global.alert('Your search must have only 1 (one) character');
+    } else {
+      getLetter(searchText);
+    }
   };
 
   return (
@@ -55,7 +74,7 @@ function SearchBar() {
           data-testid="first-letter-search-radio"
           id="first-letter"
           name="search-radio"
-          onChange={ () => setRadioText('First Letter') }
+          onChange={ () => setRadioText(FIRST_LETTER) }
         />
       </label>
       <button
