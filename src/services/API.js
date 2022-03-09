@@ -32,6 +32,13 @@
 //   return data;
 // }
 
+export async function getRandomDrink() {
+  const response = await
+  (fetch(DRINK_RANDOM_URL));
+  const data = await response.json().drinks;
+  return data;
+}
+
 // export async function getRandomDrink() {
 //   const response = await
 //   (fetch(DRINK_RANDOM_URL));
