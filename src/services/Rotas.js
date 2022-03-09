@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
-import Header from '../components/Header';
 import Login from '../pages/Login';
 import Foods from '../pages/Foods';
 import Drinks from '../pages/Drinks';
@@ -10,12 +9,14 @@ import ExploreFoods from '../pages/ExploreFoods';
 import ExploreDrinks from '../pages/ExploreDrinks';
 import FoodsByIngredient from '../pages/FoodsByIngredient';
 import FoodsByNationalities from '../pages/FoodsByNationalities';
+import Drinks from '../pages/Drinks';
+import DrinksByIngredient from '../pages/DrinksByIgredient';
+import NotFound from '../pages/NotFound';
 
 function Rotas() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/header" component={ Header } />
         <Route exact path="/" component={ Login } />
         <Route exact path="/foods" component={ Foods } />
         <Route exact path="/drinks" component={ Drinks } />
@@ -24,6 +25,12 @@ function Rotas() {
         <Route exact path="/explore/foods" component={ ExploreFoods } />
         <Route exact path="/explore/drinks" component={ ExploreDrinks } />
         <Route exact path="/explore/foods/ingredients" component={ FoodsByIngredient } />
+        <Route exact path="/explore/drinks/nationalities" component={ NotFound } />
+        <Route
+          exact
+          path="/explore/drinks/ingredients"
+          component={ DrinksByIngredient }
+        />
         <Route
           exact
           path="/explore/foods/nationalities"
