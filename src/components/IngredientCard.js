@@ -6,17 +6,23 @@ import RecipesContext from '../context/RecipesContext';
 
 function IngredientCard({ index, image, name, isItFood }) {
   const history = useHistory();
-  const { setFoodsList, setDrinksList } = useContext(RecipesContext);
+  const {
+    setDrinksList,
+    setFoodsList,
+    setFromExploreIngredient,
+  } = useContext(RecipesContext);
 
   const setMeal = async (meal) => {
     const apiResult = await getMealIngredient(meal);
     setFoodsList(apiResult.meals);
+    setFromExploreIngredient(true);
     history.push('/foods');
   };
 
   const setDrink = async (drink) => {
     const apiResult = await getDrinkIngredient(drink);
     setDrinksList(apiResult.drinks);
+    setFromExploreIngredient(true);
     history.push('/drinks');
   };
 
