@@ -15,10 +15,16 @@ function Foods() {
   const { foodsList, setFoodsList } = useContext(RecipesContext);
   const [mealCategories, setMealCategories] = useState([]);
   const [toggleFilter, setToggleFilter] = useState('');
+  const { fromExploreIngredient, setFromExploreIngredient } = useContext(RecipesContext);
+
   const getMeals = async () => {
-    const meals = await getTwelveMeals();
-    setFoodsList(meals);
-    setMealCategories(await getMealCategories());
+    if (fromExploreIngredient) {
+      setFromExploreIngredient(false);
+    } else {
+      const meals = await getTwelveMeals();
+      setFoodsList(meals);
+      setMealCategories(await getMealCategories());
+    }
   };
 
   const handleClickFilter = async ({ target }) => {
@@ -62,15 +68,15 @@ function Foods() {
       </div>
       <div>
         {foodsList.map((food, index) => (index <= MAX_LIST_SIZE
-        && (
-          <Link to={ `/foods/${food.idMeal}` }>
-            <Card
-              key={ food.idMeal }
-              index={ index }
-              image={ food.strMealThumb }
-              name={ food.strMeal }
-            />
-          </Link>)
+          && (
+            <Link to={ `/foods/${food.idMeal}` }>
+              <Card
+                key={ food.idMeal }
+                index={ index }
+                image={ food.strMealThumb }
+                name={ food.strMeal }
+              />
+            </Link>)
         ))}
       </div>
       <Footer />
