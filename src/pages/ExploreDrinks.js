@@ -2,14 +2,14 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import { getRandomDrink } from '../services/API';
 
 function ExploreDrinks() {
   const history = useHistory();
 
   const randomDrink = async () => {
-    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php');
-    const data = await response.json();
-    const drinkId = data.drinks[0].idDrink;
+    const data = await getRandomDrink();
+    const drinkId = data[0].idDrink;
     history.push(`/drinks/${drinkId}`);
   };
 
