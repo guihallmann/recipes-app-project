@@ -9,34 +9,24 @@ function Details(props) {
   const { match: { params: { id } } } = props;
   const [mealDetails, setMealDetails] = useState([]);
   const [recipe, setRecipe] = useState([]);
+  const request = async (mealId) => {
+    const apiResult = await getMealDetails(mealId);
+    setMealDetails(apiResult.meals[0]);
+    const entriesArr = Object.entries(apiResult.meals[0]);
+    const newArr = entriesArr.filter((pos) => pos[0].includes('strIngredient')
+      || pos[0].includes('strMeasure'))
+      .filter((pos) => pos[1] !== '' && pos[1] !== null)
+      .map((pos) => pos[1]);
+    const SIZE = (newArr.length) / 2;
+    const ingredients = newArr.map((pos, i) => i < SIZE && pos)
+      .filter((pos) => pos !== false);
+    const measures = newArr.map((pos, i) => i >= SIZE && pos)
+      .filter((pos) => pos !== false);
+    const array = ingredients.map((elem, index) => `${elem} - ${measures[index]}`);
+    setRecipe(array);
+  };
   useEffect(() => {
-    const request = async (mealId) => {
-      const apiResult = await getMealDetails(mealId);
-      setMealDetails(apiResult.meals[0]);
-    };
     request(id);
-  }, []);
-  useEffect(() => {
-    const handleEntries = () => {
-      const entriesArr = Object.entries(mealDetails);
-      const newArr = entriesArr.filter((pos) => pos[0].includes('strIngredient')
-        || pos[0].includes('strMeasure'))
-        .filter((pos) => pos[1] !== '' && pos[1] !== null)
-        .map((pos) => pos[1]);
-      const SIZE = (newArr.length) / 2;
-      const firsHalf = newArr.map((pos, i) => i < SIZE && pos)
-        .filter((pos) => pos !== false);
-      const secondHalf = newArr.map((pos, i) => i >= SIZE && pos)
-        .filter((pos) => pos !== false);
-      console.log(firsHalf);
-      console.log(secondHalf);
-      for (let i = 0; i < SIZE; i += 1) {
-        recipe.push(`-${firsHalf[i]} -${secondHalf[i]}`);
-      }
-      setRecipe(recipe);
-      // console.log('teste');
-    };
-    handleEntries();
   }, []);
   return (
     <section>
