@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Card from '../components/Card';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { getNationalities, getMealName } from '../services/API';
 import { MAX_LIST_SIZE } from '../data/consts';
 import RecipesContext from '../context/RecipesContext';
