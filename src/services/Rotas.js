@@ -9,7 +9,8 @@ import ExploreFoods from '../pages/ExploreFoods';
 import ExploreDrinks from '../pages/ExploreDrinks';
 import FoodsByIngredient from '../pages/FoodsByIngredient';
 import FoodsByNationalities from '../pages/FoodsByNationalities';
-import Details from '../pages/Details';
+import FoodDetails from '../pages/FoodDetails';
+import DrinkDetails from '../pages/DrinkDetails';
 import DrinksByIngredient from '../pages/DrinksByIgredient';
 import NotFound from '../pages/NotFound';
 
@@ -39,12 +40,12 @@ function Rotas() {
         <Route
           exact
           path="/foods/:id"
-          render={ (props) => <Details { ...props } /> }
+          render={ (props) => <FoodDetails { ...props } /> }
         />
         <Route
           exact
           path="/drinks/:id"
-          render={ (props) => <Details { ...props } /> }
+          render={ (props) => <DrinkDetails { ...props } /> }
         />
       </Switch>
     </BrowserRouter>
