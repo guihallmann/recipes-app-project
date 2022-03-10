@@ -5,17 +5,17 @@ import RecipesContext from '../context/RecipesContext';
 import Card from '../components/Card';
 import { MAX_LIST_SIZE } from '../data/consts';
 
-function Foods() {
-  const { foodsList } = useContext(RecipesContext);
+function Drinks() {
+  const { drinksList } = useContext(RecipesContext);
   return (
     <section>
-      <Header title="Foods" />
+      <Header title="Drinks" />
       <div>
-        {foodsList.map((food, index) => (index <= MAX_LIST_SIZE && <Card
-          key={ food.idMeal }
+        {drinksList.map((drink, index) => (index <= MAX_LIST_SIZE && <Card
+          key={ drink.idDrink }
           index={ index }
-          image={ food.strMealThumb }
-          name={ food.strMeal }
+          image={ drink.strDrinkThumb }
+          name={ drink.strDrink }
         />
         ))}
       </div>
@@ -24,4 +24,4 @@ function Foods() {
   );
 }
 
-export default Foods;
+export default Drinks;
