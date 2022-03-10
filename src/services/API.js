@@ -1,5 +1,6 @@
 const CATEGORIES_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
 // const NATIONALITIES_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
+const MEAL_INGREDIENTS_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
 // const MEAL_INGREDIENTS_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
 // const MEAL_RANDOM_URL = 'www.themealdb.com/api/json/v1/1/random.php';
 // const DRINK_RANDOM_URL = 'www.thecocktaildb.com/api/json/v1/1/random.php';
@@ -34,12 +35,16 @@ export async function searchByMealCategories(category) {
   return categories;
 }
 
-// export async function getNationalities() {
-//   const response = await
-//   (fetch(NATIONALITIES_URL));
-//   const data = await response.json();
-//   return data;
-// }
+export async function getNationalities() {
+  try {
+    const response = await
+    (fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list'));
+    const data = await response.json();
+    return data.meals;
+  } catch (error) {
+    return error;
+  }
+}
 
 // export async function getMealIngredients() {
 //   const response = await
@@ -47,20 +52,6 @@ export async function searchByMealCategories(category) {
 //   const data = await response.json();
 //   return data;
 // }
-
-// export async function getRandomMeal() {
-//   const response = await
-//   (fetch(MEAL_RANDOM_URL));
-//   const data = await response.json();
-//   return data;
-// }
-
-export async function getRandomDrink() {
-  const response = await
-  (fetch(DRINK_RANDOM_URL));
-  const data = await response.json().drinks;
-  return data;
-}
 
 // export async function getRandomDrink() {
 //   const response = await
@@ -83,12 +74,76 @@ export async function getRandomDrink() {
 //   return data;
 // }
 
-// export async function getMealDetails(mealId) {
+// export async function getDrinkName(drinkName) {
 //   const response = await
-//   (fetch(`www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`));
+//   (fetch(`www.thecocktaildb.com/api/json/v1/1/search.php?s=${drinkName}`));
 //   const data = await response.json();
 //   return data;
-// } // meal ID example 52845
+// }
+
+// export async function getDrinkLetter(letter) {
+//   const response = await
+//   (fetch(`www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`));
+//   const data = await response.json();
+//   return data;
+// }
+
+// export async function getDrinkIngredient(ingredient) {
+//   const response = await
+//   (fetch(`www.thecocktaildb.com/api/json/v1/1/search.php?i=${ingredient}`));
+//   const data = await response.json();
+//   return data;
+// }
+
+// export async function getDrinkDetails(drinkId) {
+//   const response = await
+//   (fetch(`www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`));
+//   const data = await response.json();
+//   return data;
+// }
+
+export async function getRandomMeal() {
+  try {
+    const response = await
+    (fetch('https://www.themealdb.com/api/json/v1/1/random.php'));
+    const data = await response.json();
+    return data.meals;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function getRandomDrink() {
+  try {
+    const response = await
+    (fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php'));
+    const data = await response.json();
+    return data.drinks;
+  } catch (error) {
+    return error;
+  }
+}
+
+// export async function getRandomDrink() {
+//   const response = await
+//   (fetch(DRINK_RANDOM_URL));
+//   const data = await response.json();
+//   return data;
+// }
+
+// export async function getMealName(mealName) {
+//   const response = await
+//   (fetch(`www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`));
+//   const data = await response.json();
+//   return data;
+// }
+
+// export async function getMealLetter(mealLetter) {
+//   const response = await
+//   (fetch(`www.themealdb.com/api/json/v1/1/search.php?s=${mealLetter}`));
+//   const data = await response.json();
+//   return data;
+// }
 
 // export async function getDrinkName(drinkName) {
 //   const response = await
@@ -129,6 +184,16 @@ export async function getMealIngredient(ingredient) {
   }
 }
 
+export async function getAllMealIngredients() {
+  try {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
+    const data = await response.json();
+    return data.meals;
+  } catch (error) {
+    return error;
+  }
+}
+
 export async function getMealName(name) {
   try {
     const response = await (fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`));
@@ -150,6 +215,17 @@ export async function getMealLetter(letter) {
     return error;
   }
 }
+
+export async function getAllDrinkIngredients() {
+  try {
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
+    const data = await response.json();
+    return data.drinks;
+  } catch (error) {
+    return error;
+  }
+}
+
 export async function getDrinkIngredient(ingredient) {
   try {
     const response = await (fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`));
@@ -171,6 +247,7 @@ export async function getDrinkName(name) {
     return error;
   }
 }
+
 
 export async function getDrinkLetter(letter) {
   try {
@@ -195,4 +272,12 @@ export async function getTwelveDrinks() {
     .then((response) => response.json())
     .then((data) => data.drinks);
   return drinks;
+export async function getMealDetails(id) {
+  try {
+    const response = await (fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`));
+    const data = await (response).json();
+    return data;
+  } catch (error) {
+    return error;
+  }
 }
