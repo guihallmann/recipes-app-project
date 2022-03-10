@@ -15,7 +15,6 @@ function DrinksByIngredient() {
     setIngredients(twelveDrinkIngredients);
     setIsLoading(false);
   };
-
   useEffect(() => {
     getDrinkIngredients();
   }, []);
