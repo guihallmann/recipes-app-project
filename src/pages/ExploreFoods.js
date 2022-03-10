@@ -2,14 +2,14 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { getRandomMeal } from '../services/API';
 
 function ExploreFoods() {
   const history = useHistory();
 
   const randomFood = async () => {
-    const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
-    const data = await response.json();
-    const foodId = await data.meals[0].idMeal;
+    const data = await getRandomMeal();
+    const foodId = await data[0].idMeal;
     history.push(`/foods/${foodId}`);
   };
 
