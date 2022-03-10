@@ -20,7 +20,7 @@ function IngredientCard({ index, image, name, isItFood }) {
     history.push('/drinks');
   };
 
-  const setIngredient = async (param) => {
+  const setIngredient = (param) => {
     const ingredient = param[1]
       ? setMeal(param[0])
       : setDrink(param[0]);
@@ -28,19 +28,20 @@ function IngredientCard({ index, image, name, isItFood }) {
   };
 
   return (
-    <button
-      type="button"
-      onClick={ () => setIngredient([name, isItFood]) }
-    >
-      <div data-testid={ `${index}-ingredient-card` }>
+    <div>
+      <button
+        type="button"
+        onClick={ () => setIngredient([name, isItFood]) }
+        data-testid={ `${index}-ingredient-card` }
+      >
         <img
           src={ image }
           alt={ `ingredient-card-${index}` }
           data-testid={ `${index}-card-img` }
         />
         <span data-testid={ `${index}-card-name` }>{name}</span>
-      </div>
-    </button>
+      </button>
+    </div>
   );
 }
 
