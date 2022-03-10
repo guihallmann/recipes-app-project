@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import IngredientCard from '../components/IngredientCard';
+import { getAllMealIngredients } from '../services/API';
 
 function FoodsByIngredient() {
   const CONST_12 = 12;
@@ -9,9 +10,7 @@ function FoodsByIngredient() {
   const [isloading, setIsLoading] = useState([true]);
 
   const getFoodIngredients = async () => {
-    const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
-    const data = await response.json();
-    const foodIngredients = data.meals;
+    const foodIngredients = await getAllMealIngredients();
     const twelveFoodIngredients = foodIngredients.splice(0, CONST_12);
     setIngredients(twelveFoodIngredients);
     setIsLoading(false);

@@ -9,13 +9,10 @@ function Details(props) {
   const { match: { params: { id } } } = props;
   const [mealDetails, setMealDetails] = useState([]);
   const [recipe, setRecipe] = useState([]);
-
   const request = async (mealId) => {
     const apiResult = await getMealDetails(mealId);
     setMealDetails(apiResult.meals[0]);
-
     const entriesArr = Object.entries(apiResult.meals[0]);
-
     const newArr = entriesArr.filter((pos) => pos[0].includes('strIngredient')
       || pos[0].includes('strMeasure'))
       .filter((pos) => pos[1] !== '' && pos[1] !== null)
@@ -28,11 +25,9 @@ function Details(props) {
     const array = ingredients.map((elem, index) => `${elem} - ${measures[index]}`);
     setRecipe(array);
   };
-
   useEffect(() => {
     request(id);
   }, []);
-
   return (
     <section>
       <img
