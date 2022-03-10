@@ -30,6 +30,7 @@ function FoodsByIngredient() {
           index={ index }
           image={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
           name={ strIngredient }
+          isItFood
         />
       ))}
       <Footer />

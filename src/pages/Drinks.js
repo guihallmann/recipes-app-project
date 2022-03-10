@@ -12,7 +12,7 @@ function Drinks() {
       <Header title="Drinks" />
       <div>
         {drinksList.map((drink, index) => (index <= MAX_LIST_SIZE && <Card
-          key={ drink.idMeal }
+          key={ drink.idDrink }
           index={ index }
           image={ drink.strDrinkThumb }
           name={ drink.strDrink }
