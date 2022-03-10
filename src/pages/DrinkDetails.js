@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/Details.css';
-import { getDrinkDetails } from '../services/API';
+import { getDrinkDetails, getMealsRecommends } from '../services/API';
+import SugestionCard from './SugestionsCard';
 import shareIcon from '../images/shareIcon.svg';
 import favIcon from '../images/blackHeartIcon.svg';
+import { FIRST_SIX } from '../data/consts';
 
 function DrinkDetails(props) {
   const { match: { params: { id } } } = props;
   const [drinkDetails, setDrinkDetails] = useState([]);
   const [recipe, setRecipe] = useState([]);
+  const [foodData, setFoodData] = useState([]);
   const request = async (drinkId) => {
     const apiResult = await getDrinkDetails(drinkId);
     setDrinkDetails(apiResult.drinks[0]);
@@ -25,8 +28,13 @@ function DrinkDetails(props) {
     const array = ingredients.map((elem, index) => `${elem} - ${measures[index]}`);
     setRecipe(array);
   };
+  const data = async () => {
+    const dataResult = await getMealsRecommends();
+    setFoodData(dataResult);
+  };
   useEffect(() => {
     request(id);
+    data();
   }, []);
 
   return (
@@ -59,7 +67,15 @@ function DrinkDetails(props) {
       ))}
       <p data-testid="instructions">{drinkDetails.strInstructions}</p>
       {drinkDetails.strYoutube !== undefined && <iframe data-testid="video" title="recipe-video" src={ `https://www.youtube.com/embed/${mealDetails.strYoutube.split('=')[1]}` } /> }
-      <span data-testid={ `${0}-recomendation-card` }>Recomendados</span>
+      {foodData.length !== 0 && foodData.map((rec, i) => (i <= FIRST_SIX
+      && (
+        <SugestionCard
+          key={ rec.idMeal }
+          index={ i }
+          name={ rec.strMeal }
+          image={ rec.strMealThumb }
+        />)
+      ))}
       <button type="button" data-testid="start-recipe-btn">Start Recipe</button>
     </section>
   );

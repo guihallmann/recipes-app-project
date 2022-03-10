@@ -23,62 +23,6 @@ export async function getNationalities() {
   }
 }
 
-// export async function getMealIngredients() {
-//   const response = await
-//   (fetch(MEAL_INGREDIENTS_URL));
-//   const data = await response.json();
-//   return data;
-// }
-
-// export async function getRandomDrink() {
-//   const response = await
-//   (fetch(DRINK_RANDOM_URL));
-//   const data = await response.json();
-//   return data;
-// }
-
-// export async function getMealName(mealName) {
-//   const response = await
-//   (fetch(`www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`));
-//   const data = await response.json();
-//   return data;
-// }
-
-// export async function getMealLetter(mealLetter) {
-//   const response = await
-//   (fetch(`www.themealdb.com/api/json/v1/1/search.php?s=${mealLetter}`));
-//   const data = await response.json();
-//   return data;
-// }
-
-// export async function getDrinkName(drinkName) {
-//   const response = await
-//   (fetch(`www.thecocktaildb.com/api/json/v1/1/search.php?s=${drinkName}`));
-//   const data = await response.json();
-//   return data;
-// }
-
-// export async function getDrinkLetter(letter) {
-//   const response = await
-//   (fetch(`www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`));
-//   const data = await response.json();
-//   return data;
-// }
-
-// export async function getDrinkIngredient(ingredient) {
-//   const response = await
-//   (fetch(`www.thecocktaildb.com/api/json/v1/1/search.php?i=${ingredient}`));
-//   const data = await response.json();
-//   return data;
-// }
-
-// export async function getDrinkDetails(drinkId) {
-//   const response = await
-//   (fetch(`www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`));
-//   const data = await response.json();
-//   return data;
-// }
-
 export async function getRandomMeal() {
   try {
     const response = await
@@ -203,6 +147,26 @@ export async function getDrinkDetails(id) {
     const data = await (response).json();
     // console.log(data);
     return data;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function getDrinksRecommends() {
+  try {
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+    const data = await response.json();
+    return data.drinks;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function getMealsRecommends() {
+  try {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    const data = await response.json();
+    return data.meals;
   } catch (error) {
     return error;
   }
