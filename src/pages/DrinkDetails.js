@@ -38,7 +38,7 @@ function DrinkDetails(props) {
         alt={ `${drinkDetails.strDrink}` }
       />
       <h1 data-testid="recipe-title">{drinkDetails.strDrink}</h1>
-      <h2 data-testid="recipe-category">{drinkDetails.strCategory}</h2>
+      <h2 data-testid="recipe-category">{drinkDetails.strAlcoholic}</h2>
       <section>
         <button type="button">
           <img src={ shareIcon } alt="shareIcon" data-testid="share-btn" />
