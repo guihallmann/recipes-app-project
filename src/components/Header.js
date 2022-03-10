@@ -7,8 +7,7 @@ import SearchIcon from './SearchIcon';
 import SearchBar from './SearchBar';
 import RecipesContext from '../context/RecipesContext';
 
-function Header(props) {
-  const { title } = props;
+function Header({ title }) {
   const { searchBarStatus } = useContext(RecipesContext);
   const history = useHistory();
   const handleClick = (path) => {
