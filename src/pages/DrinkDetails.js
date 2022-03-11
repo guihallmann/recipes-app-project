@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import '../styles/Details.css';
+import '../styles/DrinkDetails.css';
 import { getDrinkDetails, getMealsRecommends } from '../services/API';
 import SugestionCard from './SugestionsCard';
 import shareIcon from '../images/shareIcon.svg';
@@ -67,16 +67,24 @@ function DrinkDetails(props) {
       ))}
       <p data-testid="instructions">{drinkDetails.strInstructions}</p>
       {drinkDetails.strYoutube !== undefined && <iframe data-testid="video" title="recipe-video" src={ `https://www.youtube.com/embed/${mealDetails.strYoutube.split('=')[1]}` } /> }
-      {foodData.length !== 0 && foodData.map((rec, i) => (i <= FIRST_SIX
-      && (
-        <SugestionCard
-          key={ rec.idMeal }
-          index={ i }
-          name={ rec.strMeal }
-          image={ rec.strMealThumb }
-        />)
-      ))}
-      <button type="button" data-testid="start-recipe-btn">Start Recipe</button>
+      <section className="carousel">
+        {foodData.length !== 0 && foodData.map((rec, i) => (i <= FIRST_SIX
+          && (
+            <SugestionCard
+              key={ rec.idMeal }
+              index={ i }
+              name={ rec.strMeal }
+              image={ rec.strMealThumb }
+            />)
+        ))}
+      </section>
+      <button
+        className="start-btn"
+        type="button"
+        data-testid="start-recipe-btn"
+      >
+        Start Recipe
+      </button>
     </section>
   );
 }
