@@ -12,6 +12,7 @@ function FoodDetails(props) {
   const [mealDetails, setMealDetails] = useState([]);
   const [recipe, setRecipe] = useState([]);
   const [drinkData, setDrinkData] = useState([]);
+  const [btnStatus, setBtnStatus] = useState(true);
   const request = async (mealId) => {
     const apiResult = await getMealDetails(mealId);
     setMealDetails(apiResult.meals[0]);
@@ -32,9 +33,18 @@ function FoodDetails(props) {
     const dataResult = await getDrinksRecommends();
     setDrinkData(dataResult);
   };
+  const recipeStatus = () => {
+    const doneRecipes = localStorage.getItem('doneRecipes');
+    if (doneRecipes) {
+      const doneRecipesParse = JSON.parse(doneRecipes);
+      const getRecipe = doneRecipesParse.find((rec) => rec.id === id);
+      if (getRecipe !== undefined) setBtnStatus(false);
+    }
+  };
   useEffect(() => {
     request(id);
     data();
+    recipeStatus();
   }, []);
   return (
     <section>
@@ -77,13 +87,15 @@ function FoodDetails(props) {
         />)
         ))}
       </section>
-      <button
-        className="start-btn"
-        type="button"
-        data-testid="start-recipe-btn"
-      >
-        Start Recipe
-      </button>
+      {btnStatus
+      && (
+        <button
+          className="start-btn"
+          type="button"
+          data-testid="start-recipe-btn"
+        >
+          Start Recipe
+        </button>)}
     </section>
   );
 }
