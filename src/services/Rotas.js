@@ -60,7 +60,7 @@ function Rotas() {
         />
         <Route
           exact
-          path="/drinks/:id/id-progress"
+          path="/drinks/:id/in-progress"
           render={ (props) => <DrinkRecipeProgress { ...props } /> }
         />
       </Switch>
