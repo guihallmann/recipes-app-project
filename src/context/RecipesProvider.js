@@ -6,6 +6,7 @@ function RecipesProvider({ children }) {
   const [searchBarStatus, setSearchBarStatus] = useState(false);
   const [foodsList, setFoodsList] = useState([]);
   const [drinksList, setDrinksList] = useState([]);
+  const [fromExploreIngredient, setFromExploreIngredient] = useState(false);
 
   const context = {
     searchBarStatus,
@@ -14,6 +15,8 @@ function RecipesProvider({ children }) {
     setFoodsList,
     drinksList,
     setDrinksList,
+    fromExploreIngredient,
+    setFromExploreIngredient,
   };
   return (
     <RecipesContext.Provider value={ context }>

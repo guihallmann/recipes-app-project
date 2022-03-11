@@ -11,7 +11,7 @@ function DrinksByIngredient() {
 
   const getDrinkIngredients = async () => {
     const drinkIngredients = await getAllDrinkIngredients();
-    const twelveDrinkIngredients = drinkIngredients.splice(0, CONST_12);
+    const twelveDrinkIngredients = drinkIngredients.slice(0, CONST_12);
     setIngredients(twelveDrinkIngredients);
     setIsLoading(false);
   };

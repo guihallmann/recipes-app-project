@@ -15,10 +15,16 @@ function Drinks() {
   const { drinksList, setDrinksList } = useContext(RecipesContext);
   const [drinkCategories, setDrinkCategories] = useState([]);
   const [toggleFilter, setToggleFilter] = useState('');
+  const { fromExploreIngredient, setFromExploreIngredient } = useContext(RecipesContext);
+
   const getDrinks = async () => {
-    const drinks = await getTwelveDrinks();
-    setDrinksList(drinks);
-    setDrinkCategories(await getDrinkCategories());
+    if (fromExploreIngredient) {
+      setFromExploreIngredient(false);
+    } else {
+      const drinks = await getTwelveDrinks();
+      setDrinksList(drinks);
+      setDrinkCategories(await getDrinkCategories());
+    }
   };
 
   const handleClickFilter = async ({ target }) => {
@@ -62,15 +68,15 @@ function Drinks() {
       </div>
       <div>
         {drinksList.map((drink, index) => (index <= MAX_LIST_SIZE
-        && (
-          <Link to={ `/drinks/${drink.idDrink}` }>
-            <Card
-              key={ drink.idDrink }
-              index={ index }
-              image={ drink.strDrinkThumb }
-              name={ drink.strDrink }
-            />
-          </Link>)
+          && (
+            <Link to={ `/drinks/${drink.idDrink}` }>
+              <Card
+                key={ drink.idDrink }
+                index={ index }
+                image={ drink.strDrinkThumb }
+                name={ drink.strDrink }
+              />
+            </Link>)
         ))}
       </div>
       <Footer />
