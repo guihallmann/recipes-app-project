@@ -6,7 +6,7 @@ import { getMealDetails, getDrinksRecommends } from '../services/API';
 import shareIcon from '../images/shareIcon.svg';
 import favIcon from '../images/blackHeartIcon.svg';
 import SugestionCard from './SugestionsCard';
-import { FIRST_SIX } from '../data/consts';
+import { FIRST_SIX, CLIPBOARD_MESSAGE } from '../data/consts';
 
 function FoodDetails(props) {
   const { match: { params: { id } } } = props;
@@ -14,7 +14,9 @@ function FoodDetails(props) {
   const [recipe, setRecipe] = useState([]);
   const [drinkData, setDrinkData] = useState([]);
   const [btnStatus, setBtnStatus] = useState('newRecipe');
+  const [clipboardMessage, setClipBoardMessage] = useState('');
   const history = useHistory();
+  const { pathname } = history.location;
   const request = async (mealId) => {
     const apiResult = await getMealDetails(mealId);
     setMealDetails(apiResult.meals[0]);
@@ -53,6 +55,11 @@ function FoodDetails(props) {
   const startRecipe = () => {
     history.push(`/foods/${id}/in-progress`);
   };
+  const copyToClipboard = () => {
+    const url = `http://localhost:3000${pathname}`;
+    navigator.clipboard.writeText(url);
+    setClipBoardMessage(CLIPBOARD_MESSAGE);
+  };
   useEffect(() => {
     request(id);
     data();
@@ -69,13 +76,14 @@ function FoodDetails(props) {
       <h1 data-testid="recipe-title">{mealDetails.strMeal}</h1>
       <h2 data-testid="recipe-category">{mealDetails.strCategory}</h2>
       <section>
-        <button type="button">
+        <button type="button" onClick={ copyToClipboard }>
           <img src={ shareIcon } alt="shareIcon" data-testid="share-btn" />
         </button>
         <button type="button">
           <img src={ favIcon } alt="favIcon" data-testid="favorite-btn" />
         </button>
       </section>
+      {clipboardMessage === CLIPBOARD_MESSAGE && <span>{CLIPBOARD_MESSAGE}</span>}
       {recipe.length !== 0 && recipe.map((rec, i) => (
         <div key={ i }>
           <span
