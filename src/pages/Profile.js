@@ -8,17 +8,11 @@ function Profile() {
   const userObj = JSON.parse(user);
   const history = useHistory();
 
-  const handleDoneButton = () => {
-    history.push('/done-recipes');
-  };
-
-  const handleFavoriteButton = () => {
-    history.push('/favorite-recipes');
-  };
-
-  const handleLogoutButton = () => {
-    localStorage.clear();
-    history.push('/');
+  const handleClick = (path) => {
+    if (path === '/') {
+      localStorage.clear();
+    }
+    history.push(path);
   };
 
   return (
@@ -28,25 +22,24 @@ function Profile() {
       <button
         data-testid="profile-done-btn"
         type="button"
-        onClick={ handleDoneButton }
+        onClick={ () => handleClick('/done-recipes') }
       >
         Done Recipes
       </button>
       <button
         type="button"
         data-testid="profile-favorite-btn"
-        onClick={ handleFavoriteButton }
+        onClick={ () => handleClick('/favorite-recipes') }
       >
         Favorite Recipes
       </button>
       <button
         data-testid="profile-logout-btn"
         type="button"
-        onClick={ handleLogoutButton }
+        onClick={ () => handleClick('/') }
       >
         Logout
       </button>
-
       <Footer />
     </div>
   );
