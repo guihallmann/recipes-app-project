@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CardDoneAndFavoriteRecipes from '../components/CardDoneAndFavoriteRecipes';
+import Header from '../components/Header';
 
 function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState([]);
@@ -23,6 +24,7 @@ function DoneRecipes() {
   return (
     <section>
       <div>
+        <Header title="Done Recipes" />
         <button
           type="button"
           data-testid="filter-by-all-btn"
