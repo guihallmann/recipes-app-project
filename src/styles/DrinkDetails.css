@@ -1,0 +1,17 @@
+.carousel {
+  display: flex;
+  flex-direction: row;
+  height: 240px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: auto;
+}
+
+.carousel img {
+  width: 50vw;
+}
+
+.start-btn {
+  bottom: 0;
+  position: fixed;
+}
