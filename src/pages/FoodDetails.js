@@ -12,7 +12,7 @@ function FoodDetails(props) {
   const [mealDetails, setMealDetails] = useState([]);
   const [recipe, setRecipe] = useState([]);
   const [drinkData, setDrinkData] = useState([]);
-  const [btnStatus, setBtnStatus] = useState(true);
+  const [btnStatus, setBtnStatus] = useState('newRecipe');
   const request = async (mealId) => {
     const apiResult = await getMealDetails(mealId);
     setMealDetails(apiResult.meals[0]);
@@ -35,10 +35,17 @@ function FoodDetails(props) {
   };
   const recipeStatus = () => {
     const doneRecipes = localStorage.getItem('doneRecipes');
+    const inProgressRecipes = localStorage.getItem('inProgressRecipes');
     if (doneRecipes) {
       const doneRecipesParse = JSON.parse(doneRecipes);
       const getRecipe = doneRecipesParse.find((rec) => rec.id === id);
       if (getRecipe !== undefined) setBtnStatus(false);
+    }
+    if (inProgressRecipes) {
+      const inProgressRecipesParse = JSON.parse(inProgressRecipes);
+      const getProgress = Object.keys(inProgressRecipesParse.meals)
+        .find((rec) => rec === id);
+      if (getProgress !== undefined) setBtnStatus('inProgressRecipe');
     }
   };
   useEffect(() => {
@@ -87,7 +94,7 @@ function FoodDetails(props) {
         />)
         ))}
       </section>
-      {btnStatus
+      {btnStatus === 'newRecipe'
       && (
         <button
           className="start-btn"
@@ -95,6 +102,15 @@ function FoodDetails(props) {
           data-testid="start-recipe-btn"
         >
           Start Recipe
+        </button>)}
+      {btnStatus === 'inProgressRecipe'
+      && (
+        <button
+          className="start-btn"
+          type="button"
+          data-testid="start-recipe-btn"
+        >
+          Continue Recipe
         </button>)}
     </section>
   );
