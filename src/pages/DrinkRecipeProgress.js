@@ -2,7 +2,10 @@ import React from 'react';
 
 function DrinkRecipeProgress() {
   return (
-    <span>Olá</span>
+    <div>
+      <span>Olá</span>
+    </div>
+
   );
 }
 
