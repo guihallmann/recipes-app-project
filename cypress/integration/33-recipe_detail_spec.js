@@ -243,7 +243,7 @@ describe('38 - Desenvolva um botão de nome "Start Recipe" que deve ficar fixo n
   });
 });
 
-describe.only('39 - Implemente a solução de forma que caso a receita já tenha sido feita, o botão "Start Recipe" deve sumir', () => {
+describe('39 - Implemente a solução de forma que caso a receita já tenha sido feita, o botão "Start Recipe" deve sumir', () => {
   it('Verifica se botão de iniciar receita não é visível na tela de detalhes de uma comida', () => {
     cy.visit('http://localhost:3000/foods/52771', {
       onBeforeLoad(win) {
@@ -323,7 +323,7 @@ describe('40 - Implemente a solução de modo que caso a receita tenha sido inic
   });
 });
 
-describe.only('41 - Redirecione a pessoa usuária caso o botão "Start Recipe" seja clicado, a rota deve mudar para a tela de receita em progresso', () => {
+describe('41 - Redirecione a pessoa usuária caso o botão "Start Recipe" seja clicado, a rota deve mudar para a tela de receita em progresso', () => {
   it('Redireciona para tela de receita da comida em progresso', () => {
     cy.visit('http://localhost:3000/foods/52771', {
       onBeforeLoad(win) {
@@ -371,7 +371,7 @@ describe('42 - Implemente um botão de compartilhar e um de favoritar a receita'
   });
 });
 
-describe('43 - Implemente a solução de forma que, ao clicar no botão de compartilhar, o link da receita dentro do app deve ser copiado para o clipboard e uma mensagem avisando que o link foi copiado deve aparecer', () => {
+describe.only('43 - Implemente a solução de forma que, ao clicar no botão de compartilhar, o link da receita dentro do app deve ser copiado para o clipboard e uma mensagem avisando que o link foi copiado deve aparecer', () => {
   it('Verifica a mensagem "Link copied!" e se o link da receita da comida foi copiado para o clipboard', () => {
     cy.visit('http://localhost:3000/foods/52771', {
       onBeforeLoad(win) {
