@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
+// import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Card from '../components/Card';
@@ -10,6 +12,7 @@ function FoodsByNationalities() {
   const [nationalities, setNationalities] = useState([]);
   const [dropdown, setDropdown] = useState('All');
   const { foodsList, setFoodsList } = useContext(RecipesContext);
+  // const history = useHistory();
 
   const getFoodNationalities = async () => {
     const foodNationalities = await getNationalities();
@@ -69,12 +72,18 @@ function FoodsByNationalities() {
         }
       </select>
       <div>
-        {foodsList.map((food, index) => (index <= MAX_LIST_SIZE && <Card
-          key={ food.idMeal }
-          index={ index }
-          image={ food.strMealThumb }
-          name={ food.strMeal }
-        />
+        {foodsList.map((food, index) => (index <= MAX_LIST_SIZE
+        && (
+          <Link
+            to={ `/foods/${food.idMeal}` }
+            key={ food.idMeal }
+          >
+            <Card
+              index={ index }
+              image={ food.strMealThumb }
+              name={ food.strMeal }
+            />
+          </Link>)
         ))}
       </div>
       <Footer />
