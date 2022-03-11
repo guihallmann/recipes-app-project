@@ -1,16 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 
-function CardDoneRecipes({ image, category, name, doneDate, tags }, index) {
+const copy = require('clipboard-copy');
+
+function CardDoneRecipes({
+  image,
+  category,
+  name,
+  doneDate,
+  tags,
+  type,
+  nationality,
+  id,
+}, index) {
+  tags = tags.filter((tag, ind) => ind < 2);
+  const [copiedLink, setCopiedLink] = useState(false);
+
+  const handleClickShare = () => {
+    copy(`/${type}/${id}`);/* vericar se o type e food ou foods */
+    setCopiedLink(true);
+  };
   return (
     <div>
-      <img src={ image } alt="recipe" data-testid={ `${index}-horizontal-image` } />
-      <p data-testid={ `${index}-horizontal-top-text` }>{category}</p>
-      <h3 data-testid={ `${index}-horizontal-name` }>{name}</h3>
+      <Link to={ `/${type}/${id}` }>
+        <img src={ image } alt="recipe" data-testid={ `${index}-horizontal-image` } />
+      </Link>
+      <Link to={ `/${type}/${id}` }>
+        <h3 data-testid={ `${index}-horizontal-name` }>{name}</h3>
+      </Link>
+      <p data-testid={ `${index}-horizontal-top-text` }>
+        {
+          type === 'food' ? `${nationality} - ${category}` : alcoholicOrNot
+        }
+        {/* vericar se o type e food ou foods */}
+      </p>
       <p data-testid={ `${index}-horizontal-done-date` }>{doneDate}</p>
-      <span data-testid={ `${index}-horizontal-share-btn` }>{shareIcon}</span>
-      {/* trocar tag */}
+      <button
+        data-testid={ `${index}-horizontal-share-btn` }
+        type="button"
+        onClick={ handleClickShare }
+      >
+        {shareIcon}
+      </button>
+      {copiedLink && <p>Link copied!</p>}
       {tags.map((tagName) => (
         <p
           data-testid={ `${index}-${tagName}-horizontal-tag` }
