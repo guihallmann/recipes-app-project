@@ -8,8 +8,12 @@ function Profile() {
   const userObj = JSON.parse(user);
   const history = useHistory();
 
-  const handleClick = () => {
+  const handleDoneButton = () => {
     history.push('/done-recipes');
+  };
+
+  const handleFavoriteButton = () => {
+    history.push('/favorite-recipes');
   };
 
   return (
@@ -19,13 +23,14 @@ function Profile() {
       <button
         data-testid="profile-done-btn"
         type="button"
-        onClick={ handleClick }
+        onClick={ handleDoneButton }
       >
         Done Recipes
       </button>
       <button
         type="button"
         data-testid="profile-favorite-btn"
+        onClick={ handleFavoriteButton }
       >
         Favorite Recipes
       </button>
