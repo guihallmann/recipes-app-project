@@ -14,6 +14,7 @@ import DrinkDetails from '../pages/DrinkDetails';
 import DrinksByIngredient from '../pages/DrinksByIgredient';
 import NotFound from '../pages/NotFound';
 import DoneRecipes from '../pages/DoneRecipes';
+import FavoriteRecipes from '../pages/FavoriteRecipes';
 
 function Rotas() {
   return (
@@ -29,6 +30,7 @@ function Rotas() {
         <Route exact path="/explore/foods/ingredients" component={ FoodsByIngredient } />
         <Route exact path="/explore/drinks/nationalities" component={ NotFound } />
         <Route exact path="/done-recipes" component={ DoneRecipes } />
+        <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
         <Route
           exact
           path="/explore/drinks/ingredients"

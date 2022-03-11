@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import CardDoneAndFavoriteRecipes from '../components/CardDoneAndFavoriteRecipes';
 
-function DoneRecipes() {
-  const [doneRecipes, setDoneRecipes] = useState([]);
+function FavoriteRecipes() {
+  const [favoriteRecipes, setFavoriterecipes] = useState([]);
   useEffect(() => {
-    const LSdoneRecipes = localStorage.getItem(doneRecipes);
-    setDoneRecipes(JSON.parse(LSdoneRecipes));
+    const LSfavoriteRecipes = localStorage.getItem(favoriteRecipes);
+    setFavoriterecipes(JSON.parse(LSfavoriteRecipes));
   }, []);
 
   const handleClickFilter = ({ target: { textContent } }) => {
     if (textContent === 'All') {
-      const LSdoneRecipes = localStorage.getItem(doneRecipes);
-      setDoneRecipes(JSON.parse(LSdoneRecipes));
+      const LSfavoriteRecipes = localStorage.getItem(favoriteRecipes);
+      setFavoriterecipes(JSON.parse(LSfavoriteRecipes));
     } else {
-      const filter = doneRecipes.filter(({ type }) => type === textContent);
-      setDoneRecipes(filter);
+      const filter = favoriteRecipes.filter(({ type }) => type === textContent);
+      setFavoriterecipes(filter);// muda aq
     }
   };
 
@@ -42,11 +42,11 @@ function DoneRecipes() {
         >
           Drinks
         </button>
-        {doneRecipes.map((recipe, index) => (
+        {favoriteRecipes.map((recipe, index) => (
           <CardDoneAndFavoriteRecipes
             recipe={ recipe }
             index={ index }
-            favorite={ false }
+            favorite
             key={ recipe.id }
           />))}
       </div>
@@ -54,4 +54,4 @@ function DoneRecipes() {
   );
 }
 
-export default DoneRecipes;
+export default FavoriteRecipes;
