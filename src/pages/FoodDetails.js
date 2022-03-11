@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/FoodDetails.css';
+import { useHistory } from 'react-router';
 import { getMealDetails, getDrinksRecommends } from '../services/API';
 import shareIcon from '../images/shareIcon.svg';
 import favIcon from '../images/blackHeartIcon.svg';
@@ -13,6 +14,7 @@ function FoodDetails(props) {
   const [recipe, setRecipe] = useState([]);
   const [drinkData, setDrinkData] = useState([]);
   const [btnStatus, setBtnStatus] = useState('newRecipe');
+  const history = useHistory();
   const request = async (mealId) => {
     const apiResult = await getMealDetails(mealId);
     setMealDetails(apiResult.meals[0]);
@@ -47,6 +49,9 @@ function FoodDetails(props) {
         .find((rec) => rec === id);
       if (getProgress !== undefined) setBtnStatus('inProgressRecipe');
     }
+  };
+  const startRecipe = () => {
+    history.push(`/foods/${id}/in-progress`);
   };
   useEffect(() => {
     request(id);
@@ -100,6 +105,7 @@ function FoodDetails(props) {
           className="start-btn"
           type="button"
           data-testid="start-recipe-btn"
+          onClick={ startRecipe }
         >
           Start Recipe
         </button>)}

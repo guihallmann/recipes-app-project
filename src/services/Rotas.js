@@ -15,6 +15,8 @@ import DrinksByIngredient from '../pages/DrinksByIgredient';
 import NotFound from '../pages/NotFound';
 import DoneRecipes from '../pages/DoneRecipes';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
+import MealRecipeProgress from '../pages/MealRecipeProgress';
+import DrinkRecipeProgress from '../pages/DrinkRecipeProgress';
 
 function Rotas() {
   return (
@@ -50,6 +52,16 @@ function Rotas() {
           exact
           path="/drinks/:id"
           render={ (props) => <DrinkDetails { ...props } /> }
+        />
+        <Route
+          exact
+          path="/drinks/:id/in-progress"
+          render={ (props) => <MealRecipeProgress { ...props } /> }
+        />
+        <Route
+          exact
+          path="/drinks/:id/id-progress"
+          render={ (props) => <DrinkRecipeProgress { ...props } /> }
         />
       </Switch>
     </BrowserRouter>
