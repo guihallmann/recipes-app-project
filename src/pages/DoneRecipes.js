@@ -5,13 +5,15 @@ function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState([]);
   useEffect(() => {
     const LSdoneRecipes = localStorage.getItem(doneRecipes);
-    setDoneRecipes(JSON.parse(LSdoneRecipes));
+    const objDoneRecipes = JSON.parse(LSdoneRecipes);
+    if (objDoneRecipes !== null) setDoneRecipes(objDoneRecipes);
   }, []);
 
   const handleClickFilter = ({ target: { textContent } }) => {
     if (textContent === 'All') {
       const LSdoneRecipes = localStorage.getItem(doneRecipes);
-      setDoneRecipes(JSON.parse(LSdoneRecipes));
+      const objDoneRecipes = JSON.parse(LSdoneRecipes);
+      if (objDoneRecipes !== null) setDoneRecipes(objDoneRecipes);
     } else {
       const filter = doneRecipes.filter(({ type }) => type === textContent);
       setDoneRecipes(filter);

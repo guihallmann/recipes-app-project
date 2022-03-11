@@ -5,16 +5,18 @@ function FavoriteRecipes() {
   const [favoriteRecipes, setFavoriterecipes] = useState([]);
   useEffect(() => {
     const LSfavoriteRecipes = localStorage.getItem(favoriteRecipes);
-    setFavoriterecipes(JSON.parse(LSfavoriteRecipes));
+    const objFavRecipes = JSON.parse(LSfavoriteRecipes);
+    if (objFavRecipes !== null) setFavoriterecipes(objFavRecipes);
   }, []);
 
   const handleClickFilter = ({ target: { textContent } }) => {
     if (textContent === 'All') {
       const LSfavoriteRecipes = localStorage.getItem(favoriteRecipes);
-      setFavoriterecipes(JSON.parse(LSfavoriteRecipes));
+      const objFavRecipes = JSON.parse(LSfavoriteRecipes);
+      if (objFavRecipes !== null) setFavoriterecipes(objFavRecipes);
     } else {
       const filter = favoriteRecipes.filter(({ type }) => type === textContent);
-      setFavoriterecipes(filter);// muda aq
+      setFavoriterecipes(filter);
     }
   };
 
