@@ -5,8 +5,10 @@ import { useHistory } from 'react-router';
 import { getDrinkDetails, getMealsRecommends } from '../services/API';
 import SugestionCard from './SugestionsCard';
 import shareIcon from '../images/shareIcon.svg';
-import favIcon from '../images/blackHeartIcon.svg';
+import blackHeart from '../images/blackHeartIcon.svg';
+import whiteHeart from '../images/whiteHeartIcon.svg';
 import { FIRST_SIX, CLIPBOARD_MESSAGE } from '../data/consts';
+import { recipeStatus, favoriteStatus } from '../services/Functions';
 
 function DrinkDetails(props) {
   const { match: { params: { id } } } = props;
@@ -15,6 +17,7 @@ function DrinkDetails(props) {
   const [foodData, setFoodData] = useState([]);
   const [btnStatus, setBtnStatus] = useState('newRecipe');
   const [clipboardMessage, setClipBoardMessage] = useState('');
+  const [favStatus, setFavStatus] = useState(false);
   const history = useHistory();
   const { pathname } = history.location;
   const request = async (drinkId) => {
@@ -37,21 +40,6 @@ function DrinkDetails(props) {
     const dataResult = await getMealsRecommends();
     setFoodData(dataResult);
   };
-  const recipeStatus = () => {
-    const doneRecipes = localStorage.getItem('doneRecipes');
-    const inProgressRecipes = localStorage.getItem('inProgressRecipes');
-    if (doneRecipes) {
-      const doneRecipesParse = JSON.parse(doneRecipes);
-      const getRecipe = doneRecipesParse.find((rec) => rec.id === id);
-      if (getRecipe !== undefined) setBtnStatus('doneRecipe');
-    }
-    if (inProgressRecipes) {
-      const inProgressRecipesParse = JSON.parse(inProgressRecipes);
-      const getProgress = Object.keys(inProgressRecipesParse.cocktails)
-        .find((rec) => rec === id);
-      if (getProgress !== undefined) setBtnStatus('inProgressRecipe');
-    }
-  };
   const startRecipe = () => {
     history.push(`/drinks/${id}/in-progress`);
   };
@@ -63,7 +51,8 @@ function DrinkDetails(props) {
   useEffect(() => {
     request(id);
     data();
-    recipeStatus();
+    recipeStatus(id, 'cocktails', setBtnStatus);
+    favoriteStatus(id, setFavStatus);
   }, []);
 
   return (
@@ -81,7 +70,11 @@ function DrinkDetails(props) {
           <img src={ shareIcon } alt="shareIcon" data-testid="share-btn" />
         </button>
         <button type="button">
-          <img src={ favIcon } alt="favIcon" data-testid="favorite-btn" />
+          <img
+            src={ favStatus ? blackHeart : whiteHeart }
+            alt="favIcon"
+            data-testid="favorite-btn"
+          />
         </button>
       </section>
       {clipboardMessage === CLIPBOARD_MESSAGE && <span>{CLIPBOARD_MESSAGE}</span>}
