@@ -8,7 +8,7 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import { FIRST_SIX, CLIPBOARD_MESSAGE } from '../data/consts';
-import { recipeStatus, favoriteStatus, changeFavStatus } from '../services/Functions';
+import { recipeStatus, favoriteStatus, setFavoriteDrink } from '../services/Functions';
 
 function DrinkDetails(props) {
   const { match: { params: { id } } } = props;
@@ -71,7 +71,7 @@ function DrinkDetails(props) {
         </button>
         <button
           type="button"
-          onClick={ () => changeFavStatus(favStatus, setFavStatus) }
+          onClick={ () => setFavoriteDrink(favStatus, setFavStatus, drinkDetails) }
         >
           <img
             src={ favStatus ? blackHeart : whiteHeart }
