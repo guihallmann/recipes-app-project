@@ -16,12 +16,15 @@ export const recipeStatus = (id, type, setBtnStatus) => {
 
 export const favoriteStatus = (id, setFavStatus) => {
   const favRecipes = localStorage.getItem('favoriteRecipes');
+  if (!favRecipes) {
+    localStorage.setItem('favoriteRecipes', []);
+    setFavStatus(false);
+  }
   if (favRecipes) {
     const favRecipesParse = JSON.parse(favRecipes);
     const getFav = favRecipesParse.find((fav) => fav.id === id);
     if (getFav !== undefined) setFavStatus(true);
   }
-  localStorage.setItem('favoriteRecipes', []);
 };
 
 export const setFavoriteMeal = (favStatus, setFavStatus, mealDetails) => {
