@@ -22,3 +22,8 @@ export const favoriteStatus = (id, setFavStatus) => {
     if (getFav !== undefined) setFavStatus(true);
   }
 };
+
+export const changeFavStatus = (favStatus, setFavStatus) => {
+  if (favStatus === true) setFavStatus(false);
+  if (favStatus === false) setFavStatus(true);
+};
