@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import CardDoneAndFavoriteRecipes from '../components/CardDoneAndFavoriteRecipes';
+import Header from '../components/Header';
 
 function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState([]);
   useEffect(() => {
     const LSdoneRecipes = localStorage.getItem(doneRecipes);
-    setDoneRecipes(JSON.parse(LSdoneRecipes));
+    const objDoneRecipes = JSON.parse(LSdoneRecipes);
+    if (objDoneRecipes !== null) setDoneRecipes(objDoneRecipes);
   }, []);
 
   const handleClickFilter = ({ target: { textContent } }) => {
     if (textContent === 'All') {
       const LSdoneRecipes = localStorage.getItem(doneRecipes);
-      setDoneRecipes(JSON.parse(LSdoneRecipes));
+      const objDoneRecipes = JSON.parse(LSdoneRecipes);
+      if (objDoneRecipes !== null) setDoneRecipes(objDoneRecipes);
     } else {
       const filter = doneRecipes.filter(({ type }) => type === textContent);
       setDoneRecipes(filter);
@@ -21,6 +24,7 @@ function DoneRecipes() {
   return (
     <section>
       <div>
+        <Header title="Done Recipes" />
         <button
           type="button"
           data-testid="filter-by-all-btn"

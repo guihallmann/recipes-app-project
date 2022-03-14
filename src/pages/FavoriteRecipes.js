@@ -1,26 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import RecipesContext from '../context/RecipesContext';
 import CardDoneAndFavoriteRecipes from '../components/CardDoneAndFavoriteRecipes';
+import Header from '../components/Header';
 
 function FavoriteRecipes() {
   const [favoriteRecipes, setFavoriterecipes] = useState([]);
+  const { changeList } = useContext(RecipesContext);
+
   useEffect(() => {
-    const LSfavoriteRecipes = localStorage.getItem(favoriteRecipes);
-    setFavoriterecipes(JSON.parse(LSfavoriteRecipes));
-  }, []);
+    setFavoriterecipes(JSON.parse(localStorage.getItem('favoriteRecipes')));
+  }, [changeList]);
 
   const handleClickFilter = ({ target: { textContent } }) => {
+    const LSfavoriteRecipes = localStorage.getItem('favoriteRecipes');
+    const parseFavRecipes = JSON.parse(LSfavoriteRecipes);
     if (textContent === 'All') {
-      const LSfavoriteRecipes = localStorage.getItem(favoriteRecipes);
-      setFavoriterecipes(JSON.parse(LSfavoriteRecipes));
-    } else {
-      const filter = favoriteRecipes.filter(({ type }) => type === textContent);
-      setFavoriterecipes(filter);// muda aq
+      setFavoriterecipes(parseFavRecipes);
+    } else if (textContent === 'Drinks') {
+      const filter = parseFavRecipes.filter(({ type }) => type === 'drink');
+      setFavoriterecipes(filter);
+    } else if (textContent === 'Food') {
+      const filter = parseFavRecipes.filter(({ type }) => type === 'food');
+      setFavoriterecipes(filter);
     }
   };
 
   return (
     <section>
       <div>
+        <Header title="Favorite Recipes" />
         <button
           type="button"
           data-testid="filter-by-all-btn"
