@@ -48,6 +48,11 @@ function MealInProgress(props) {
     navigator.clipboard.writeText(url);
     setClipBoardMessage(CLIPBOARD_MESSAGE);
   };
+
+  const handleCheckbox = ({ target }) => {
+    target.parentElement.classList.toggle('isChecked');
+  };
+
   useEffect(() => {
     request(id);
     // data();
@@ -87,6 +92,7 @@ function MealInProgress(props) {
               type="checkbox"
               key={ i }
               id={ rec }
+              onClick={ handleCheckbox }
             />
             {rec}
           </label>
