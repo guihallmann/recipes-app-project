@@ -83,12 +83,14 @@ function DrinkRecipeProgress(props) {
       {clipboardMessage === CLIPBOARD_MESSAGE && <span>{CLIPBOARD_MESSAGE}</span>}
       {recipe.length !== 0 && recipe.map((rec, i) => (
         <div key={ i }>
-          <span
-            data-testid={ `${i}-ingredient-step` }
-            key={ i }
-          >
+          <label htmlFor={ rec } data-testid={ `${i}-ingredient-step` }>
+            <input
+              type="checkbox"
+              key={ i }
+              id={ rec }
+            />
             {rec}
-          </span>
+          </label>
         </div>
       ))}
       <p data-testid="instructions">{drinkDetails.strInstructions}</p>
@@ -97,7 +99,7 @@ function DrinkRecipeProgress(props) {
         className="start-btn"
         type="button"
         data-testid="finish-recipe-btn"
-        // onClick={ startRecipe }
+      // onClick={ startRecipe }
       >
         Finish Recipe
       </button>
