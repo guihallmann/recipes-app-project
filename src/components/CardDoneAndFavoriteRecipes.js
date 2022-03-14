@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import RecipesContext from '../context/RecipesContext';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import '../styles/FavoritesCard.css';
 
 const copy = require('clipboard-copy');
 
@@ -19,17 +21,16 @@ function CardDoneAndFavoriteRecipes({ recipe, index, favorite }) {
     alcoholicOrNot,
   } = recipe;
   const [filterTags, setFilterTags] = useState([]);
-  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
-  useEffect(() => {
+  const { changeList, setChangeList } = useContext(RecipesContext);
+  // const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+
+  const handleClickUnfavorite = () => { // verificar se atualiza a tela
     const storageFavorites = localStorage.getItem('favoriteRecipes');
     const favoritesParse = JSON.parse(storageFavorites);
-    setFavoriteRecipes(favoritesParse);
-  }, []);
-  const handleClickUnfavorite = () => { // verificar se atualiza a tela
-    const newFavoriteRecipes = favoriteRecipes
+    const newFavoriteRecipes = favoritesParse
       .filter((favRecipe) => favRecipe.id !== recipe.id);
     localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
-    setFavoriteRecipes(newFavoriteRecipes);
+    setChangeList(changeList + 1);
   };
   if (tags) {
     setFilterTags(tags.filter((tag, ind) => ind < 2));
@@ -42,16 +43,17 @@ function CardDoneAndFavoriteRecipes({ recipe, index, favorite }) {
   };
   return (
     <div>
-      {console.log(favoriteRecipes)}
+      {console.log(type)}
       <Link to={ `${type}s/${id}` }>
         <img
+          className="recipe-image"
           src={ image }
           alt="recipe"
           data-testid={ `${index}-horizontal-image` }
         />
       </Link>
       <Link to={ `/${type}s/${id}` }>
-        <p data-testid={ `${index}-horizontal-name` }>{name}</p>
+        <h3 data-testid={ `${index}-horizontal-name` }>{name}</h3>
       </Link>
       <p data-testid={ `${index}-horizontal-top-text` }>
         {
