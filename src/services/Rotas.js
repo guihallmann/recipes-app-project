@@ -55,7 +55,7 @@ function Rotas() {
         />
         <Route
           exact
-          path="/drinks/:id/in-progress"
+          path="/foods/:id/in-progress"
           render={ (props) => <MealRecipeProgress { ...props } /> }
         />
         <Route
