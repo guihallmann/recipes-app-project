@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CardDoneAndFavoriteRecipes from '../components/CardDoneAndFavoriteRecipes';
 import Header from '../components/Header';
 
 function FavoriteRecipes() {
-  const [favoriteRecipes, setFavoriterecipes] = useState([]);
-  useEffect(() => {
-    const LSfavoriteRecipes = localStorage.getItem(favoriteRecipes);
-    const objFavRecipes = JSON.parse(LSfavoriteRecipes);
-    if (objFavRecipes !== null) setFavoriterecipes(objFavRecipes);
-  }, []);
+  // const [favoriteRecipes, setFavoriterecipes] = useState([]);
+  const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  // useEffect(() => {
+  //   const LSfavoriteRecipes = localStorage.getItem(favoriteRecipes);
+  //   const objFavRecipes = JSON.parse(LSfavoriteRecipes);
+  //   if (objFavRecipes !== null) setFavoriterecipes(objFavRecipes);
+  // }, []);
 
-  const handleClickFilter = ({ target: { textContent } }) => {
-    if (textContent === 'All') {
-      const LSfavoriteRecipes = localStorage.getItem(favoriteRecipes);
-      const objFavRecipes = JSON.parse(LSfavoriteRecipes);
-      if (objFavRecipes !== null) setFavoriterecipes(objFavRecipes);
-    } else {
-      const filter = favoriteRecipes.filter(({ type }) => type === textContent);
-      setFavoriterecipes(filter);
-    }
-  };
+  // const handleClickFilter = ({ target: { textContent } }) => {
+  //   if (textContent === 'All') {
+  //     const LSfavoriteRecipes = localStorage.getItem(favoriteRecipes);
+  //     const objFavRecipes = JSON.parse(LSfavoriteRecipes);
+  //     if (objFavRecipes !== null) setFavoriterecipes(objFavRecipes);
+  //   } else {
+  //     const filter = favoriteRecipes.filter(({ type }) => type === textContent);
+  //     setFavoriterecipes(filter);
+  //   }
+  // };
 
   return (
     <section>
@@ -28,25 +29,25 @@ function FavoriteRecipes() {
         <button
           type="button"
           data-testid="filter-by-all-btn"
-          onClick={ handleClickFilter }
+          // onClick={ handleClickFilter }
         >
           All
         </button>
         <button
           type="button"
           data-testid="filter-by-food-btn"
-          onClick={ handleClickFilter }
+          // onClick={ handleClickFilter }
         >
           Food
         </button>
         <button
           type="button"
           data-testid="filter-by-drink-btn"
-          onClick={ handleClickFilter }
+          // onClick={ handleClickFilter }
         >
           Drinks
         </button>
-        {favoriteRecipes.map((recipe, index) => (
+        {favorites.map((recipe, index) => (
           <CardDoneAndFavoriteRecipes
             recipe={ recipe }
             index={ index }

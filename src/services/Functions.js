@@ -17,7 +17,7 @@ export const recipeStatus = (id, type, setBtnStatus) => {
 export const favoriteStatus = (id, setFavStatus) => {
   const favRecipes = localStorage.getItem('favoriteRecipes');
   if (!favRecipes) {
-    localStorage.setItem('favoriteRecipes', []);
+    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
     setFavStatus(false);
   }
   if (favRecipes) {
@@ -29,8 +29,10 @@ export const favoriteStatus = (id, setFavStatus) => {
 
 export const setFavoriteMeal = (favStatus, setFavStatus, mealDetails) => {
   const favRecipes = localStorage.getItem('favoriteRecipes');
+  const favRecipesParse = JSON.parse(favRecipes);
+
   if (!favStatus) {
-    localStorage.setItem('favoriteRecipes', JSON.stringify([...favRecipes, {
+    const MealFavList = [...favRecipesParse, {
       id: mealDetails.idMeal,
       type: 'food',
       nationality: mealDetails.strArea,
@@ -38,11 +40,12 @@ export const setFavoriteMeal = (favStatus, setFavStatus, mealDetails) => {
       alcoholicOrNot: '',
       name: mealDetails.strMeal,
       image: mealDetails.strMealThumb,
-    }]));
+    }];
+    localStorage.setItem('favoriteRecipes', JSON.stringify(MealFavList));
     setFavStatus(true);
   }
   if (favStatus) {
-    const favRecipesParse = JSON.parse(favRecipes);
+    /* const favRecipesParse = JSON.parse(favRecipes); */
     const removeFav = favRecipesParse.filter((fav) => fav.id !== mealDetails.idMeal);
     localStorage.setItem('favoriteRecipes', JSON.stringify(removeFav));
     setFavStatus(false);
