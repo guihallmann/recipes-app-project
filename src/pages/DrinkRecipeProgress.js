@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import '../styles/DrinkDetails.css';
+import '../styles/DrinkRecipeProgress.css';
 import { useHistory } from 'react-router';
 import { getDrinkDetails } from '../services/API';
 import shareIcon from '../images/shareIcon.svg';
@@ -17,6 +17,7 @@ function DrinkRecipeProgress(props) {
   // const [btnStatus, setBtnStatus] = useState('newRecipe');
   const [clipboardMessage, setClipBoardMessage] = useState('');
   const [favStatus, setFavStatus] = useState(false);
+
   const history = useHistory();
   const { pathname } = history.location;
   const request = async (drinkId) => {
@@ -48,6 +49,11 @@ function DrinkRecipeProgress(props) {
     navigator.clipboard.writeText(url);
     setClipBoardMessage(CLIPBOARD_MESSAGE);
   };
+
+  const handleCheckbox = ({ target }) => {
+    target.parentElement.classList.toggle('isChecked');
+  };
+
   useEffect(() => {
     request(id);
     // data();
@@ -83,11 +89,15 @@ function DrinkRecipeProgress(props) {
       {clipboardMessage === CLIPBOARD_MESSAGE && <span>{CLIPBOARD_MESSAGE}</span>}
       {recipe.length !== 0 && recipe.map((rec, i) => (
         <div key={ i }>
-          <label htmlFor={ rec } data-testid={ `${i}-ingredient-step` }>
+          <label
+            htmlFor={ rec }
+            data-testid={ `${i}-ingredient-step` }
+          >
             <input
               type="checkbox"
               key={ i }
               id={ rec }
+              onClick={ handleCheckbox }
             />
             {rec}
           </label>
