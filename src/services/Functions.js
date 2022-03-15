@@ -75,3 +75,34 @@ export const setFavoriteDrink = (favStatus, setFavStatus, drinkDetails) => {
     setFavStatus(false);
   }
 };
+
+const checkInProgressIngredients = (ingredient, id) => {
+  const getStorageData = localStorage.getItem('inProgressRecipes');
+  const getStorageParse = JSON.parse(getStorageData);
+  localStorage.setItem('inProgressRecipes', JSON.stringify(
+    { ...getStorageParse,
+      meals: { [id]: [...getStorageParse.meals[id], ingredient] } },
+  ));
+};
+
+const uncheckInProgressIngredients = (ingredient, id) => {
+  const getStorageData = localStorage.getItem('inProgressRecipes');
+  const getStorageParse = JSON.parse(getStorageData);
+  const newUsedIngredients = getStorageParse.meals[id]
+    .filter((ing) => ing !== ingredient);
+  localStorage.setItem('inProgressRecipes', JSON.stringify(
+    { ...getStorageParse,
+      meals: { [id]: newUsedIngredients } },
+  ));
+};
+
+export const handleCheckbox = ({ target }, id, setToggle) => {
+  target.parentElement.classList.toggle('isChecked');
+  if (target.parentElement.className === 'isChecked') {
+    checkInProgressIngredients(target.name, id);
+    setToggle(true);
+  } else {
+    uncheckInProgressIngredients(target.name, id);
+    setToggle(false);
+  }
+};
