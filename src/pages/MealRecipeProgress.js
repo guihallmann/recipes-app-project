@@ -14,12 +14,49 @@ function MealInProgress(props) {
   const { match: { params: { id } } } = props;
   const [mealDetails, setMealDetails] = useState([]);
   const [recipe, setRecipe] = useState([]);
+  const [usedIngredients, setUsedIngredients] = useState({});
   // const [drinkData, setDrinkData] = useState([]);
   // const [btnStatus, setBtnStatus] = useState('newRecipe');
   const [clipboardMessage, setClipBoardMessage] = useState('');
   const [favStatus, setFavStatus] = useState(false);
   const history = useHistory();
   const { pathname } = history.location;
+
+  const fromStateToStorage = () => {
+    localStorage.setItem('inProgressRecipes', JSON.stringify({
+      meals: {
+        [id]: [{ ...usedIngredients }],
+      },
+    }));
+  };
+
+  const checkInProgressIngredients = (ingredient) => {
+    setUsedIngredients({ ...usedIngredients, [ingredient]: 'isChecked' });
+  };
+
+  const uncheckInProgressIngredients = (ingredient) => {
+    setUsedIngredients({ ...usedIngredients, [ingredient]: '' });
+  };
+
+  // const inProgressRecipes = () => {
+  //   const listaIngredienteUsados = {};
+  //   recipe.forEach((ingredient) => {
+  //     listaIngredienteUsados[ingredient] = '';
+  //   });
+  //   setUsedIngredients(listaIngredienteUsados);
+  // };
+
+  // const getFromStorage = () => {
+  //   const ingredientsFromStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  //   console.log(ingredientsFromStorage.meals[id]);
+  //   if (ingredientsFromStorage.meals[id] !== 'undefined') {
+  //     const thisRecipeIngredients = ingredientsFromStorage.meals[id][0];
+  //     setUsedIngredients(thisRecipeIngredients);
+  //   } else {
+  //     inProgressRecipes();
+  //   }
+  // };
+
   const request = async (mealId) => {
     const apiResult = await getMealDetails(mealId);
     setMealDetails(apiResult.meals[0]);
@@ -36,10 +73,12 @@ function MealInProgress(props) {
     const array = ingredients.map((elem, index) => `${elem} - ${measures[index]}`);
     setRecipe(array);
   };
+
   // const data = async () => {
   //   const dataResult = await getDrinksRecommends();
   //   setDrinkData(dataResult);
   // };
+
   // const startRecipe = () => {
   //   history.push(`/foods/${id}/in-progress`);
   // };
@@ -51,6 +90,11 @@ function MealInProgress(props) {
 
   const handleCheckbox = ({ target }) => {
     target.parentElement.classList.toggle('isChecked');
+    if (target.parentElement.className === 'isChecked') {
+      checkInProgressIngredients(target.name);
+    } else {
+      uncheckInProgressIngredients(target.name);
+    }
   };
 
   useEffect(() => {
@@ -59,6 +103,8 @@ function MealInProgress(props) {
     // recipeStatus(id, 'meals', setBtnStatus);
     favoriteStatus(id, setFavStatus);
   }, []);
+
+  useEffect(() => { fromStateToStorage(); }, [usedIngredients]);
   return (
     <section>
       <img
@@ -87,11 +133,16 @@ function MealInProgress(props) {
       {clipboardMessage === CLIPBOARD_MESSAGE && <span>{CLIPBOARD_MESSAGE}</span>}
       {recipe.length !== 0 && recipe.map((rec, i) => (
         <div key={ i }>
-          <label htmlFor={ rec } data-testid={ `${i}-ingredient-step` }>
+          <label
+            htmlFor={ rec }
+            data-testid={ `${i}-ingredient-step` }
+            className={ usedIngredients.rec }
+          >
             <input
               type="checkbox"
               key={ i }
               id={ rec }
+              name={ rec }
               onClick={ handleCheckbox }
             />
             {rec}
