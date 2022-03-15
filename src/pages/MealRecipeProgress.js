@@ -6,36 +6,40 @@ import { getMealDetails } from '../services/API';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
-// import SugestionCard from './SugestionsCard';
 import { CLIPBOARD_MESSAGE } from '../data/consts';
-import { favoriteStatus, setFavoriteMeal } from '../services/Functions';
+import { favoriteStatus, setFavoriteMeal, handleCheckbox } from '../services/Functions';
 
 function MealInProgress(props) {
   const { match: { params: { id } } } = props;
   const [mealDetails, setMealDetails] = useState([]);
   const [recipe, setRecipe] = useState([]);
-  const [usedIngredients, setUsedIngredients] = useState({});
-  // const [drinkData, setDrinkData] = useState([]);
-  // const [btnStatus, setBtnStatus] = useState('newRecipe');
+  const [usedIngredients, setUsedIngredients] = useState([]);
   const [clipboardMessage, setClipBoardMessage] = useState('');
   const [favStatus, setFavStatus] = useState(false);
+  const [toggle, setToggle] = useState(false);
   const history = useHistory();
   const { pathname } = history.location;
 
-  const fromStateToStorage = () => {
-    localStorage.setItem('inProgressRecipes', JSON.stringify({
-      meals: {
-        [id]: [{ ...usedIngredients }],
-      },
-    }));
+  const getFromStorage = () => {
+    const storageData = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const ingredients = storageData.meals[id];
+    setUsedIngredients(ingredients);
   };
 
-  const checkInProgressIngredients = (ingredient) => {
-    setUsedIngredients({ ...usedIngredients, [ingredient]: 'isChecked' });
-  };
-
-  const uncheckInProgressIngredients = (ingredient) => {
-    setUsedIngredients({ ...usedIngredients, [ingredient]: '' });
+  const checkStorage = () => {
+    const getStorageData = localStorage.getItem('inProgressRecipes');
+    if (!getStorageData) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(
+        { meals: {}, cocktails: {} },
+      ));
+    }
+    const storageData = localStorage.getItem('inProgressRecipes');
+    const getStorageDataParse = JSON.parse(storageData);
+    if (!getStorageDataParse.meals[id]) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(
+        { ...getStorageDataParse, meals: { [id]: [] } },
+      ));
+    }
   };
 
   // const inProgressRecipes = () => {
@@ -44,17 +48,6 @@ function MealInProgress(props) {
   //     listaIngredienteUsados[ingredient] = '';
   //   });
   //   setUsedIngredients(listaIngredienteUsados);
-  // };
-
-  // const getFromStorage = () => {
-  //   const ingredientsFromStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  //   console.log(ingredientsFromStorage.meals[id]);
-  //   if (ingredientsFromStorage.meals[id] !== 'undefined') {
-  //     const thisRecipeIngredients = ingredientsFromStorage.meals[id][0];
-  //     setUsedIngredients(thisRecipeIngredients);
-  //   } else {
-  //     inProgressRecipes();
-  //   }
   // };
 
   const request = async (mealId) => {
@@ -85,16 +78,7 @@ function MealInProgress(props) {
   const copyToClipboard = () => {
     const url = `http://localhost:3000${pathname}/in-progress`;
     navigator.clipboard.writeText(url);
-    setClipBoardMessage(CLIPBOARD_MESSAGE);
-  };
-
-  const handleCheckbox = ({ target }) => {
-    target.parentElement.classList.toggle('isChecked');
-    if (target.parentElement.className === 'isChecked') {
-      checkInProgressIngredients(target.name);
-    } else {
-      uncheckInProgressIngredients(target.name);
-    }
+    setClipBoardMessage(message);
   };
 
   useEffect(() => {
@@ -102,9 +86,14 @@ function MealInProgress(props) {
     // data();
     // recipeStatus(id, 'meals', setBtnStatus);
     favoriteStatus(id, setFavStatus);
+    checkStorage();
+    getFromStorage();
   }, []);
 
-  useEffect(() => { fromStateToStorage(); }, [usedIngredients]);
+  useEffect(() => {
+    getFromStorage();
+  }, [toggle]);
+
   return (
     <section>
       <img
@@ -136,14 +125,15 @@ function MealInProgress(props) {
           <label
             htmlFor={ rec }
             data-testid={ `${i}-ingredient-step` }
-            className={ usedIngredients.rec }
+            className={ usedIngredients.find((ing) => ing === rec) ? 'isChecked' : '' }
           >
             <input
               type="checkbox"
               key={ i }
               id={ rec }
               name={ rec }
-              onClick={ handleCheckbox }
+              onChange={ (e) => handleCheckbox(e, id, setToggle) }
+              checked={ usedIngredients.find((ing) => ing === rec) }
             />
             {rec}
           </label>
@@ -163,14 +153,14 @@ function MealInProgress(props) {
         ))}
       </section> */}
 
-      <button
+      {/* <button
         className="start-btn"
         type="button"
         data-testid="finish-recipe-btn"
-      // onClick={ startRecipe }
+        // onClick={ startRecipe }
       >
         Finish Recipe
-      </button>
+      </button> */}
       {/* {btnStatus === 'inProgressRecipe'
         && (
           <button

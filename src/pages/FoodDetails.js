@@ -119,6 +119,7 @@ function FoodDetails(props) {
           className="start-btn"
           type="button"
           data-testid="start-recipe-btn"
+          onClick={ startRecipe }
         >
           Continue Recipe
         </button>)}
