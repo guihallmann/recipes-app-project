@@ -104,7 +104,7 @@ function DrinkRecipeProgress(props) {
   useEffect(() => {
     fromStateToStorage();
     handleButton(recipe,
-      usedIngredients, btnFinishRecipe, setBtnFinishRecipe);
+      usedIngredients, setBtnFinishRecipe);
   }, [usedIngredients]);
 
   return (
