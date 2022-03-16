@@ -7,16 +7,48 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import { CLIPBOARD_MESSAGE } from '../data/consts';
-import { favoriteStatus, setFavoriteDrink } from '../services/Functions';
+import { favoriteStatus, setFavoriteDrink, handleCheckbox } from '../services/Functions';
 
 function DrinkRecipeProgress(props) {
   const { match: { params: { id } } } = props;
   const [drinkDetails, setDrinkDetails] = useState([]);
   const [recipe, setRecipe] = useState([]);
+  const [usedIngredients, setUsedIngredients] = useState([]);
   // const [foodData, setFoodData] = useState([]);
   // const [btnStatus, setBtnStatus] = useState('newRecipe');
   const [clipboardMessage, setClipBoardMessage] = useState('');
   const [favStatus, setFavStatus] = useState(false);
+
+  const getFromStorage = () => {
+    const storageData = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const ingredients = storageData.cocktails[id];
+    setUsedIngredients(ingredients);
+  };
+
+  const fromStateToStorage = () => {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(
+      {
+        cocktails: { [id]: usedIngredients },
+      },
+    ));
+  };
+
+  const checkStorage = () => {
+    console.log(id);
+    const getStorageData = localStorage.getItem('inProgressRecipes');
+    if (!getStorageData) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(
+        { meals: {}, cocktails: {} },
+      ));
+    }
+    const storageData = localStorage.getItem('inProgressRecipes');
+    const getStorageDataParse = JSON.parse(storageData);
+    if (!getStorageDataParse.cocktails[id]) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(
+        { ...getStorageDataParse, cocktails: { [id]: [] } },
+      ));
+    }
+  };
 
   // const history = useHistory();
   // const { pathname } = history.location;
@@ -36,6 +68,13 @@ function DrinkRecipeProgress(props) {
     const array = ingredients.map((elem, index) => `${elem} - ${measures[index]}`);
     setRecipe(array);
   };
+
+  const copyToClipboard = () => {
+    const url = `http://localhost:3000/drinks/${id}`;
+    navigator.clipboard.writeText(url);
+    setClipBoardMessage(CLIPBOARD_MESSAGE);
+  };
+
   // const data = async () => {
   //   const dataResult = await getMealsRecommends();
   //   setFoodData(dataResult);
@@ -44,22 +83,16 @@ function DrinkRecipeProgress(props) {
   //   history.push(`/drinks/${id}/in-progress`);
   // };
 
-  const copyToClipboard = () => {
-    const url = `http://localhost:3000/drinks/${id}`;
-    navigator.clipboard.writeText(url);
-    setClipBoardMessage(CLIPBOARD_MESSAGE);
-  };
-
-  const handleCheckbox = ({ target }) => {
-    target.parentElement.classList.toggle('isChecked');
-  };
-
   useEffect(() => {
     request(id);
     // data();
     // recipeStatus(id, 'cocktails', setBtnStatus);
     favoriteStatus(id, setFavStatus);
+    checkStorage();
+    getFromStorage();
   }, []);
+
+  useEffect(() => { fromStateToStorage(); }, [usedIngredients]);
 
   return (
     <section>
@@ -92,12 +125,16 @@ function DrinkRecipeProgress(props) {
           <label
             htmlFor={ rec }
             data-testid={ `${i}-ingredient-step` }
+            className={ usedIngredients.find((ing) => ing === rec) ? 'isChecked' : '' }
           >
             <input
               type="checkbox"
               key={ i }
               id={ rec }
-              onClick={ handleCheckbox }
+              name={ rec }
+              onChange={ (e) => handleCheckbox(e,
+                usedIngredients, setUsedIngredients) }
+              checked={ usedIngredients.find((ing) => ing === rec) }
             />
             {rec}
           </label>
