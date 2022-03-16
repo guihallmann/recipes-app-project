@@ -54,17 +54,18 @@ function MealInProgress(props) {
     const apiResult = await getMealDetails(mealId);
     setMealDetails(apiResult.meals[0]);
     const entriesArr = Object.entries(apiResult.meals[0]);
-    const newArr = entriesArr.filter((pos) => pos[0].includes('strIngredient')
-      || pos[0].includes('strMeasure'))
-      .filter((pos) => pos[1] !== '' && pos[1] !== null)
-      .map((pos) => pos[1]);
-    const SIZE = (newArr.length) / 2;
-    const ingredients = newArr.map((pos, i) => i < SIZE && pos)
-      .filter((pos) => pos !== false);
-    const measures = newArr.map((pos, i) => i >= SIZE && pos)
-      .filter((pos) => pos !== false);
-    const array = ingredients.map((elem, index) => `${elem} - ${measures[index]}`);
-    setRecipe(array);
+    const ingredients = entriesArr.filter((elem) => elem[0].includes('strIngredient'))
+      .filter((ing) => ing[1] !== '' && ing[1] !== null)
+      .map((ing) => ing[1]);
+    const measures = entriesArr.filter((elem) => elem[0].includes('strMeasure'))
+      .filter((mea) => mea[1] !== ' ' && mea[1] !== null && mea[1] !== '')
+      .map((mea) => mea[1]);
+    const SIZE = ingredients.length;
+    const ARRAY = [];
+    for (let i = 0; i < SIZE; i += 1) {
+      ARRAY.push(`${ingredients[i]} - ${measures[i]}`);
+    }
+    setRecipe(ARRAY);
   };
 
   const copyToClipboard = () => {
