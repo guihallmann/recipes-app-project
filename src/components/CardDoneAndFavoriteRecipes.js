@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import RecipesContext from '../context/RecipesContext';
@@ -24,7 +24,7 @@ function CardDoneAndFavoriteRecipes({ recipe, index, favorite }) {
   const { changeList, setChangeList } = useContext(RecipesContext);
   // const [favoriteRecipes, setFavoriteRecipes] = useState([]);
 
-  const handleClickUnfavorite = () => { // verificar se atualiza a tela
+  const handleClickUnfavorite = () => {
     const storageFavorites = localStorage.getItem('favoriteRecipes');
     const favoritesParse = JSON.parse(storageFavorites);
     const newFavoriteRecipes = favoritesParse
@@ -32,9 +32,11 @@ function CardDoneAndFavoriteRecipes({ recipe, index, favorite }) {
     localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
     setChangeList(changeList + 1);
   };
-  if (tags) {
-    setFilterTags(tags.filter((tag, ind) => ind < 2));
-  }
+  useEffect(() => {
+    if (tags) {
+      setFilterTags(tags.filter((tag, ind) => ind < 2));
+    }
+  }, []);
   const [copiedLink, setCopiedLink] = useState(false);
 
   const handleClickShare = () => {
@@ -43,7 +45,6 @@ function CardDoneAndFavoriteRecipes({ recipe, index, favorite }) {
   };
   return (
     <div>
-      {console.log(type)}
       <Link to={ `${type}s/${id}` }>
         <img
           className="recipe-image"

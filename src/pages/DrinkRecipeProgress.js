@@ -8,7 +8,8 @@ import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import { CLIPBOARD_MESSAGE } from '../data/consts';
 import { favoriteStatus,
-  setFavoriteDrink, handleCheckbox, handleButton } from '../services/Functions';
+  setFavoriteDrink, handleCheckbox, handleButton,
+  handleClickFinishRecipe } from '../services/Functions';
 
 function DrinkRecipeProgress(props) {
   const { match: { params: { id } } } = props;
@@ -150,7 +151,7 @@ function DrinkRecipeProgress(props) {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ btnFinishRecipe }
-        onClick={ () => history.push('/done-recipes') }
+        onClick={ () => handleClickFinishRecipe(history, drinkDetails, 'bebida') }
       >
         Finish Recipe
       </button>

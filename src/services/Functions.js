@@ -26,6 +26,54 @@ export const favoriteStatus = (id, setFavStatus) => {
     if (getFav !== undefined) setFavStatus(true);
   }
 };
+export const handleClickFinishRecipe = (history, details, type) => {
+  const doneRecipes = localStorage.getItem('doneRecipes');
+  const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  let parseDonerecipes; let mealsOrCocktails; let id;
+  if (doneRecipes) {
+    parseDonerecipes = JSON.parse(doneRecipes);
+  } else {
+    parseDonerecipes = [];
+  }
+  let objectDetails = {};
+  if (type === 'bebida') {
+    mealsOrCocktails = 'cocktails';
+    id = details.idDrink;
+    objectDetails = {
+      id: details.idDrink,
+      type,
+      nationality: '',
+      category: details.strCategory,
+      alcoholicOrNot: details.alcoholicOrNot,
+      name: details.strDrink,
+      image: details.strDrinkThumb,
+      doneDate: Date(),
+      tags: [],
+    };
+  }
+  if (type === 'comida') {
+    mealsOrCocktails = 'meals';
+    id = details.idMeal;
+    objectDetails = {
+      id: details.idMeal,
+      type,
+      nationality: details.strArea,
+      category: details.strCategory,
+      alcoholicOrNot: '',
+      name: details.strMeal,
+      image: details.strMealThumb,
+      doneDate: new Date(),
+      tags: [details.strTags],
+    };
+  }
+  if (mealsOrCocktails === 'meals') delete inProgressRecipes.meals[id];
+  if (mealsOrCocktails === 'cocktails') delete inProgressRecipes.cocktails[id];
+  localStorage.setItem('doneRecipes', JSON.stringify(
+    [...parseDonerecipes, objectDetails],
+  ));
+  localStorage.setItem('inProgressRecipes', JSON.stringify({ ...inProgressRecipes }));
+  history.push('/done-recipes');
+};
 
 export const setFavoriteMeal = (favStatus, setFavStatus, mealDetails) => {
   const favRecipes = localStorage.getItem('favoriteRecipes');

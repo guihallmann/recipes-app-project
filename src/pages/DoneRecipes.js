@@ -5,18 +5,21 @@ import Header from '../components/Header';
 function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState([]);
   useEffect(() => {
-    const LSdoneRecipes = localStorage.getItem(doneRecipes);
+    const LSdoneRecipes = localStorage.getItem('doneRecipes');
     const objDoneRecipes = JSON.parse(LSdoneRecipes);
     if (objDoneRecipes !== null) setDoneRecipes(objDoneRecipes);
   }, []);
 
   const handleClickFilter = ({ target: { textContent } }) => {
+    const LSdoneRecipes = localStorage.getItem('doneRecipes');
+    const objDoneRecipes = JSON.parse(LSdoneRecipes);
     if (textContent === 'All') {
-      const LSdoneRecipes = localStorage.getItem(doneRecipes);
-      const objDoneRecipes = JSON.parse(LSdoneRecipes);
       if (objDoneRecipes !== null) setDoneRecipes(objDoneRecipes);
-    } else {
-      const filter = doneRecipes.filter(({ type }) => type === textContent);
+    } else if (textContent === 'Drinks') {
+      const filter = objDoneRecipes.filter(({ type }) => type === 'bebida');
+      setDoneRecipes(filter);
+    } else if (textContent === 'Food') {
+      const filter = objDoneRecipes.filter(({ type }) => type === 'comida');
       setDoneRecipes(filter);
     }
   };
