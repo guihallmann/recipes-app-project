@@ -49,7 +49,7 @@ function DoneRecipes() {
         >
           Drinks
         </button>
-        {doneRecipes.map((recipe, index) => (
+        {doneRecipes && doneRecipes.map((recipe, index) => (
           <CardDoneAndFavoriteRecipes
             recipe={ recipe }
             index={ index }
