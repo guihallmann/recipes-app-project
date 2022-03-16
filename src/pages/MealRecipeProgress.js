@@ -8,7 +8,7 @@ import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import { CLIPBOARD_MESSAGE } from '../data/consts';
 import { favoriteStatus, setFavoriteMeal,
-  handleCheckbox, handleButton } from '../services/Functions';
+  handleCheckbox, handleButton, handleClickFinishRecipe } from '../services/Functions';
 
 function MealInProgress(props) {
   const { match: { params: { id } } } = props;
@@ -27,11 +27,10 @@ function MealInProgress(props) {
   };
 
   const fromStateToStorage = () => {
-    localStorage.setItem('inProgressRecipes', JSON.stringify(
-      {
-        meals: { [id]: usedIngredients },
-      },
-    ));
+    const store = localStorage.getItem('inProgressRecipes');
+    const parsedStore = JSON.parse(store);
+    parsedStore.meals[id] = usedIngredients;
+    localStorage.setItem('inProgressRecipes', JSON.stringify(parsedStore));
   };
 
   const checkStorage = () => {
@@ -44,9 +43,8 @@ function MealInProgress(props) {
     const storageData = localStorage.getItem('inProgressRecipes');
     const getStorageDataParse = JSON.parse(storageData);
     if (!getStorageDataParse.meals[id]) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify(
-        { ...getStorageDataParse, meals: { [id]: [] } },
-      ));
+      getStorageDataParse.meals[id] = [];
+      localStorage.setItem('inProgressRecipes', JSON.stringify(getStorageDataParse));
     }
   };
 
@@ -85,7 +83,7 @@ function MealInProgress(props) {
     fromStateToStorage();
     handleButton(recipe,
       usedIngredients, setBtnFinishRecipe);
-  }, [usedIngredients]);
+  }, [usedIngredients, recipe]);
 
   return (
     <section>
@@ -139,7 +137,7 @@ function MealInProgress(props) {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ btnFinishRecipe }
-        onClick={ () => history.push('/done-recipes') }
+        onClick={ () => handleClickFinishRecipe(history, mealDetails, 'comida') }
       >
         Finish Recipe
       </button>

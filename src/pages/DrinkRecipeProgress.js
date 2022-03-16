@@ -8,7 +8,8 @@ import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import { CLIPBOARD_MESSAGE } from '../data/consts';
 import { favoriteStatus,
-  setFavoriteDrink, handleCheckbox, handleButton } from '../services/Functions';
+  setFavoriteDrink, handleCheckbox, handleButton,
+  handleClickFinishRecipe } from '../services/Functions';
 
 function DrinkRecipeProgress(props) {
   const { match: { params: { id } } } = props;
@@ -27,21 +28,11 @@ function DrinkRecipeProgress(props) {
   };
 
   const fromStateToStorage = () => {
-    localStorage.setItem('inProgressRecipes', JSON.stringify(
-      {
-        cocktails: { [id]: usedIngredients },
-      },
-    ));
+    const store = localStorage.getItem('inProgressRecipes');
+    const parsedStore = JSON.parse(store);
+    parsedStore.cocktails[id] = usedIngredients;
+    localStorage.setItem('inProgressRecipes', JSON.stringify(parsedStore));
   };
-
-  // const handleButton = () => {
-  //   if (recipe.length === usedIngredients.length) {
-  //     setBtnFinishRecipe(false);
-  //   } else { setBtnFinishRecipe(true); }
-  //   console.log('recipe', recipe.length);
-  //   console.log('ingredients', usedIngredients.length);
-  //   console.log(btnFinishRecipe);
-  // };
 
   const checkStorage = () => {
     const getStorageData = localStorage.getItem('inProgressRecipes');
@@ -53,9 +44,8 @@ function DrinkRecipeProgress(props) {
     const storageData = localStorage.getItem('inProgressRecipes');
     const getStorageDataParse = JSON.parse(storageData);
     if (!getStorageDataParse.cocktails[id]) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify(
-        { ...getStorageDataParse, cocktails: { [id]: [] } },
-      ));
+      getStorageDataParse.cocktails[id] = [];
+      localStorage.setItem('inProgressRecipes', JSON.stringify(getStorageDataParse));
     }
   };
 
@@ -106,7 +96,7 @@ function DrinkRecipeProgress(props) {
     fromStateToStorage();
     handleButton(recipe,
       usedIngredients, setBtnFinishRecipe);
-  }, [usedIngredients]);
+  }, [usedIngredients, recipe]);
 
   return (
     <section>
@@ -161,7 +151,7 @@ function DrinkRecipeProgress(props) {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ btnFinishRecipe }
-        onClick={ () => history.push('/done-recipes') }
+        onClick={ () => handleClickFinishRecipe(history, drinkDetails, 'bebida') }
       >
         Finish Recipe
       </button>

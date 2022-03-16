@@ -9,7 +9,7 @@ function Login({ history }) {
   useEffect(() => {
     if (inputEmail.match(/\S+@\S+\.\S+/) && inputPassword.length > CONST_6) {
       setValidEmailAndPassword(false);
-    }
+    } else { setValidEmailAndPassword(true); }
   }, [inputEmail, inputPassword]);
 
   const handleClickLogin = () => {
