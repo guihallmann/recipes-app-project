@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/FoodDetails.css';
-import { useHistory } from 'react-router';
+// import { useHistory } from 'react-router';
 import { getMealDetails } from '../services/API';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeart from '../images/blackHeartIcon.svg';
@@ -16,8 +16,8 @@ function MealInProgress(props) {
   const [usedIngredients, setUsedIngredients] = useState([]);
   const [clipboardMessage, setClipBoardMessage] = useState('');
   const [favStatus, setFavStatus] = useState(false);
-  const history = useHistory();
-  const { pathname } = history.location;
+  // const history = useHistory();
+  // const { pathname } = history.location;
 
   const getFromStorage = () => {
     const storageData = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -67,9 +67,9 @@ function MealInProgress(props) {
   };
 
   const copyToClipboard = () => {
-    const url = `http://localhost:3000${pathname}/in-progress`;
+    const url = `http://localhost:3000/foods/${id}`;
     navigator.clipboard.writeText(url);
-    setClipBoardMessage(message);
+    setClipBoardMessage(CLIPBOARD_MESSAGE);
   };
 
   useEffect(() => {
