@@ -17,7 +17,7 @@ function MealInProgress(props) {
   const [usedIngredients, setUsedIngredients] = useState([]);
   const [clipboardMessage, setClipBoardMessage] = useState('');
   const [favStatus, setFavStatus] = useState(false);
-  const [btnFinishRecipe, setBtnFinishRecipe] = useState(false);
+  const [btnFinishRecipe, setBtnFinishRecipe] = useState(true);
   const history = useHistory();
 
   const getFromStorage = () => {
@@ -27,11 +27,10 @@ function MealInProgress(props) {
   };
 
   const fromStateToStorage = () => {
-    localStorage.setItem('inProgressRecipes', JSON.stringify(
-      {
-        meals: { [id]: usedIngredients },
-      },
-    ));
+    const store = localStorage.getItem('inProgressRecipes');
+    const parsedStore = JSON.parse(store);
+    parsedStore.meals[id] = usedIngredients;
+    localStorage.setItem('inProgressRecipes', JSON.stringify(parsedStore));
   };
 
   const checkStorage = () => {
@@ -44,9 +43,8 @@ function MealInProgress(props) {
     const storageData = localStorage.getItem('inProgressRecipes');
     const getStorageDataParse = JSON.parse(storageData);
     if (!getStorageDataParse.meals[id]) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify(
-        { ...getStorageDataParse, meals: { [id]: [] } },
-      ));
+      getStorageDataParse.meals[id] = [];
+      localStorage.setItem('inProgressRecipes', JSON.stringify(getStorageDataParse));
     }
   };
 
@@ -85,7 +83,7 @@ function MealInProgress(props) {
     fromStateToStorage();
     handleButton(recipe,
       usedIngredients, setBtnFinishRecipe);
-  }, [usedIngredients]);
+  }, [usedIngredients, recipe]);
 
   return (
     <section>

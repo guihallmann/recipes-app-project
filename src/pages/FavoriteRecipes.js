@@ -50,7 +50,7 @@ function FavoriteRecipes() {
         >
           Drinks
         </button>
-        {favoriteRecipes.map((recipe, index) => (
+        {favoriteRecipes && favoriteRecipes.map((recipe, index) => (
           <CardDoneAndFavoriteRecipes
             recipe={ recipe }
             index={ index }
