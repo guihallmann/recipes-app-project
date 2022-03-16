@@ -36,7 +36,7 @@ export const handleClickFinishRecipe = (history, details, type) => {
     parseDonerecipes = [];
   }
   let objectDetails = {};
-  if (type === 'bebida') {
+  if (type === 'drink') {
     mealsOrCocktails = 'cocktails';
     id = details.idDrink;
     objectDetails = {
@@ -51,7 +51,7 @@ export const handleClickFinishRecipe = (history, details, type) => {
       tags: [],
     };
   }
-  if (type === 'comida') {
+  if (type === 'food') {
     mealsOrCocktails = 'meals';
     id = details.idMeal;
     objectDetails = {
