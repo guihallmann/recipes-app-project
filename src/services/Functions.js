@@ -76,33 +76,41 @@ export const setFavoriteDrink = (favStatus, setFavStatus, drinkDetails) => {
   }
 };
 
-const checkInProgressIngredients = (ingredient, id) => {
-  const getStorageData = localStorage.getItem('inProgressRecipes');
-  const getStorageParse = JSON.parse(getStorageData);
-  localStorage.setItem('inProgressRecipes', JSON.stringify(
-    { ...getStorageParse,
-      meals: { [id]: [...getStorageParse.meals[id], ingredient] } },
-  ));
+const checkInProgressIngredients = (ingredient,
+  usedIngredients, setUsedIngredients) => {
+  setUsedIngredients([...usedIngredients, ingredient]);
+  // const getStorageData = localStorage.getItem('inProgressRecipes');
+  // const getStorageParse = JSON.parse(getStorageData);
+  // localStorage.setItem('inProgressRecipes', JSON.stringify(
+  //   {
+  //     ...getStorageParse,
+  //     meals: { [id]: [...getStorageParse.meals[id], ingredient] },
+  //   },
+  // ));
 };
 
-const uncheckInProgressIngredients = (ingredient, id) => {
-  const getStorageData = localStorage.getItem('inProgressRecipes');
-  const getStorageParse = JSON.parse(getStorageData);
-  const newUsedIngredients = getStorageParse.meals[id]
-    .filter((ing) => ing !== ingredient);
-  localStorage.setItem('inProgressRecipes', JSON.stringify(
-    { ...getStorageParse,
-      meals: { [id]: newUsedIngredients } },
-  ));
+const uncheckInProgressIngredients = (ingredient,
+  usedIngredients, setUsedIngredients) => {
+  const newUsedIngredients = usedIngredients.filter((ing) => ing !== ingredient);
+  setUsedIngredients(newUsedIngredients);
+  // setUsedIngredients([newUsedIngredients]);
+  // const getStorageData = localStorage.getItem('inProgressRecipes');
+  // const getStorageParse = JSON.parse(getStorageData);
+  // const newUsedIngredients = getStorageParse.meals[id]
+  //   .filter((ing) => ing !== ingredient);
+  // localStorage.setItem('inProgressRecipes', JSON.stringify(
+  //   {
+  //     ...getStorageParse,
+  //     meals: { [id]: newUsedIngredients },
+  //   },
+  // ));
 };
 
-export const handleCheckbox = ({ target }, id, setToggle) => {
+export const handleCheckbox = ({ target }, usedIngredients, setUsedIngredients) => {
   target.parentElement.classList.toggle('isChecked');
   if (target.parentElement.className === 'isChecked') {
-    checkInProgressIngredients(target.name, id);
-    setToggle(true);
+    checkInProgressIngredients(target.name, usedIngredients, setUsedIngredients);
   } else {
-    uncheckInProgressIngredients(target.name, id);
-    setToggle(false);
+    uncheckInProgressIngredients(target.name, usedIngredients, setUsedIngredients);
   }
 };
