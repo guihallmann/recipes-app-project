@@ -12,14 +12,15 @@ function DoneRecipes() {
 
   const handleClickFilter = ({ target: { textContent } }) => {
     const LSdoneRecipes = localStorage.getItem('doneRecipes');
-    const objDoneRecipes = JSON.parse(LSdoneRecipes);
+    let objDoneRecipes = JSON.parse(LSdoneRecipes);
+    if (objDoneRecipes === null) objDoneRecipes = [];
     if (textContent === 'All') {
-      if (objDoneRecipes !== null) setDoneRecipes(objDoneRecipes);
+      setDoneRecipes(objDoneRecipes);
     } else if (textContent === 'Drinks') {
-      const filter = objDoneRecipes.filter(({ type }) => type === 'bebida');
+      const filter = objDoneRecipes.filter(({ type }) => type === 'drink');
       setDoneRecipes(filter);
     } else if (textContent === 'Food') {
-      const filter = objDoneRecipes.filter(({ type }) => type === 'comida');
+      const filter = objDoneRecipes.filter(({ type }) => type === 'food');
       setDoneRecipes(filter);
     }
   };

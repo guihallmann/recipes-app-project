@@ -137,7 +137,7 @@ function MealInProgress(props) {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ btnFinishRecipe }
-        onClick={ () => handleClickFinishRecipe(history, mealDetails, 'comida') }
+        onClick={ () => handleClickFinishRecipe(history, mealDetails, 'food') }
       >
         Finish Recipe
       </button>
