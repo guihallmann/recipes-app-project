@@ -116,7 +116,7 @@ export const handleCheckbox = ({ target }, usedIngredients, setUsedIngredients) 
 };
 
 export const handleButton = (recipe,
-  usedIngredients, btnFinishRecipe, setBtnFinishRecipe) => {
+  usedIngredients, setBtnFinishRecipe) => {
   if (recipe.length === usedIngredients.length) {
     setBtnFinishRecipe(false);
   } else { setBtnFinishRecipe(true); }
