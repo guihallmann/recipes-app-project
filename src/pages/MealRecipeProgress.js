@@ -16,7 +16,6 @@ function MealInProgress(props) {
   const [usedIngredients, setUsedIngredients] = useState([]);
   const [clipboardMessage, setClipBoardMessage] = useState('');
   const [favStatus, setFavStatus] = useState(false);
-  const [toggle, setToggle] = useState(false);
   const history = useHistory();
   const { pathname } = history.location;
 
@@ -24,6 +23,14 @@ function MealInProgress(props) {
     const storageData = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const ingredients = storageData.meals[id];
     setUsedIngredients(ingredients);
+  };
+
+  const fromStateToStorage = () => {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(
+      {
+        meals: { [id]: usedIngredients },
+      },
+    ));
   };
 
   const checkStorage = () => {
@@ -42,14 +49,6 @@ function MealInProgress(props) {
     }
   };
 
-  // const inProgressRecipes = () => {
-  //   const listaIngredienteUsados = {};
-  //   recipe.forEach((ingredient) => {
-  //     listaIngredienteUsados[ingredient] = '';
-  //   });
-  //   setUsedIngredients(listaIngredienteUsados);
-  // };
-
   const request = async (mealId) => {
     const apiResult = await getMealDetails(mealId);
     setMealDetails(apiResult.meals[0]);
@@ -67,14 +66,6 @@ function MealInProgress(props) {
     setRecipe(array);
   };
 
-  // const data = async () => {
-  //   const dataResult = await getDrinksRecommends();
-  //   setDrinkData(dataResult);
-  // };
-
-  // const startRecipe = () => {
-  //   history.push(`/foods/${id}/in-progress`);
-  // };
   const copyToClipboard = () => {
     const url = `http://localhost:3000${pathname}/in-progress`;
     navigator.clipboard.writeText(url);
@@ -83,16 +74,12 @@ function MealInProgress(props) {
 
   useEffect(() => {
     request(id);
-    // data();
-    // recipeStatus(id, 'meals', setBtnStatus);
     favoriteStatus(id, setFavStatus);
     checkStorage();
     getFromStorage();
   }, []);
 
-  useEffect(() => {
-    getFromStorage();
-  }, [toggle]);
+  useEffect(() => { fromStateToStorage(); }, [usedIngredients]);
 
   return (
     <section>
@@ -132,7 +119,8 @@ function MealInProgress(props) {
               key={ i }
               id={ rec }
               name={ rec }
-              onChange={ (e) => handleCheckbox(e, id, setToggle) }
+              onChange={ (e) => handleCheckbox(e,
+                usedIngredients, setUsedIngredients) }
               checked={ usedIngredients.find((ing) => ing === rec) }
             />
             {rec}
@@ -140,36 +128,13 @@ function MealInProgress(props) {
         </div>
       ))}
       <p data-testid="instructions">{mealDetails.strInstructions}</p>
-      {/* {mealDetails.strYoutube !== undefined && <iframe data-testid="video" title="recipe-video" src={ `https://www.youtube.com/embed/${mealDetails.strYoutube.split('=')[1]}` } /> }
-      <section className="carousel">
-        {drinkData.length !== 0 && drinkData.map((rec, i) => (i <= FIRST_SIX
-      && (
-        <SugestionCard
-          key={ rec.idDrink }
-          index={ i }
-          name={ rec.strDrink }
-          image={ rec.strDrinkThumb }
-        />)
-        ))}
-      </section> */}
-
-      {/* <button
-        className="start-btn"
+      <button
+        className="finish-btn"
         type="button"
         data-testid="finish-recipe-btn"
-        // onClick={ startRecipe }
       >
         Finish Recipe
-      </button> */}
-      {/* {btnStatus === 'inProgressRecipe'
-        && (
-          <button
-            className="start-btn"
-            type="button"
-            data-testid="start-recipe-btn"
-          >
-            Continue Recipe
-          </button>)} */}
+      </button>
     </section>
   );
 }
