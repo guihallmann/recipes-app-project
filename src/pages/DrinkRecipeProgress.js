@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/DrinkRecipeProgress.css';
-import { useHistory } from 'react-router';
+// import { useHistory } from 'react-router';
 import { getDrinkDetails } from '../services/API';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeart from '../images/blackHeartIcon.svg';
@@ -18,8 +18,8 @@ function DrinkRecipeProgress(props) {
   const [clipboardMessage, setClipBoardMessage] = useState('');
   const [favStatus, setFavStatus] = useState(false);
 
-  const history = useHistory();
-  const { pathname } = history.location;
+  // const history = useHistory();
+  // const { pathname } = history.location;
   const request = async (drinkId) => {
     const apiResult = await getDrinkDetails(drinkId);
     setDrinkDetails(apiResult.drinks[0]);
@@ -45,7 +45,7 @@ function DrinkRecipeProgress(props) {
   // };
 
   const copyToClipboard = () => {
-    const url = `http://localhost:3000${pathname}/in-progress`;
+    const url = `http://localhost:3000/drinks/${id}`;
     navigator.clipboard.writeText(url);
     setClipBoardMessage(CLIPBOARD_MESSAGE);
   };
