@@ -7,7 +7,8 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import { CLIPBOARD_MESSAGE } from '../data/consts';
-import { favoriteStatus, setFavoriteDrink, handleCheckbox } from '../services/Functions';
+import { favoriteStatus,
+  setFavoriteDrink, handleCheckbox, handleButton } from '../services/Functions';
 
 function DrinkRecipeProgress(props) {
   const { match: { params: { id } } } = props;
@@ -15,7 +16,7 @@ function DrinkRecipeProgress(props) {
   const [recipe, setRecipe] = useState([]);
   const [usedIngredients, setUsedIngredients] = useState([]);
   // const [foodData, setFoodData] = useState([]);
-  // const [btnStatus, setBtnStatus] = useState('newRecipe');
+  const [btnFinishRecipe, setBtnFinishRecipe] = useState(false);
   const [clipboardMessage, setClipBoardMessage] = useState('');
   const [favStatus, setFavStatus] = useState(false);
 
@@ -33,8 +34,16 @@ function DrinkRecipeProgress(props) {
     ));
   };
 
+  // const handleButton = () => {
+  //   if (recipe.length === usedIngredients.length) {
+  //     setBtnFinishRecipe(false);
+  //   } else { setBtnFinishRecipe(true); }
+  //   console.log('recipe', recipe.length);
+  //   console.log('ingredients', usedIngredients.length);
+  //   console.log(btnFinishRecipe);
+  // };
+
   const checkStorage = () => {
-    console.log(id);
     const getStorageData = localStorage.getItem('inProgressRecipes');
     if (!getStorageData) {
       localStorage.setItem('inProgressRecipes', JSON.stringify(
@@ -92,7 +101,11 @@ function DrinkRecipeProgress(props) {
     getFromStorage();
   }, []);
 
-  useEffect(() => { fromStateToStorage(); }, [usedIngredients]);
+  useEffect(() => {
+    fromStateToStorage();
+    handleButton(recipe,
+      usedIngredients, btnFinishRecipe, setBtnFinishRecipe);
+  }, [usedIngredients]);
 
   return (
     <section>
@@ -143,22 +156,14 @@ function DrinkRecipeProgress(props) {
       <p data-testid="instructions">{drinkDetails.strInstructions}</p>
 
       <button
-        className="start-btn"
+        className="finish-btn"
         type="button"
         data-testid="finish-recipe-btn"
+        disabled={ btnFinishRecipe }
       // onClick={ startRecipe }
       >
         Finish Recipe
       </button>
-      {/* {btnStatus === 'inProgressRecipe'
-      && (
-        <button
-          className="start-btn"
-          type="button"
-          data-testid="start-recipe-btn"
-        >
-          Continue Recipe
-        </button>)} */}
     </section>
   );
 }
