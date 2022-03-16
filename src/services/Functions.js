@@ -114,3 +114,10 @@ export const handleCheckbox = ({ target }, usedIngredients, setUsedIngredients) 
     uncheckInProgressIngredients(target.name, usedIngredients, setUsedIngredients);
   }
 };
+
+export const handleButton = (recipe,
+  usedIngredients, btnFinishRecipe, setBtnFinishRecipe) => {
+  if (recipe.length === usedIngredients.length) {
+    setBtnFinishRecipe(false);
+  } else { setBtnFinishRecipe(true); }
+};

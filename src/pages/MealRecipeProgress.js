@@ -7,7 +7,8 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import { CLIPBOARD_MESSAGE } from '../data/consts';
-import { favoriteStatus, setFavoriteMeal, handleCheckbox } from '../services/Functions';
+import { favoriteStatus, setFavoriteMeal,
+  handleCheckbox, handleButton } from '../services/Functions';
 
 function MealInProgress(props) {
   const { match: { params: { id } } } = props;
@@ -16,6 +17,7 @@ function MealInProgress(props) {
   const [usedIngredients, setUsedIngredients] = useState([]);
   const [clipboardMessage, setClipBoardMessage] = useState('');
   const [favStatus, setFavStatus] = useState(false);
+  const [btnFinishRecipe, setBtnFinishRecipe] = useState(false);
   // const history = useHistory();
   // const { pathname } = history.location;
 
@@ -79,7 +81,11 @@ function MealInProgress(props) {
     getFromStorage();
   }, []);
 
-  useEffect(() => { fromStateToStorage(); }, [usedIngredients]);
+  useEffect(() => {
+    fromStateToStorage();
+    handleButton(recipe,
+      usedIngredients, btnFinishRecipe, setBtnFinishRecipe);
+  }, [usedIngredients]);
 
   return (
     <section>
@@ -132,6 +138,7 @@ function MealInProgress(props) {
         className="finish-btn"
         type="button"
         data-testid="finish-recipe-btn"
+        disabled={ btnFinishRecipe }
       >
         Finish Recipe
       </button>
