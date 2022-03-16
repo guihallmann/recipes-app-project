@@ -17,7 +17,7 @@ function MealInProgress(props) {
   const [usedIngredients, setUsedIngredients] = useState([]);
   const [clipboardMessage, setClipBoardMessage] = useState('');
   const [favStatus, setFavStatus] = useState(false);
-  const [btnFinishRecipe, setBtnFinishRecipe] = useState(false);
+  const [btnFinishRecipe, setBtnFinishRecipe] = useState(true);
   const history = useHistory();
 
   const getFromStorage = () => {

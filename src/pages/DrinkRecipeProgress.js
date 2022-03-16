@@ -16,7 +16,7 @@ function DrinkRecipeProgress(props) {
   const [recipe, setRecipe] = useState([]);
   const [usedIngredients, setUsedIngredients] = useState([]);
   // const [foodData, setFoodData] = useState([]);
-  const [btnFinishRecipe, setBtnFinishRecipe] = useState(false);
+  const [btnFinishRecipe, setBtnFinishRecipe] = useState(true);
   const [clipboardMessage, setClipBoardMessage] = useState('');
   const [favStatus, setFavStatus] = useState(false);
 
