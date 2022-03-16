@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/FoodDetails.css';
-// import { useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 import { getMealDetails } from '../services/API';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeart from '../images/blackHeartIcon.svg';
@@ -18,8 +18,7 @@ function MealInProgress(props) {
   const [clipboardMessage, setClipBoardMessage] = useState('');
   const [favStatus, setFavStatus] = useState(false);
   const [btnFinishRecipe, setBtnFinishRecipe] = useState(false);
-  // const history = useHistory();
-  // const { pathname } = history.location;
+  const history = useHistory();
 
   const getFromStorage = () => {
     const storageData = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -139,6 +138,7 @@ function MealInProgress(props) {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ btnFinishRecipe }
+        onClick={ () => history.push('/done-recipes') }
       >
         Finish Recipe
       </button>
