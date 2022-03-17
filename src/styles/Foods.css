@@ -1,0 +1,36 @@
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+
+.filter-btn {
+  border-style: none;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 8px;
+  width: 30vw;
+  background-color: #0fa36b;
+  color: #fff;
+}
+
+.cards-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.link-style {
+  text-decoration: none;
+  color: #0fa36b;
+  /* display: flex;
+  flex: 1;
+  flex-direction: row;
+  flex-basis: 30%; */
+}
+
+.link-style:hover {
+  color: #0b754c;
+}

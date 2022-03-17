@@ -60,7 +60,7 @@ function DrinkDetails(props) {
     <section>
       <img
         data-testid="recipe-photo"
-        className="mealImg"
+        className="img-size1"
         src={ drinkDetails.strDrinkThumb }
         alt={ `${drinkDetails.strDrink}` }
       />

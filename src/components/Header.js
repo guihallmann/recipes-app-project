@@ -17,6 +17,7 @@ function Header({ title }) {
     <header>
       <section className="header">
         <button
+          className="btn-header"
           type="button"
           onClick={ () => handleClick('/profile') }
         >

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import RecipesContext from '../context/RecipesContext';
 import searchIcon from '../images/searchIcon.svg';
+import '../styles/Header.css';
 
 function SearchIcon() {
   const { searchBarStatus, setSearchBarStatus } = useContext(RecipesContext);
@@ -10,6 +11,7 @@ function SearchIcon() {
   };
   return (
     <button
+      className="btn-header"
       type="button"
       onClick={ handleClick }
     >

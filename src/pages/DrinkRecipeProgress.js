@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/DrinkRecipeProgress.css';
+import '../styles/Buttons.css';
 import { useHistory } from 'react-router';
 import { getDrinkDetails } from '../services/API';
 import shareIcon from '../images/shareIcon.svg';
@@ -102,7 +103,7 @@ function DrinkRecipeProgress(props) {
     <section>
       <img
         data-testid="recipe-photo"
-        className="mealImg"
+        className="img-size1"
         src={ drinkDetails.strDrinkThumb }
         alt={ `${drinkDetails.strDrink}` }
       />
@@ -147,7 +148,7 @@ function DrinkRecipeProgress(props) {
       <p data-testid="instructions">{drinkDetails.strInstructions}</p>
 
       <button
-        className="finish-btn"
+        className={ btnFinishRecipe ? 'disabled-default-btn' : 'default-btn' }
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ btnFinishRecipe }

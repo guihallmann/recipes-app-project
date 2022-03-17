@@ -47,7 +47,7 @@ function CardDoneAndFavoriteRecipes({ recipe, index, favorite }) {
     <div>
       <Link to={ `${type}s/${id}` }>
         <img
-          className="recipe-image"
+          className="img-size1"
           src={ image }
           alt="recipe"
           data-testid={ `${index}-horizontal-image` }

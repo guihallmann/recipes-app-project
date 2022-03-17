@@ -59,17 +59,24 @@ function FoodDetails(props) {
     <section>
       <img
         data-testid="recipe-photo"
-        className="mealImg"
+        className="img-size1"
         src={ mealDetails.strMealThumb }
         alt={ `${mealDetails.strMeal}` }
       />
-      <h1 data-testid="recipe-title">{mealDetails.strMeal}</h1>
-      <h2 data-testid="recipe-category">{mealDetails.strCategory}</h2>
+      <h1 className="name-food" data-testid="recipe-title">{mealDetails.strMeal}</h1>
+      <h2 className="type-food" data-testid="recipe-category">
+        {mealDetails.strCategory}
+      </h2>
       <section>
-        <button type="button" onClick={ copyToClipboard }>
+        <button
+          className="button-share-favorite"
+          type="button"
+          onClick={ copyToClipboard }
+        >
           <img src={ shareIcon } alt="shareIcon" data-testid="share-btn" />
         </button>
         <button
+          className="button-share-favorite"
           type="button"
           onClick={ () => setFavoriteMeal(favStatus, setFavStatus, mealDetails) }
         >

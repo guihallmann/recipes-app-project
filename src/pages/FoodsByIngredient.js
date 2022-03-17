@@ -23,15 +23,17 @@ function FoodsByIngredient() {
   return (
     <div>
       <Header title="Explore Ingredients" />
-      {!isloading && ingredients.map(({ idIngredient, strIngredient }, index) => (
-        <IngredientCard
-          key={ idIngredient }
-          index={ index }
-          image={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
-          name={ strIngredient }
-          isItFood
-        />
-      ))}
+      <section className="card">
+        {!isloading && ingredients.map(({ idIngredient, strIngredient }, index) => (
+          <IngredientCard
+            key={ idIngredient }
+            index={ index }
+            image={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
+            name={ strIngredient }
+            isItFood
+          />
+        ))}
+      </section>
       <Footer />
     </div>
   );

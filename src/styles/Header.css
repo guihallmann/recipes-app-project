@@ -1,4 +1,19 @@
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  background-color: #0A7049;
+  font-size: 20px;
+  height: 65px;
+  color: #fff;
+}
+
+.btn-header {
+  border: 0;
+  background-color: #0A7049;
+  margin: auto 15px;
+}
+
+.page-title {
+  font-family: sans-serif;
+  margin: auto;
 }

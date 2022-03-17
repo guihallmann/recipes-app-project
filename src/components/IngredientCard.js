@@ -44,6 +44,7 @@ function IngredientCard({ index, image, name, isItFood }) {
           src={ image }
           alt={ `ingredient-card-${index}` }
           data-testid={ `${index}-card-img` }
+          className="img-size1"
         />
         <span data-testid={ `${index}-card-name` }>{name}</span>
       </button>
