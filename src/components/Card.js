@@ -9,7 +9,7 @@ function Card({ index, image, name }) {
         src={ image }
         alt="recipe-card"
         data-testid={ `${index}-card-img` }
-        className="img-size1 img-card"
+        className="img-card"
       />
       <h3 data-testid={ `${index}-card-name` } className="card-recipe-name">{name}</h3>
     </div>

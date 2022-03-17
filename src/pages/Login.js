@@ -23,6 +23,7 @@ function Login({ history }) {
 
   return (
     <section className="login-container">
+      <h1 className="title-login">TrybeFood</h1>
       <input
         type="text"
         data-testid="email-input"

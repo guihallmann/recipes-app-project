@@ -11,6 +11,7 @@ import {
   searchByMealCategories,
 } from '../services/API';
 import '../styles/Foods.css';
+import '../styles/App.css';
 
 function Foods() {
   const { foodsList, setFoodsList } = useContext(RecipesContext);
@@ -45,7 +46,7 @@ function Foods() {
   return (
     <section className="section-complete">
       <Header title="Foods" />
-      <section className="filter-buttons ">
+      <section className="filter-buttons">
         <button
           type="button"
           onClick={ handleClickFilter }

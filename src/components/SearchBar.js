@@ -9,6 +9,7 @@ import {
   getDrinkIngredient,
   getDrinkLetter,
 } from '../services/API';
+import '../styles/SearchBar.css';
 import { FIRST_LETTER, NAME, INGREDIENT } from '../data/consts';
 
 function SearchBar() {
@@ -102,41 +103,44 @@ function SearchBar() {
         value={ searchText }
         onChange={ handleChange }
       />
-      <label htmlFor="ingredient">
-        Ingrediente
-        <input
-          type="radio"
-          data-testid="ingredient-search-radio"
-          id="ingredient"
-          name="search-radio"
-          value={ radioText }
-          onChange={ () => setRadioText(INGREDIENT) }
-        />
-      </label>
-      <label htmlFor="name">
-        Name
-        <input
-          type="radio"
-          data-testid="name-search-radio"
-          id="name"
-          name="search-radio"
-          onChange={ () => setRadioText(NAME) }
-        />
-      </label>
-      <label htmlFor="first-letter">
-        First Letter
-        <input
-          type="radio"
-          data-testid="first-letter-search-radio"
-          id="first-letter"
-          name="search-radio"
-          onChange={ () => setRadioText(FIRST_LETTER) }
-        />
-      </label>
+      <section className="radio-filters">
+        <label htmlFor="ingredient">
+          Ingrediente
+          <input
+            type="radio"
+            data-testid="ingredient-search-radio"
+            id="ingredient"
+            name="search-radio"
+            value={ radioText }
+            onChange={ () => setRadioText(INGREDIENT) }
+          />
+        </label>
+        <label htmlFor="name">
+          Name
+          <input
+            type="radio"
+            data-testid="name-search-radio"
+            id="name"
+            name="search-radio"
+            onChange={ () => setRadioText(NAME) }
+          />
+        </label>
+        <label htmlFor="first-letter">
+          First Letter
+          <input
+            type="radio"
+            data-testid="first-letter-search-radio"
+            id="first-letter"
+            name="search-radio"
+            onChange={ () => setRadioText(FIRST_LETTER) }
+          />
+        </label>
+      </section>
       <button
         type="button"
         data-testid="exec-search-btn"
         onClick={ handleClick }
+        className="search-btn"
       >
         Search
       </button>

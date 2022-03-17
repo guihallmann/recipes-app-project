@@ -1,9 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Hurricane&family=M+PLUS+1:wght@100&display=swap');
+
 .login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background-color: #0fa36b;
+}
+
+.title-login {
+  font-family: 'Hurricane', sans-serif;
+  color: white;
+  font-size: 70px;
 }
 
 .email-input {
@@ -38,7 +47,7 @@
   margin: 5px;
   padding: 10px;
   width: 50vw;
-  background-color: #0fa36b;
+  background-color: rgb(19, 97, 66);
   color: #fff;
 }
 

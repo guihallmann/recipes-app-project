@@ -21,7 +21,12 @@ function Header({ title }) {
           type="button"
           onClick={ () => handleClick('/profile') }
         >
-          <img data-testid="profile-top-btn" src={ profileIcon } alt="profileIcon" />
+          <img
+            data-testid="profile-top-btn"
+            src={ profileIcon }
+            alt="profileIcon"
+            className="svg-icon"
+          />
         </button>
         <h1 className="page-title" data-testid="page-title">
           {title}

@@ -15,7 +15,12 @@ function SearchIcon() {
       type="button"
       onClick={ handleClick }
     >
-      <img data-testid="search-top-btn" src={ searchIcon } alt="searchIcon" />
+      <img
+        data-testid="search-top-btn"
+        src={ searchIcon }
+        alt="searchIcon"
+        className="svg-icon"
+      />
     </button>
   );
 }

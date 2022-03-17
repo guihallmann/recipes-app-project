@@ -25,10 +25,13 @@
 .link-style {
   text-decoration: none;
   color: #0fa36b;
-  /* display: flex;
-  flex: 1;
-  flex-direction: row;
-  flex-basis: 30%; */
+  width: 45%;
+  border: 1px solid rgb(212, 211, 211);
+  margin: 7px;
+  border-radius: 5%;
+  box-shadow: 3px 3px 5px rgb(168, 168, 168);
+  width: 43vw;
+  height: auto;
 }
 
 .link-style:hover {
