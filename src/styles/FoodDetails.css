@@ -8,8 +8,8 @@
 }
 
 .carousel img {
-  width: 50vw;
   margin: 5px;
+  width: 50vw;
 }
 
 .start-btn-section {
@@ -19,33 +19,32 @@
 }
 
 .start-btn {
-  bottom: 0;
-  position: fixed;
   background-color: #0fa36b;
   border-radius: 5px;
   border-style: none;
-  margin: 5px;
+  bottom: 0;
+  color: #0fff;
   padding: 10px;
+  position: fixed;
   width: 80vw;
-  color: #fff;
 }
 
-.img-size1{
+.img-size1 {
   height: 250px;
   width: 100%;
 }
 
-.name-food{
-  margin-left: 5px;
+.name-food {
   color: #0fa36f;
+  margin-left: 5px;
 }
 
-.type-food{
-  margin-left: 5px;
+.type-food {
   color: #0fa36f;
+  margin-left: 5px;
 }
 
-.button-share-favorite{
+.button-share-favorite {
   background-color: #0fa36b;
   border-radius: 5px;
   border-style: none;
@@ -54,34 +53,35 @@
   width: 20vw;
 }
 
-.container-ingredients{
-  margin:7px;
+.container-ingredients {
+  margin: 7px;
 }
 
-.ingredients-section{
-  background-color:	#DCE4E2;
+.ingredients-section {
+  background-color: #dce4e2;
   margin: 5px;
 }
 
-.instructions{
+.instructions {
   line-height: 1.6;
-  margin:10px;
-  text-align: justify; 
+  margin: 10px;
+  text-align: justify;
 }
 
-.video{
-  margin:10px;
+.video {
+  margin: 10px;
 }
-.card-recommended{
+
+.card-recommended {
   height: 50%;
   width: 50%;
 }
 
-.div-card-recommended{
+.div-card-recommended {
   margin: 5px;
 }
 
-.name-card-recommended{
+.name-card-recommended {
   margin: 5px;
 }
 
@@ -89,8 +89,8 @@
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(71deg) brightness(103%) contrast(100%);
 }
 
-.container-instructions{
-  background-color:	#DCE4E2;
+.container-instructions {
+  background-color: #dce4e2;
   margin: 5px;
 }
 
@@ -105,12 +105,22 @@
   justify-content: space-between;
 }
 
-.h3-ingredients{
-  margin-left: 5px;
+.h3-ingredients {
   color: #0fa36f;
+  margin-left: 5px;
 }
 
-.h3-instructions{
-  margin-left: 5px;
+.h3-instructions {
   color: #0fa36f;
+  margin-left: 5px;
+}
+
+.h3-video {
+  color: #0fa36f;
+  margin-left: 5px;
+}
+
+.h3-recommends{
+  color: #0fa36f;
+  margin-left: 5px;
 }
