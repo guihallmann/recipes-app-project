@@ -16,7 +16,8 @@ function Drinks() {
   const { drinksList, setDrinksList } = useContext(RecipesContext);
   const [drinkCategories, setDrinkCategories] = useState([]);
   const [toggleFilter, setToggleFilter] = useState('');
-  const { fromExploreIngredient, setFromExploreIngredient } = useContext(RecipesContext);
+  const { fromExploreIngredient, setFromExploreIngredient,
+    setSearchBarStatus } = useContext(RecipesContext);
 
   const getDrinks = async () => {
     if (fromExploreIngredient) {
@@ -40,6 +41,7 @@ function Drinks() {
 
   useEffect(() => {
     getDrinks();
+    setSearchBarStatus(false);
   }, []);
 
   return (

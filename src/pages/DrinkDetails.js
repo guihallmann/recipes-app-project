@@ -98,7 +98,7 @@ function DrinkDetails(props) {
         </button>
       </section>
       {clipboardMessage === CLIPBOARD_MESSAGE && <span>{CLIPBOARD_MESSAGE}</span>}
-      <h3 className="h3-ingredients">Ingredientes</h3>
+      <h3 className="h3-ingredients">Ingredients</h3>
       <section className="ingredients-section">
         {recipe.length !== 0 && recipe.map((rec, i) => (
           <div key={ i }>
@@ -111,7 +111,7 @@ function DrinkDetails(props) {
           </div>
         ))}
       </section>
-      <h3 className="h3-instructions">Instruções</h3>
+      <h3 className="h3-instructions">Instructions</h3>
       <section className="container-instructions">
         <p data-testid="instructions">{drinkDetails.strInstructions}</p>
       </section>
