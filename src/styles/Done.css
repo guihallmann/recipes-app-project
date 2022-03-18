@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: center;
   margin: 10px 10px;
+  font-weight: bold;
 }
 
 .filter-btn {
@@ -13,4 +14,5 @@
   width: 30vw;
   background-color: #0fa36b;
   color: #fff;
+  font-weight: bold;
 }

@@ -65,7 +65,7 @@ function CardDoneAndFavoriteRecipes({ recipe, index, favorite }) {
         </Link>
         <p data-testid={ `${index}-horizontal-top-text` }>
           {
-            type === 'food' ? `${nationality} ${category}` : alcoholicOrNot
+            type === 'food' ? `${nationality} - ${category}` : alcoholicOrNot
           }
         </p>
         <section className="share-favorite-section">

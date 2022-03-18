@@ -49,6 +49,7 @@
   width: 50vw;
   background-color: rgb(19, 97, 66);
   color: #fff;
+  font-weight: bold;
 }
 
 .login-btn:focus {
@@ -63,4 +64,5 @@
   width: 50vw;
   background-color: #A0A4A3;
   color: #fff;
+  font-weight: bold;
 }
