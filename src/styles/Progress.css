@@ -29,7 +29,7 @@
 
 .check-list {
   background-color: #dce4e2;
-  margin: 10px 5px;
+  margin: 10px;
   padding: 5px;
   border-radius: 5px;
 }
@@ -40,9 +40,11 @@ input[type="checkbox"] { /* change "blue" browser chrome to yellow */
 
 .instructions-section {
   background-color: #dce4e2;
-  margin: 10px 5px;
   padding: 5px;
   border-radius: 5px;
+  line-height: 1.6;
+  margin: 10px;
+  text-align: justify;
 }
 
 .btn-place {

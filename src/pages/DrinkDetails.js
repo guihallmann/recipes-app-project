@@ -97,7 +97,14 @@ function DrinkDetails(props) {
           />
         </button>
       </section>
-      {clipboardMessage === CLIPBOARD_MESSAGE && <span>{CLIPBOARD_MESSAGE}</span>}
+      {clipboardMessage === CLIPBOARD_MESSAGE
+      && (
+        <span
+          className="clip-message"
+        >
+          {CLIPBOARD_MESSAGE}
+        </span>
+      )}
       <h3 className="h3-ingredients">Ingredients</h3>
       <section className="ingredients-section">
         {recipe.length !== 0 && recipe.map((rec, i) => (
