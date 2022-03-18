@@ -1,0 +1,52 @@
+.recipe-title {
+  color: #0fa36f;
+  margin: 10px 5px;
+}
+
+.recipe-category {
+  color: #0fa36f;
+  margin: 10px 5px;
+}
+
+.button-share-favorite {
+  background-color: #0fa36b;
+  border-radius: 5px;
+  border-style: none;
+  margin: 5px;
+  padding: 3px;
+  width: 20vw;
+}
+
+.svg-icon {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(71deg) brightness(103%) contrast(100%);
+  width: 26px;
+  height: 26px;
+}
+
+.clipboard-message {
+  margin: 10px 7px;
+}
+
+.check-list {
+  background-color: #dce4e2;
+  margin: 10px 5px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+input[type="checkbox"] { /* change "blue" browser chrome to yellow */
+  filter: invert(100%) sepia(54%) saturate(300%) hue-rotate(77deg) brightness(90%) contrast(50%);
+}
+
+.instructions-section {
+  background-color: #dce4e2;
+  margin: 10px 5px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.btn-place {
+  display: flex;
+  justify-content: center;
+}
+
