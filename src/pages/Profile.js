@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import RecipesContext from '../context/RecipesContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '../styles/Profile.css';
 import '../styles/Buttons.css';
 
 function Profile() {
+  const { setSearchBarStatus } = useContext(RecipesContext);
+
   const user = localStorage.getItem('user');
   const objEmail = JSON.parse(user);
   const userObj = objEmail || 'email@null.com';
@@ -17,6 +20,10 @@ function Profile() {
     }
     history.push(path);
   };
+
+  useEffect(() => {
+    setSearchBarStatus(false);
+  }, []);
 
   return (
     <div>

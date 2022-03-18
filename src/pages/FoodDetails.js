@@ -101,7 +101,7 @@ function FoodDetails(props) {
           {CLIPBOARD_MESSAGE}
         </span>
       )}
-      <h3 className="h3-ingredients">Ingredientes</h3>
+      <h3 className="h3-ingredients">Ingredients</h3>
       <section className="ingredients-section">
         {recipe.length !== 0 && recipe.map((rec, i) => (
           <div className="container-ingredients" key={ i }>
@@ -109,12 +109,12 @@ function FoodDetails(props) {
               data-testid={ `${i}-ingredient-name-and-measure` }
               key={ i }
             >
-              { rec }
+              { rec.includes('undefined') ? rec.split('-')[0] : rec }
             </span>
           </div>
         ))}
       </section>
-      <h3 className="h3-instructions">Instruções</h3>
+      <h3 className="h3-instructions">Instructions</h3>
       <section className="container-instructions">
         <p
           className="instructions"
@@ -125,12 +125,12 @@ function FoodDetails(props) {
       </section>
       {mealDetails.strYoutube !== undefined && (
         <>
-          <h3 className="h3-video">Vídeo</h3>
+          <h3 className="h3-video">Video</h3>
           <section className="video-section">
             <iframe className="video" data-testid="video" title="recipe-video" src={ `https://www.youtube.com/embed/${mealDetails.strYoutube.split('=')[1]}` } />
           </section>
         </>)}
-      <h3 className="h3-recommends">Recomendações</h3>
+      <h3 className="h3-recommends">Recomendation</h3>
       <section className="carousel">
         {drinkData.length !== 0 && drinkData.map((rec, i) => (i <= FIRST_SIX
       && (
