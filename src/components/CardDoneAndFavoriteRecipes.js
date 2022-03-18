@@ -33,10 +33,13 @@ function CardDoneAndFavoriteRecipes({ recipe, index, favorite }) {
     setChangeList(changeList + 1);
   };
   useEffect(() => {
-    if (tags && tags.length > 0 && tags[0] !== null) {
-      const arrayTags = tags[0].split(',');
-      setFilterTags(arrayTags.filter((tag, ind) => ind < 2));
+    if (tags) {
+      setFilterTags(tags.filter((tag, ind) => ind < 2));
     }
+    // if (tags && tags.length > 0 && tags[0] !== null) {
+    //   const arrayTags = tags[0].split(',');
+    //   setFilterTags(arrayTags.filter((tag, ind) => ind < 2));
+    // }
   }, []);
   const [copiedLink, setCopiedLink] = useState(false);
 
