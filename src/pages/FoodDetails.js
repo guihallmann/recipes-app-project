@@ -116,7 +116,12 @@ function FoodDetails(props) {
           { mealDetails.strInstructions }
         </p>
       </section>
-      {mealDetails.strYoutube !== undefined && <iframe className="video" data-testid="video" title="recipe-video" src={ `https://www.youtube.com/embed/${mealDetails.strYoutube.split('=')[1]}` } /> }
+      {mealDetails.strYoutube !== undefined && (
+        <>
+          <h3 className="h3-video">Vídeo</h3>
+          <iframe className="video" data-testid="video" title="recipe-video" src={ `https://www.youtube.com/embed/${mealDetails.strYoutube.split('=')[1]}` } />
+        </>)}
+      <h3 className="h3-recommends">Recomendações</h3>
       <section className="carousel">
         {drinkData.length !== 0 && drinkData.map((rec, i) => (i <= FIRST_SIX
       && (
