@@ -33,8 +33,9 @@ function CardDoneAndFavoriteRecipes({ recipe, index, favorite }) {
     setChangeList(changeList + 1);
   };
   useEffect(() => {
-    if (tags) {
-      setFilterTags(tags.filter((tag, ind) => ind < 2));
+    if (tags && tags.length > 0 && tags[0] !== null) {
+      const arrayTags = tags[0].split(',');
+      setFilterTags(arrayTags.filter((tag, ind) => ind < 2));
     }
   }, []);
   const [copiedLink, setCopiedLink] = useState(false);
@@ -43,6 +44,7 @@ function CardDoneAndFavoriteRecipes({ recipe, index, favorite }) {
     copy(`http://localhost:3000/${type}s/${id}`);
     setCopiedLink(true);
   };
+
   return (
     <div className="favorite-card">
       <section className="first-half">
@@ -103,7 +105,7 @@ function CardDoneAndFavoriteRecipes({ recipe, index, favorite }) {
               className="date-section"
               data-testid={ `${index}-horizontal-done-date` }
             >
-              {doneDate.split('T')[0]}
+              { doneDate.split('T')[0]}
             </p>)}
         {!favorite && filterTags.map((tagName) => (
           <p
