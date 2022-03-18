@@ -36,7 +36,13 @@
   width: 100%;
   height: 100%;
   border-radius: 5px;
-  margin: 5px;
+  margin-top: 3px;
+  margin-left: 3px;
+}
+
+.category-section {
+  margin: 2px;
+  font-size: smaller;
 }
 
 .svg-icon {
@@ -54,12 +60,17 @@
   width: 20vw;
 }
 
+.first-half {
+  width: 170px;
+}
+
 .second-half {
   display: flex;
   flex-direction: column;
+  width: 170px;
   align-items: center;
-  justify-content: space-evenly;
-  margin: 5px 5px 5px 20px;
+  justify-content: space-between;
+  margin-left: 10px;
 }
 
 .second-half a {
@@ -68,9 +79,19 @@
   margin: 0;
 }
 
+.second-half h3 {
+  margin: 2px;
+}
+
 .share-favorite-section {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 2px;
 }
+
+.date-section {
+  margin: 0;
+}
+
 

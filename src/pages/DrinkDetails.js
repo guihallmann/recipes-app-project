@@ -106,7 +106,7 @@ function DrinkDetails(props) {
               data-testid={ `${i}-ingredient-name-and-measure` }
               key={ i }
             >
-              { rec }
+              { rec.includes('undefined') ? rec.split('-')[0] : rec}
             </span>
           </div>
         ))}

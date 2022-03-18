@@ -46,7 +46,7 @@ function CardDoneAndFavoriteRecipes({ recipe, index, favorite }) {
   return (
     <div className="favorite-card">
       <section className="first-half">
-        <Link className="img-link" to={ `${type}s/${id}` }>
+        <Link to={ `${type}s/${id}` }>
           <img
             className="fav-img"
             src={ image }
@@ -65,7 +65,7 @@ function CardDoneAndFavoriteRecipes({ recipe, index, favorite }) {
         </Link>
         <p data-testid={ `${index}-horizontal-top-text` }>
           {
-            type === 'food' ? `${nationality} - ${category}` : alcoholicOrNot
+            type === 'food' ? `${nationality} ${category}` : alcoholicOrNot
           }
         </p>
         <section className="share-favorite-section">
@@ -97,7 +97,14 @@ function CardDoneAndFavoriteRecipes({ recipe, index, favorite }) {
           )}
         </section>
         {copiedLink && <p>Link copied!</p>}
-        {!favorite && <p data-testid={ `${index}-horizontal-done-date` }>{doneDate}</p>}
+        {!favorite
+          && (
+            <p
+              className="date-section"
+              data-testid={ `${index}-horizontal-done-date` }
+            >
+              {doneDate.split('T')[0]}
+            </p>)}
         {!favorite && filterTags.map((tagName) => (
           <p
             data-testid={ `${index}-${tagName}-horizontal-tag` }
