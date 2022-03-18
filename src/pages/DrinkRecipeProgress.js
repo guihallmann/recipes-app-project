@@ -152,7 +152,7 @@ function DrinkRecipeProgress(props) {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ btnFinishRecipe }
-        onClick={ () => handleClickFinishRecipe(history, drinkDetails, 'bebida') }
+        onClick={ () => handleClickFinishRecipe(history, drinkDetails, 'drink') }
       >
         Finish Recipe
       </button>
