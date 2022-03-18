@@ -119,7 +119,7 @@ function DrinkDetails(props) {
         <>
           <h3 className="h3-video">Vídeo</h3>
           <iframe data-testid="video" title="recipe-video" src={ `https://www.youtube.com/embed/${mealDetails.strYoutube.split('=')[1]}` } />
-        </>)} */}
+        </>)} Não tem vídeo em drinks? confirmar */}
       <section className="carousel">
         {foodData.length !== 0 && foodData.map((rec, i) => (i <= FIRST_SIX
           && (
