@@ -93,7 +93,14 @@ function FoodDetails(props) {
           />
         </button>
       </section>
-      {clipboardMessage === CLIPBOARD_MESSAGE && <span>{CLIPBOARD_MESSAGE}</span>}
+      {clipboardMessage === CLIPBOARD_MESSAGE
+      && (
+        <span
+          className="clip-message"
+        >
+          {CLIPBOARD_MESSAGE}
+        </span>
+      )}
       <h3 className="h3-ingredients">Ingredientes</h3>
       <section className="ingredients-section">
         {recipe.length !== 0 && recipe.map((rec, i) => (
@@ -119,7 +126,9 @@ function FoodDetails(props) {
       {mealDetails.strYoutube !== undefined && (
         <>
           <h3 className="h3-video">Vídeo</h3>
-          <iframe className="video" data-testid="video" title="recipe-video" src={ `https://www.youtube.com/embed/${mealDetails.strYoutube.split('=')[1]}` } />
+          <section className="video-section">
+            <iframe className="video" data-testid="video" title="recipe-video" src={ `https://www.youtube.com/embed/${mealDetails.strYoutube.split('=')[1]}` } />
+          </section>
         </>)}
       <h3 className="h3-recommends">Recomendações</h3>
       <section className="carousel">

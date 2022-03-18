@@ -23,7 +23,7 @@
   border-radius: 5px;
   border-style: none;
   bottom: 0;
-  color: #0fff;
+  color: #fff;
   padding: 10px;
   position: fixed;
   width: 80vw;
@@ -54,12 +54,14 @@
 }
 
 .container-ingredients {
-  margin: 7px;
+  margin: 10px;
 }
 
 .ingredients-section {
   background-color: #dce4e2;
   margin: 5px;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .instructions {
@@ -72,9 +74,18 @@
   margin: 10px;
 }
 
+.video-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .card-recommended {
   height: 50%;
   width: 50%;
+  border: 1px solid rgb(212, 211, 211);
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px rgb(168, 168, 168);
 }
 
 .div-card-recommended {
@@ -82,16 +93,22 @@
 }
 
 .name-card-recommended {
-  margin: 5px;
+  text-align: center;
+  margin: 5px 10px;
+  color: #0fa36f;
 }
 
 .svg-icon {
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(71deg) brightness(103%) contrast(100%);
+  width: 26px;
+  height: 26px;
 }
 
 .container-instructions {
   background-color: #dce4e2;
   margin: 5px;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .name-fav-buttons {
@@ -123,4 +140,9 @@
 .h3-recommends {
   color: #0fa36f;
   margin-left: 5px;
+}
+
+.clip-message {
+  color: #0fa36f;
+  margin: 10px;
 }
