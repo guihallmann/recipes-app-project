@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import IngredientCard from '../components/IngredientCard';
 import { getAllDrinkIngredients } from '../services/API';
+import '../styles/ExploreIngredient.css';
 
 function DrinksByIngredient() {
   const CONST_12 = 12;
@@ -22,14 +23,16 @@ function DrinksByIngredient() {
   return (
     <div>
       <Header title="Explore Ingredients" />
-      {!isloading && ingredients.map(({ strIngredient1 }, index) => (
-        <IngredientCard
-          key={ strIngredient1 }
-          index={ index }
-          image={ `https://www.thecocktaildb.com/images/ingredients/${strIngredient1}-Small.png` }
-          name={ strIngredient1 }
-        />
-      ))}
+      <section className="ingredients-list">
+        {!isloading && ingredients.map(({ strIngredient1 }, index) => (
+          <IngredientCard
+            key={ strIngredient1 }
+            index={ index }
+            image={ `https://www.thecocktaildb.com/images/ingredients/${strIngredient1}-Small.png` }
+            name={ strIngredient1 }
+          />
+        ))}
+      </section>
       <Footer />
     </div>
   );

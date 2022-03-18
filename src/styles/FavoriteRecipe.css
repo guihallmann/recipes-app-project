@@ -40,11 +40,6 @@
   margin-left: 3px;
 }
 
-.category-section {
-  margin: 2px;
-  font-size: smaller;
-}
-
 .svg-icon {
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(71deg) brightness(103%) contrast(100%);
   width: 26px;
@@ -69,8 +64,14 @@
   flex-direction: column;
   width: 170px;
   align-items: center;
-  justify-content: space-between;
+  text-align: center;
+  justify-content: space-evenly;
   margin-left: 10px;
+}
+
+.second-half p {
+  margin: 5px;
+  font-size: smaller;
 }
 
 .second-half a {
@@ -91,7 +92,7 @@
 }
 
 .date-section {
-  margin: 0;
+  margin: 5px;
 }
 
 
