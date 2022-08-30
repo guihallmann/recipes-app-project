@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import CardDoneAndFavoriteRecipes from '../components/CardDoneAndFavoriteRecipes';
+import RecipesContext from '../context/RecipesContext';
 import Header from '../components/Header';
 import '../styles/Done.css';
 
 function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState([]);
+  const { setSearchBarStatus } = useContext(RecipesContext);
   useEffect(() => {
+    setSearchBarStatus(false);
     const LSdoneRecipes = localStorage.getItem('doneRecipes');
     const objDoneRecipes = JSON.parse(LSdoneRecipes);
     if (objDoneRecipes !== null) setDoneRecipes(objDoneRecipes);

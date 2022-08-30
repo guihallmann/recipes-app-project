@@ -7,8 +7,10 @@ import '../styles/FavoriteRecipe.css';
 function FavoriteRecipes() {
   const [favoriteRecipes, setFavoriterecipes] = useState([]);
   const { changeList } = useContext(RecipesContext);
+  const { setSearchBarStatus } = useContext(RecipesContext);
 
   useEffect(() => {
+    setSearchBarStatus(false);
     setFavoriterecipes(JSON.parse(localStorage.getItem('favoriteRecipes')));
   }, [changeList]);
 
