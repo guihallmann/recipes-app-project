@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Hurricane&family=M+PLUS+1:wght@100&display=swap');
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #0fa36b;
+}
+
+.title-login {
+  font-family: 'Hurricane', sans-serif;
+  color: white;
+  font-size: 70px;
+}
+
+.email-input {
+  margin: 5px 0;
+  padding: 5px;
+  width: 80vw;
+  border-style: none;
+  border: 1px solid #E5F0ED;
+  border-radius: 5px;
+}
+
+.email-input:focus {
+  outline-color: #DCE4E2;
+}
+
+.pw-input {
+  margin: 5px 0;
+  padding: 5px;
+  border-style: none;
+  border: 1px solid #E5F0ED;
+  width: 80vw;
+  border-radius: 5px;
+}
+
+.pw-input:focus {
+  outline-color: #DCE4E2;
+}
+
+.login-btn {
+  border-style: none;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+  width: 50vw;
+  background-color: rgb(19, 97, 66);
+  color: #fff;
+  font-weight: bold;
+}
+
+.login-btn:focus {
+  outline-color: #0fa36b
+}
+
+.disabled-login-btn {
+  border-style: none;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+  width: 50vw;
+  background-color: #A0A4A3;
+  color: #fff;
+  font-weight: bold;
+}

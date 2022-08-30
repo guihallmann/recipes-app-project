@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import RecipesProvider from './context/RecipesProvider';
 import Rotas from './services/Rotas';
 

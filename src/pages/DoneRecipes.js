@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import CardDoneAndFavoriteRecipes from '../components/CardDoneAndFavoriteRecipes';
+import RecipesContext from '../context/RecipesContext';
 import Header from '../components/Header';
+import '../styles/Done.css';
 
 function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState([]);
+  const { setSearchBarStatus } = useContext(RecipesContext);
   useEffect(() => {
+    setSearchBarStatus(false);
     const LSdoneRecipes = localStorage.getItem('doneRecipes');
     const objDoneRecipes = JSON.parse(LSdoneRecipes);
     if (objDoneRecipes !== null) setDoneRecipes(objDoneRecipes);
@@ -27,29 +31,34 @@ function DoneRecipes() {
 
   return (
     <section>
-      <div>
+      <section>
         <Header title="Done Recipes" />
-        <button
-          type="button"
-          data-testid="filter-by-all-btn"
-          onClick={ handleClickFilter }
-        >
-          All
-        </button>
-        <button
-          type="button"
-          data-testid="filter-by-food-btn"
-          onClick={ handleClickFilter }
-        >
-          Food
-        </button>
-        <button
-          type="button"
-          data-testid="filter-by-drink-btn"
-          onClick={ handleClickFilter }
-        >
-          Drinks
-        </button>
+        <section className="done-buttons">
+          <button
+            type="button"
+            data-testid="filter-by-all-btn"
+            onClick={ handleClickFilter }
+            className="filter-btn"
+          >
+            All
+          </button>
+          <button
+            type="button"
+            data-testid="filter-by-food-btn"
+            onClick={ handleClickFilter }
+            className="filter-btn"
+          >
+            Food
+          </button>
+          <button
+            type="button"
+            data-testid="filter-by-drink-btn"
+            onClick={ handleClickFilter }
+            className="filter-btn"
+          >
+            Drinks
+          </button>
+        </section>
         {doneRecipes && doneRecipes.map((recipe, index) => (
           <CardDoneAndFavoriteRecipes
             recipe={ recipe }
@@ -57,7 +66,7 @@ function DoneRecipes() {
             favorite={ false }
             key={ recipe.id }
           />))}
-      </div>
+      </section>
     </section>
   );
 }

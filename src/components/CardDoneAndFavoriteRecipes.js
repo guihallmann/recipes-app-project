@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import RecipesContext from '../context/RecipesContext';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import '../styles/FavoritesCard.css';
+// import '../styles/FavoriteRecipe.css';
 
 const copy = require('clipboard-copy');
 
@@ -33,8 +33,12 @@ function CardDoneAndFavoriteRecipes({ recipe, index, favorite }) {
     setChangeList(changeList + 1);
   };
   useEffect(() => {
-    if (tags) {
-      setFilterTags(tags.filter((tag, ind) => ind < 2));
+    // if (tags) {
+    //   setFilterTags(tags.filter((tag, ind) => ind < 2));
+    // }
+    if (tags && tags.length > 0 && tags[0] !== null) {
+      const arrayTags = tags[0].split(',');
+      setFilterTags(arrayTags.filter((tag, ind) => ind < 2));
     }
   }, []);
   const [copiedLink, setCopiedLink] = useState(false);
@@ -43,55 +47,77 @@ function CardDoneAndFavoriteRecipes({ recipe, index, favorite }) {
     copy(`http://localhost:3000/${type}s/${id}`);
     setCopiedLink(true);
   };
+
   return (
-    <div>
-      <Link to={ `${type}s/${id}` }>
-        <img
-          className="recipe-image"
-          src={ image }
-          alt="recipe"
-          data-testid={ `${index}-horizontal-image` }
-        />
-      </Link>
-      <Link to={ `/${type}s/${id}` }>
-        <h3 data-testid={ `${index}-horizontal-name` }>{name}</h3>
-      </Link>
-      <p data-testid={ `${index}-horizontal-top-text` }>
-        {
-          type === 'food' ? `${nationality} - ${category}` : alcoholicOrNot
-        }
-      </p>
-      <button
-        type="button"
-        onClick={ handleClickShare }
-      >
-        <img
-          data-testid={ `${index}-horizontal-share-btn` }
-          src={ shareIcon }
-          alt="shareIcon"
-        />
-      </button>
-      {copiedLink && <p>Link copied!</p>}
-      {favorite && (
-        <button
-          type="button"
-          onClick={ () => handleClickUnfavorite() }
-        >
+    <div className="favorite-card">
+      <section className="first-half">
+        <Link to={ `${type}s/${id}` }>
           <img
-            data-testid={ `${index}-horizontal-favorite-btn` }
-            src={ blackHeartIcon }
-            alt="blackHeartIcon"
+            className="fav-img"
+            src={ image }
+            alt="recipe"
+            data-testid={ `${index}-horizontal-image` }
           />
-        </button>
-      )}
-      {!favorite && <p data-testid={ `${index}-horizontal-done-date` }>{doneDate}</p>}
-      {!favorite && filterTags.map((tagName) => (
-        <p
-          data-testid={ `${index}-${tagName}-horizontal-tag` }
-          key={ tagName }
-        >
-          {tagName}
-        </p>))}
+        </Link>
+      </section>
+      <section className="second-half">
+        <Link className="fav-name" to={ `/${type}s/${id}` }>
+          <h3
+            data-testid={ `${index}-horizontal-name` }
+          >
+            {name}
+          </h3>
+        </Link>
+        <p data-testid={ `${index}-horizontal-top-text` }>
+          {
+            type === 'food' ? `${nationality} - ${category}` : alcoholicOrNot
+          }
+        </p>
+        <section className="share-favorite-section">
+          <button
+            type="button"
+            onClick={ handleClickShare }
+            className="button-share-favorite"
+          >
+            <img
+              data-testid={ `${index}-horizontal-share-btn` }
+              src={ shareIcon }
+              alt="shareIcon"
+              className="svg-icon"
+            />
+          </button>
+          {favorite && (
+            <button
+              type="button"
+              onClick={ () => handleClickUnfavorite() }
+              className="button-share-favorite"
+            >
+              <img
+                data-testid={ `${index}-horizontal-favorite-btn` }
+                src={ blackHeartIcon }
+                alt="blackHeartIcon"
+                className="svg-icon"
+              />
+            </button>
+          )}
+        </section>
+        {copiedLink && <p>Link copied!</p>}
+        {!favorite
+          && (
+            <p
+              className="date-section"
+              data-testid={ `${index}-horizontal-done-date` }
+            >
+              { doneDate.split('T')[0]}
+            </p>)}
+        {!favorite && filterTags.map((tagName) => (
+          <p
+            data-testid={ `${index}-${tagName}-horizontal-tag` }
+            key={ tagName }
+          >
+            {tagName}
+          </p>))}
+      </section>
     </div>
   );
 }

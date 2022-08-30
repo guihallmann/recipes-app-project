@@ -16,9 +16,10 @@ function ExploreDrinks() {
   return (
     <div>
       <Header title="Explore Drinks" />
-      <div>
+      <div className="category">
         <button
           type="button"
+          className="default-btn"
           data-testid="explore-by-ingredient"
           onClick={ () => (history.push('/explore/drinks/ingredients')) }
         >
@@ -26,6 +27,7 @@ function ExploreDrinks() {
         </button>
         <button
           type="button"
+          className="default-btn"
           data-testid="explore-surprise"
           onClick={ randomDrink }
         >

@@ -2,12 +2,15 @@ import React, { useContext, useState, useEffect } from 'react';
 import RecipesContext from '../context/RecipesContext';
 import CardDoneAndFavoriteRecipes from '../components/CardDoneAndFavoriteRecipes';
 import Header from '../components/Header';
+import '../styles/FavoriteRecipe.css';
 
 function FavoriteRecipes() {
   const [favoriteRecipes, setFavoriterecipes] = useState([]);
   const { changeList } = useContext(RecipesContext);
+  const { setSearchBarStatus } = useContext(RecipesContext);
 
   useEffect(() => {
+    setSearchBarStatus(false);
     setFavoriterecipes(JSON.parse(localStorage.getItem('favoriteRecipes')));
   }, [changeList]);
 
@@ -29,27 +32,32 @@ function FavoriteRecipes() {
     <section>
       <div>
         <Header title="Favorite Recipes" />
-        <button
-          type="button"
-          data-testid="filter-by-all-btn"
-          onClick={ handleClickFilter }
-        >
-          All
-        </button>
-        <button
-          type="button"
-          data-testid="filter-by-food-btn"
-          onClick={ handleClickFilter }
-        >
-          Food
-        </button>
-        <button
-          type="button"
-          data-testid="filter-by-drink-btn"
-          onClick={ handleClickFilter }
-        >
-          Drinks
-        </button>
+        <section className="filters">
+          <button
+            type="button"
+            data-testid="filter-by-all-btn"
+            onClick={ handleClickFilter }
+            className="filter-btn"
+          >
+            All
+          </button>
+          <button
+            type="button"
+            data-testid="filter-by-food-btn"
+            onClick={ handleClickFilter }
+            className="filter-btn"
+          >
+            Food
+          </button>
+          <button
+            type="button"
+            data-testid="filter-by-drink-btn"
+            onClick={ handleClickFilter }
+            className="filter-btn"
+          >
+            Drinks
+          </button>
+        </section>
         {favoriteRecipes && favoriteRecipes.map((recipe, index) => (
           <CardDoneAndFavoriteRecipes
             recipe={ recipe }

@@ -8,10 +8,122 @@
 }
 
 .carousel img {
+  margin: 5px;
   width: 50vw;
 }
 
-.start-btn {
-  bottom: 0;
-  position: fixed;
+.start-btn-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
+
+.start-btn {
+  background-color: #0fa36b;
+  border-radius: 5px;
+  border-style: none;
+  bottom: 0;
+  color: #fff;
+  padding: 10px;
+  position: fixed;
+  width: 80vw;
+  font-weight: bold;
+}
+
+.img-size1 {
+  height: 250px;
+  width: 100%;
+}
+
+.name-food {
+  color: #0fa36f;
+  margin-left: 5px;
+}
+
+.type-food {
+  color: #0fa36f;
+  margin-left: 5px;
+}
+
+.button-share-favorite {
+  background-color: #0fa36b;
+  border-radius: 5px;
+  border-style: none;
+  margin: 5px;
+  padding: 3px;
+  width: 20vw;
+}
+
+.container-ingredients {
+  margin: 7px;
+}
+
+.ingredients-section {
+  background-color: #dce4e2;
+  margin: 5px;
+}
+
+.instructions {
+  line-height: 1.6;
+  margin: 10px;
+  text-align: justify;
+}
+
+.card-recommended {
+  height: 50%;
+  width: 50%;
+}
+
+.div-card-recommended {
+  margin: 5px;
+}
+
+.name-card-recommended {
+  margin: 5px;
+}
+
+.svg-icon {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(71deg) brightness(103%) contrast(100%);
+}
+
+.container-instructions {
+  background-color: #dce4e2;
+  margin: 5px;
+}
+
+.name-fav-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.h3-ingredients {
+  color: #0fa36f;
+  margin-left: 5px;
+}
+
+.h3-instructions {
+  color: #0fa36f;
+  margin-left: 5px;
+}
+
+.h3-video {
+  color: #0fa36f;
+  margin-left: 5px;
+}
+
+.h3-recommends {
+  color: #0fa36f;
+  margin-left: 5px;
+}
+
+.clip-message {
+  color: #0fa36f;
+  margin: 10px;
+}
+

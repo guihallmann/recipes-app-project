@@ -3,9 +3,15 @@ import PropTypes from 'prop-types';
 
 function SugestionCard({ index, image, name }) {
   return (
-    <div data-testid={ `${index}-recomendation-card` }>
-      <h1 data-testid={ `${index}-recomendation-title` }>{name}</h1>
+    <div className="div-card-recommended" data-testid={ `${index}-recomendation-card` }>
+      <h1
+        className="name-card-recommended"
+        data-testid={ `${index}-recomendation-title` }
+      >
+        {name}
+      </h1>
       <img
+        className="card-recommended"
         data-testid={ `${index}-card-img` }
         src={ image }
         alt="recomendation-card"
@@ -22,3 +28,6 @@ SugestionCard.propTypes = {
 };
 
 export default SugestionCard;
+
+// testando push
+// push novamente

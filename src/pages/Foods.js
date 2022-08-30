@@ -10,12 +10,15 @@ import {
   getMealCategories,
   searchByMealCategories,
 } from '../services/API';
+import '../styles/Foods.css';
+import '../styles/App.css';
 
 function Foods() {
   const { foodsList, setFoodsList } = useContext(RecipesContext);
   const [mealCategories, setMealCategories] = useState([]);
   const [toggleFilter, setToggleFilter] = useState('');
-  const { fromExploreIngredient, setFromExploreIngredient } = useContext(RecipesContext);
+  const { fromExploreIngredient,
+    setFromExploreIngredient, setSearchBarStatus } = useContext(RecipesContext);
 
   const getMeals = async () => {
     if (fromExploreIngredient) {
@@ -39,16 +42,18 @@ function Foods() {
 
   useEffect(() => {
     getMeals();
+    setSearchBarStatus(false);
   }, []);
 
   return (
-    <section>
+    <section className="section-complete">
       <Header title="Foods" />
-      <div>
+      <section className="filter-buttons">
         <button
           type="button"
           onClick={ handleClickFilter }
           data-testid="All-category-filter"
+          className="filter-btn"
         >
           All
         </button>
@@ -60,16 +65,17 @@ function Foods() {
               key={ category }
               data-testid={ `${category}-category-filter` }
               onClick={ handleClickFilter }
+              className="filter-btn"
             >
               {category}
             </button>)
         ))}
 
-      </div>
-      <div>
+      </section>
+      <section className="cards-list">
         {foodsList.map((food, index) => (index <= MAX_LIST_SIZE
           && (
-            <Link to={ `/foods/${food.idMeal}` }>
+            <Link className="link-style" to={ `/foods/${food.idMeal}` }>
               <Card
                 key={ food.idMeal }
                 index={ index }
@@ -78,7 +84,7 @@ function Foods() {
               />
             </Link>)
         ))}
-      </div>
+      </section>
       <Footer />
     </section>
   );

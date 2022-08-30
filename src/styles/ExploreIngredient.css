@@ -1,0 +1,31 @@
+.card-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  padding: 0;
+  margin: 5px;
+  border: 1px solid rgb(212, 211, 211);
+  border-radius: 5%;
+  box-shadow: 3px 3px 5px rgb(168, 168, 168);
+}
+
+.recipe-name {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  color: #0fa36b;
+  margin-bottom: 10px;
+}
+
+.ingredients-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+
+.card-button img {
+  width: 155px;
+  height: 155px;
+}

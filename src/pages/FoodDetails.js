@@ -59,17 +59,29 @@ function FoodDetails(props) {
     <section>
       <img
         data-testid="recipe-photo"
-        className="mealImg"
+        className="img-size1"
         src={ mealDetails.strMealThumb }
         alt={ `${mealDetails.strMeal}` }
       />
-      <h1 data-testid="recipe-title">{mealDetails.strMeal}</h1>
-      <h2 data-testid="recipe-category">{mealDetails.strCategory}</h2>
+      <h1 className="name-food" data-testid="recipe-title">{mealDetails.strMeal}</h1>
+      <h3 className="type-food" data-testid="recipe-category">
+        {mealDetails.strCategory}
+      </h3>
       <section>
-        <button type="button" onClick={ copyToClipboard }>
-          <img src={ shareIcon } alt="shareIcon" data-testid="share-btn" />
+        <button
+          className="button-share-favorite"
+          type="button"
+          onClick={ copyToClipboard }
+        >
+          <img
+            className="svg-icon"
+            src={ shareIcon }
+            alt="shareIcon"
+            data-testid="share-btn"
+          />
         </button>
         <button
+          className="button-share-favorite"
           type="button"
           onClick={ () => setFavoriteMeal(favStatus, setFavStatus, mealDetails) }
         >
@@ -77,22 +89,48 @@ function FoodDetails(props) {
             src={ favStatus ? blackHeart : whiteHeart }
             alt="favIcon"
             data-testid="favorite-btn"
+            className="svg-icon"
           />
         </button>
       </section>
-      {clipboardMessage === CLIPBOARD_MESSAGE && <span>{CLIPBOARD_MESSAGE}</span>}
-      {recipe.length !== 0 && recipe.map((rec, i) => (
-        <div key={ i }>
-          <span
-            data-testid={ `${i}-ingredient-name-and-measure` }
-            key={ i }
-          >
-            { rec }
-          </span>
-        </div>
-      ))}
-      <p data-testid="instructions">{mealDetails.strInstructions}</p>
-      {mealDetails.strYoutube !== undefined && <iframe data-testid="video" title="recipe-video" src={ `https://www.youtube.com/embed/${mealDetails.strYoutube.split('=')[1]}` } /> }
+      {clipboardMessage === CLIPBOARD_MESSAGE
+      && (
+        <span
+          className="clip-message"
+        >
+          {CLIPBOARD_MESSAGE}
+        </span>
+      )}
+      <h3 className="h3-ingredients">Ingredients</h3>
+      <section className="ingredients-section">
+        {recipe.length !== 0 && recipe.map((rec, i) => (
+          <div className="container-ingredients" key={ i }>
+            <span
+              data-testid={ `${i}-ingredient-name-and-measure` }
+              key={ i }
+            >
+              { rec.includes('undefined') ? rec.split('-')[0] : rec}
+            </span>
+          </div>
+        ))}
+      </section>
+      <h3 className="h3-instructions">Instructions</h3>
+      <section className="container-instructions">
+        <p
+          className="instructions"
+          data-testid="instructions"
+        >
+          { mealDetails.strInstructions }
+        </p>
+      </section>
+      {mealDetails.strYoutube !== undefined && (
+        <>
+          <h3 className="h3-video">Video</h3>
+          <section className="video-section">
+            <iframe className="video" data-testid="video" title="recipe-video" src={ `https://www.youtube.com/embed/${mealDetails.strYoutube.split('=')[1]}` } />
+          </section>
+        </>)}
+      <h3 className="h3-recommends">Recomendation</h3>
       <section className="carousel">
         {drinkData.length !== 0 && drinkData.map((rec, i) => (i <= FIRST_SIX
       && (
@@ -104,26 +142,28 @@ function FoodDetails(props) {
         />)
         ))}
       </section>
-      {btnStatus === 'newRecipe'
-      && (
-        <button
-          className="start-btn"
-          type="button"
-          data-testid="start-recipe-btn"
-          onClick={ startRecipe }
-        >
-          Start Recipe
-        </button>)}
-      {btnStatus === 'inProgressRecipe'
-      && (
-        <button
-          className="start-btn"
-          type="button"
-          data-testid="start-recipe-btn"
-          onClick={ startRecipe }
-        >
-          Continue Recipe
-        </button>)}
+      <section className="start-btn-section">
+        {btnStatus === 'newRecipe'
+        && (
+          <button
+            className="start-btn"
+            type="button"
+            data-testid="start-recipe-btn"
+            onClick={ startRecipe }
+          >
+            Start Recipe
+          </button>)}
+        {btnStatus === 'inProgressRecipe'
+        && (
+          <button
+            className="start-btn"
+            type="button"
+            data-testid="start-recipe-btn"
+            onClick={ startRecipe }
+          >
+            Continue Recipe
+          </button>)}
+      </section>
     </section>
   );
 }

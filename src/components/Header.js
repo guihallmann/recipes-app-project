@@ -16,18 +16,28 @@ function Header({ title }) {
   return (
     <header>
       <section className="header">
-        <button
-          type="button"
-          onClick={ () => handleClick('/profile') }
-        >
-          <img data-testid="profile-top-btn" src={ profileIcon } alt="profileIcon" />
-        </button>
+        <div className="invisible">
+          <button
+            className="btn-header"
+            type="button"
+            onClick={ () => handleClick('/profile') }
+          >
+            <img
+              data-testid="profile-top-btn"
+              src={ profileIcon }
+              alt="profileIcon"
+              className="svg-icon"
+            />
+          </button>
+        </div>
         <h1 className="page-title" data-testid="page-title">
           {title}
         </h1>
-        {(title === 'Foods'
-          || title === 'Explore Nationalities'
-          || title === 'Drinks') && <SearchIcon />}
+        <div className="invisible">
+          {(title === 'Foods'
+            || title === 'Explore Nationalities'
+            || title === 'Drinks') && <SearchIcon />}
+        </div>
       </section>
       { searchBarStatus && <SearchBar />}
     </header>

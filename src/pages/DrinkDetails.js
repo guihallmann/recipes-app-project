@@ -60,17 +60,32 @@ function DrinkDetails(props) {
     <section>
       <img
         data-testid="recipe-photo"
-        className="mealImg"
+        className="img-size1"
         src={ drinkDetails.strDrinkThumb }
         alt={ `${drinkDetails.strDrink}` }
       />
-      <h1 data-testid="recipe-title">{drinkDetails.strDrink}</h1>
-      <h2 data-testid="recipe-category">{drinkDetails.strAlcoholic}</h2>
+      <h1 className="name-food" data-testid="recipe-title">{drinkDetails.strDrink}</h1>
+      <h3
+        className="type-food"
+        data-testid="recipe-category"
+      >
+        {drinkDetails.strAlcoholic}
+      </h3>
       <section>
-        <button type="button" onClick={ copyToClipboard }>
-          <img src={ shareIcon } alt="shareIcon" data-testid="share-btn" />
+        <button
+          className="button-share-favorite"
+          type="button"
+          onClick={ copyToClipboard }
+        >
+          <img
+            className="svg-icon"
+            src={ shareIcon }
+            alt="shareIcon"
+            data-testid="share-btn"
+          />
         </button>
         <button
+          className="button-share-favorite"
           type="button"
           onClick={ () => setFavoriteDrink(favStatus, setFavStatus, drinkDetails) }
         >
@@ -78,22 +93,40 @@ function DrinkDetails(props) {
             src={ favStatus ? blackHeart : whiteHeart }
             alt="favIcon"
             data-testid="favorite-btn"
+            className="svg-icon"
           />
         </button>
       </section>
-      {clipboardMessage === CLIPBOARD_MESSAGE && <span>{CLIPBOARD_MESSAGE}</span>}
-      {recipe.length !== 0 && recipe.map((rec, i) => (
-        <div key={ i }>
-          <span
-            data-testid={ `${i}-ingredient-name-and-measure` }
-            key={ i }
-          >
-            { rec }
-          </span>
-        </div>
-      ))}
-      <p data-testid="instructions">{drinkDetails.strInstructions}</p>
-      {drinkDetails.strYoutube !== undefined && <iframe data-testid="video" title="recipe-video" src={ `https://www.youtube.com/embed/${mealDetails.strYoutube.split('=')[1]}` } /> }
+      {clipboardMessage === CLIPBOARD_MESSAGE
+      && (
+        <span
+          className="clip-message"
+        >
+          {CLIPBOARD_MESSAGE}
+        </span>
+      )}
+      <h3 className="h3-ingredients">Ingredients</h3>
+      <section className="ingredients-section">
+        {recipe.length !== 0 && recipe.map((rec, i) => (
+          <div key={ i }>
+            <span
+              data-testid={ `${i}-ingredient-name-and-measure` }
+              key={ i }
+            >
+              { rec.includes('undefined') ? rec.split('-')[0] : rec }
+            </span>
+          </div>
+        ))}
+      </section>
+      <h3 className="h3-instructions">Instructions</h3>
+      <section className="container-instructions">
+        <p data-testid="instructions">{drinkDetails.strInstructions}</p>
+      </section>
+      {/* {drinkDetails.strYoutube !== undefined && (
+        <>
+          <h3 className="h3-video">Vídeo</h3>
+          <iframe data-testid="video" title="recipe-video" src={ `https://www.youtube.com/embed/${mealDetails.strYoutube.split('=')[1]}` } />
+        </>)} Não tem vídeo em drinks? confirmar */}
       <section className="carousel">
         {foodData.length !== 0 && foodData.map((rec, i) => (i <= FIRST_SIX
           && (
@@ -105,7 +138,8 @@ function DrinkDetails(props) {
             />)
         ))}
       </section>
-      {btnStatus === 'newRecipe'
+      <section className="start-btn-section">
+        {btnStatus === 'newRecipe'
       && (
         <button
           className="start-btn"
@@ -115,15 +149,17 @@ function DrinkDetails(props) {
         >
           Start Recipe
         </button>)}
-      {btnStatus === 'inProgressRecipe'
+        {btnStatus === 'inProgressRecipe'
       && (
         <button
           className="start-btn"
           type="button"
           data-testid="start-recipe-btn"
+          onClick={ startRecipe }
         >
           Continue Recipe
         </button>)}
+      </section>
     </section>
   );
 }

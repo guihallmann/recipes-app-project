@@ -1,0 +1,32 @@
+.select-input {
+  background-color: #0c8d59;
+  color: #fff;
+  padding: 5px;
+  margin: 10px 20px;
+  width: 30vw;
+  border-radius: 5px;
+  border-style: none;
+}
+
+.cards-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.select-input:focus {
+  outline-color: #DCE4E2;
+}
+
+.link-style {
+  text-decoration: none;
+  color: #0fa36b;
+  width: 45%;
+  border: 1px solid rgb(212, 211, 211);
+  margin: 7px;
+  border-radius: 5%;
+  box-shadow: 3px 3px 5px rgb(168, 168, 168);
+  width: 155px;
+  height: auto;
+}

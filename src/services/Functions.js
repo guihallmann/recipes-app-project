@@ -47,7 +47,7 @@ export const handleClickFinishRecipe = (history, details, type) => {
       alcoholicOrNot: details.alcoholicOrNot,
       name: details.strDrink,
       image: details.strDrinkThumb,
-      doneDate: Date(),
+      doneDate: new Date(),
       tags: [],
     };
   }

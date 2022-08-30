@@ -7,6 +7,7 @@ import Card from '../components/Card';
 import { getNationalities, getMealName } from '../services/API';
 import { MAX_LIST_SIZE } from '../data/consts';
 import RecipesContext from '../context/RecipesContext';
+import '../styles/ExploreNationalities.css';
 
 function FoodsByNationalities() {
   const [nationalities, setNationalities] = useState([]);
@@ -53,6 +54,7 @@ function FoodsByNationalities() {
         id="nationalities"
         data-testid="explore-by-nationality-dropdown"
         value={ dropdown }
+        className="select-input"
       >
         <option
           value="All"
@@ -71,10 +73,11 @@ function FoodsByNationalities() {
             </option>))
         }
       </select>
-      <div>
+      <section className="cards-list">
         {foodsList.map((food, index) => (index <= MAX_LIST_SIZE
         && (
           <Link
+            className="link-style"
             to={ `/foods/${food.idMeal}` }
             key={ food.idMeal }
           >
@@ -85,7 +88,7 @@ function FoodsByNationalities() {
             />
           </Link>)
         ))}
-      </div>
+      </section>
       <Footer />
     </div>
   );

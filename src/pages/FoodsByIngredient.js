@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import IngredientCard from '../components/IngredientCard';
 import { getAllMealIngredients } from '../services/API';
+import '../styles/ExploreIngredient.css';
 
 function FoodsByIngredient() {
   const CONST_12 = 12;
@@ -23,15 +24,17 @@ function FoodsByIngredient() {
   return (
     <div>
       <Header title="Explore Ingredients" />
-      {!isloading && ingredients.map(({ idIngredient, strIngredient }, index) => (
-        <IngredientCard
-          key={ idIngredient }
-          index={ index }
-          image={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
-          name={ strIngredient }
-          isItFood
-        />
-      ))}
+      <section className="ingredients-list">
+        {!isloading && ingredients.map(({ idIngredient, strIngredient }, index) => (
+          <IngredientCard
+            key={ idIngredient }
+            index={ index }
+            image={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
+            name={ strIngredient }
+            isItFood
+          />
+        ))}
+      </section>
       <Footer />
     </div>
   );

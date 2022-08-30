@@ -1,0 +1,40 @@
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+
+.filter-btn {
+  border-style: none;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 8px;
+  width: 30vw;
+  background-color: #0fa36b;
+  color: #fff;
+  font-weight: bold;
+}
+
+.cards-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.link-style {
+  text-decoration: none;
+  color: #0fa36b;
+  width: 45%;
+  border: 1px solid rgb(212, 211, 211);
+  margin: 7px;
+  border-radius: 5%;
+  box-shadow: 3px 3px 5px rgb(168, 168, 168);
+  width: 43vw;
+  height: auto;
+}
+
+.link-style:hover {
+  color: #0b754c;
+}

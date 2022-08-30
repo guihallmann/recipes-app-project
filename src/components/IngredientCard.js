@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { getMealIngredient, getDrinkIngredient } from '../services/API';
 import RecipesContext from '../context/RecipesContext';
+import '../styles/ExploreIngredient.css';
 
 function IngredientCard({ index, image, name, isItFood }) {
   const history = useHistory();
@@ -39,13 +40,14 @@ function IngredientCard({ index, image, name, isItFood }) {
         type="button"
         onClick={ () => setIngredient([name, isItFood]) }
         data-testid={ `${index}-ingredient-card` }
+        className="card-button"
       >
         <img
           src={ image }
           alt={ `ingredient-card-${index}` }
           data-testid={ `${index}-card-img` }
         />
-        <span data-testid={ `${index}-card-name` }>{name}</span>
+        <h3 className="recipe-name" data-testid={ `${index}-card-name` }>{name}</h3>
       </button>
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/FoodDetails.css';
+import '../styles/Buttons.css';
 import { useHistory } from 'react-router';
 import { getMealDetails } from '../services/API';
 import shareIcon from '../images/shareIcon.svg';
@@ -89,58 +90,88 @@ function MealInProgress(props) {
     <section>
       <img
         data-testid="recipe-photo"
-        className="mealImg"
+        className="img-size1"
         src={ mealDetails.strMealThumb }
         alt={ `${mealDetails.strMeal}` }
       />
-      <h1 data-testid="recipe-title">{mealDetails.strMeal}</h1>
-      <h2 data-testid="recipe-category">{mealDetails.strCategory}</h2>
+      <h1 className="recipe-title" data-testid="recipe-title">{mealDetails.strMeal}</h1>
+      <h3
+        data-testid="recipe-category"
+        className="recipe-category"
+      >
+        {mealDetails.strCategory}
+      </h3>
       <section>
-        <button type="button" onClick={ copyToClipboard }>
-          <img src={ shareIcon } alt="shareIcon" data-testid="share-btn" />
+        <button
+          className="button-share-favorite"
+          type="button"
+          onClick={ copyToClipboard }
+        >
+          <img
+            src={ shareIcon }
+            alt="shareIcon"
+            data-testid="share-btn"
+            className="svg-icon"
+          />
         </button>
         <button
           type="button"
           onClick={ () => setFavoriteMeal(favStatus, setFavStatus, mealDetails) }
+          className="button-share-favorite"
         >
           <img
+            className="svg-icon"
             src={ favStatus ? blackHeart : whiteHeart }
             alt="favIcon"
             data-testid="favorite-btn"
           />
         </button>
       </section>
-      {clipboardMessage === CLIPBOARD_MESSAGE && <span>{CLIPBOARD_MESSAGE}</span>}
-      {recipe.length !== 0 && recipe.map((rec, i) => (
-        <div key={ i }>
-          <label
-            htmlFor={ rec }
-            data-testid={ `${i}-ingredient-step` }
-            className={ usedIngredients.find((ing) => ing === rec) ? 'isChecked' : '' }
-          >
-            <input
-              type="checkbox"
-              key={ i }
-              id={ rec }
-              name={ rec }
-              onChange={ (e) => handleCheckbox(e,
-                usedIngredients, setUsedIngredients) }
-              checked={ usedIngredients.find((ing) => ing === rec) }
-            />
-            {rec}
-          </label>
-        </div>
-      ))}
-      <p data-testid="instructions">{mealDetails.strInstructions}</p>
-      <button
-        className="finish-btn"
-        type="button"
-        data-testid="finish-recipe-btn"
-        disabled={ btnFinishRecipe }
-        onClick={ () => handleClickFinishRecipe(history, mealDetails, 'food') }
+      {clipboardMessage === CLIPBOARD_MESSAGE
+      && (
+        <span className="clipboard-message">
+          {CLIPBOARD_MESSAGE}
+        </span>
+      )}
+      <section className="check-list">
+        {recipe.length !== 0 && recipe.map((rec, i) => (
+          <div key={ i }>
+            <label
+              htmlFor={ rec }
+              data-testid={ `${i}-ingredient-step` }
+              className={ usedIngredients.find((ing) => ing === rec) ? 'isChecked' : '' }
+            >
+              <input
+                type="checkbox"
+                key={ i }
+                id={ rec }
+                name={ rec }
+                onChange={ (e) => handleCheckbox(e,
+                  usedIngredients, setUsedIngredients) }
+                checked={ usedIngredients.find((ing) => ing === rec) }
+              />
+              {rec}
+            </label>
+          </div>
+        ))}
+      </section>
+      <p
+        className="instructions-section"
+        data-testid="instructions"
       >
-        Finish Recipe
-      </button>
+        {mealDetails.strInstructions}
+      </p>
+      <section className="btn-place">
+        <button
+          className={ btnFinishRecipe ? 'disabled-default-btn' : 'default-btn' }
+          type="button"
+          data-testid="finish-recipe-btn"
+          disabled={ btnFinishRecipe }
+          onClick={ () => handleClickFinishRecipe(history, mealDetails, 'food') }
+        >
+          Finish Recipe
+        </button>
+      </section>
     </section>
   );
 }
